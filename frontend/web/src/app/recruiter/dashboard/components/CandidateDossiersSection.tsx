@@ -27,7 +27,7 @@ export function CandidateDossiersSection({
  onClearFilters: () => void;
 }) {
  return (
- <section id="dossiers"className="rounded-2xl bg-surface border border-line overflow-hidden backdrop-blur-md shadow-2xl">
+ <section id="dossiers"className="card-panel overflow-hidden">
  {loading ? (
  <div className="p-16 text-center space-y-3">
  <RefreshCw className="w-8 h-8 text-accent-indigo animate-spin mx-auto"/>

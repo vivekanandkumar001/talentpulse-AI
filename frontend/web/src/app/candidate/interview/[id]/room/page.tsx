@@ -1405,7 +1405,7 @@ export default function LiveInterviewRoomPage() {
                   : 'text-ink-muted hover:text-ink hover:bg-surface'
                   }`}
               >
-                <Layers className="w-3.5 h-3.5 text-indigo-400" />
+                <Layers className="w-3.5 h-3.5 text-accent-indigo" />
                 <span>Whiteboard</span>
               </button>
             </div>

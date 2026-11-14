@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" fill="none">
+  <defs>
+    <linearGradient id="ogBg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0b1f3f"/>
+      <stop offset="0.55" stop-color="#123058"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <radialGradient id="ogGlow" cx="0.5" cy="0.42" r="0.55" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2f6bff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#0b1f3f" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ogTile" x1="432" y1="120" x2="768" y2="516" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2f6bff"/>
+      <stop offset="0.55" stop-color="#1d4ed8"/>
+      <stop offset="1" stop-color="#0b1f3f"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#ogBg)"/>
+  <rect width="1200" height="630" fill="url(#ogGlow)"/>
+
+  <!-- grid -->
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <path d="M0 105H1200M0 210H1200M0 315H1200M0 420H1200M0 525H1200M105 0V630M210 0V630M315 0V630M420 0V630M525 0V630M630 0V630M735 0V630M840 0V630M945 0V630M1050 0V630M1155 0V630"/>
+  </g>
+
+  <!-- monogram tile centered -->
+  <g transform="translate(408 126) scale(8)">
+    <rect x="2" y="2" width="44" height="44" rx="11" fill="url(#ogTile)" stroke="#ffffff" stroke-opacity="0.18"/>
+    <circle cx="27" cy="18.6" r="7.4" stroke="#ffffff" stroke-width="5.4" fill="none"/>
+    <rect x="13.4" y="11.2" width="6.6" height="25.8" rx="3.3" fill="#ffffff"/>
+    <circle cx="35.8" cy="34.6" r="4.6" fill="#22d3ee"/>
+  </g>
+</svg>

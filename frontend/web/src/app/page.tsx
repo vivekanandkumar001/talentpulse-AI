@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -11,19 +11,18 @@ import {
   FileText,
   Video,
   Sparkles,
-  Users,
   Building2,
   CheckCircle2,
   Mic2,
   BarChart3,
   PlayCircle,
-  ChevronDown,
   Terminal,
   Cpu,
   Flame,
   Check } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
+import { FaqSection } from '@/components/FaqSection';
 import { apiJson } from '@/lib/api';
 
 const featureCards = [
@@ -39,28 +38,28 @@ const technicalInterviewTracks = [
     title: 'Distributed Systems & Backend Architecture',
     category: 'Backend Track',
     level: 'Advanced',
-    levelColor: 'text-rose-700 bg-rose-50 border-rose-200',
+    levelColor: 'text-accent-rose bg-accent-rose/10 border-accent-rose/30',
     desc: 'Deep dives on distributed concurrency, cache invalidation, locking semantics & high-throughput pipelines.',
   },
   {
     title: 'Frontend Architecture & Modern Web Systems',
     category: 'Frontend Track',
     level: 'Core',
-    levelColor: 'text-accent-blue bg-blue-50 border-blue-200',
+    levelColor: 'text-accent-blue bg-accent-blue/10 border-accent-blue/30',
     desc: 'Tests real DOM performance, state reactivity, micro-frontends, rendering pipelines and accessibility standards.',
   },
   {
     title: 'Algorithms, Data Structures & Complexity',
     category: 'Computer Science Track',
     level: 'Advanced',
-    levelColor: 'text-rose-700 bg-rose-50 border-rose-200',
+    levelColor: 'text-accent-rose bg-accent-rose/10 border-accent-rose/30',
     desc: 'Probes dynamic programming, graph invariants, transformer latency, memory bounds, and algorithmic optimization.',
   },
   {
     title: 'Engineering Leadership & Architectural Tradeoffs',
     category: 'System & Leadership',
     level: 'Staff / Lead',
-    levelColor: 'text-emerald-700 bg-emerald-50 border-emerald-200',
+    levelColor: 'text-accent-emerald bg-accent-emerald/10 border-accent-emerald/30',
     desc: 'Evaluates architecture trade-offs, cross-functional engineering leadership, fault tolerance, and incident resolution.',
   },
 ];
@@ -139,33 +138,6 @@ const pricing = [
     href: '/candidate/wallet',
     periodLabel: 'one-time',
   },
-];
-
-const faqs = [
-  [
-    'What is Progeni Atlas?',
-    'Progeni Atlas is an enterprise-grade autonomous AI technical interview and skills assessment platform. It conducts live two-way voice interviews, multi-language coding assessments in a secure browser sandbox, enforces anti-cheat proctoring, and automatically generates calibrated recruiter scoring dossiers.'
-  ],
-  [
-    'How does autonomous AI technical interviewing work?',
-    'Candidates join through a web link with zero software installation. An autonomous AI interviewer engages the candidate in live adaptive dialogue, poses real-world coding problems, executes code in a secure cloud sandbox, and generates an evidence-linked evaluation report across technical depth, problem-solving, and architecture.'
-  ],
-  [
-    'How does Progeni Atlas prevent AI cheating and unauthorized assistance?',
-    'Progeni Atlas utilizes a multi-layered anti-cheat framework including companion smartphone camera pairing for 360-degree room proctoring, gaze alignment verification, single-voice biometric tracking, and copy-paste telemetry without requiring intrusive surveillance software.'
-  ],
-  [
-    'What is the pricing model for Progeni Atlas technical interviews?',
-    'Progeni Atlas uses a transparent duration-based billing convention where ₹1.00 equals 1 Credit. Screening is billed strictly at 1 Credit per 3 minutes of interview time (₹0.33 per minute). Every newly registered organization receives 2 complimentary demo screenings of up to 10 minutes each.'
-  ],
-  [
-    'Which engineering roles and technical tracks are supported?',
-    'Progeni Atlas supports Full-Stack Development, Backend Systems Engineering, Frontend Architecture, DevOps & Site Reliability Engineering (SRE), Machine Learning Engineering, System Design, and Data Structures & Algorithms.'
-  ],
-  [
-    'Can recruiters integrate Progeni Atlas with enterprise ATS platforms?',
-    'Yes. Progeni Atlas provides native webhook and API integrations with enterprise Applicant Tracking Systems (ATS) including Greenhouse, Workday, and Lever, automatically synchronizing candidate invites and hiring dossiers.'
-  ]
 ];
 
 export default function Home() {
@@ -286,7 +258,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-canvas text-ink overflow-x-clip selection:bg-cyan-500/20 selection:text-cyan-200">
+    <main className="min-h-screen bg-canvas text-ink overflow-x-clip selection:bg-cyan-500/30 selection:text-accent-cyan">
       <Navbar />
 
       {/* =====================================================================
@@ -467,14 +439,18 @@ export default function Home() {
 
                 {/* Candidate Video Preview */}
                 <div className="relative overflow-hidden rounded-xl border border-inverse-line bg-inverse-surface-2 shadow-md">
-                  <div className="relative flex h-44 w-full flex-col items-center justify-center bg-gradient-to-br from-surface to-indigo-950/60">
-                    <div className="relative flex h-16 w-16 items-center justify-center rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 shadow-inner">
-                      <Users className="h-8 w-8" />
-                    </div>
+                  <div className="relative h-44 w-full overflow-hidden bg-inverse-surface-2">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/avatars/candidate_male.jpg"
+                      alt="Arjun Mehta — Candidate"
+                      className="h-full w-full object-cover object-center interviewer-sway brightness-105 contrast-[1.02]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-canvas via-transparent to-transparent opacity-90" />
 
                     <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between">
                       <div className="flex items-center gap-2 rounded-lg bg-inverse-canvas/85 px-2.5 py-1 backdrop-blur-md border border-inverse-line">
-                        <span className="text-[11px] font-bold text-white">Candidate</span>
+                        <span className="text-[11px] font-bold text-white">Arjun Mehta</span>
                         <span className="text-[9px] font-mono text-inverse-ink-muted">(Live Stream)</span>
                       </div>
 
@@ -885,32 +861,9 @@ export default function Home() {
       </section>
 
       {/* =====================================================================
-          FAQ
+          FAQ — enterprise two-column with searchable categorized accordion
           ===================================================================== */}
-      <section id="faq" className="border-b border-line bg-surface-deep px-5 py-20 sm:px-8 lg:px-10">
-        <div className="mx-auto max-w-4xl">
-          <div className="text-center">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-accent-cyan">FAQ</span>
-            <h2 className="mt-3 text-3xl font-black text-ink">Frequently Asked Questions</h2>
-          </div>
-          <div className="mt-10 space-y-3.5">
-            {faqs.map(([question, answer]) => (
-              <details
-                key={question}
-                className="group rounded-xl border border-line bg-surface transition-colors duration-200"
-              >
-                <summary className="flex cursor-pointer list-none items-center justify-between px-6 py-4 text-sm font-semibold text-ink">
-                  <span>{question}</span>
-                  <ChevronDown className="h-4 w-4 text-accent-cyan transition-transform duration-300 group-open:rotate-180" />
-                </summary>
-                <p className="px-6 pb-5 text-sm leading-relaxed text-ink-muted border-t border-line/50 pt-3">
-                  {answer}
-                </p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FaqSection />
 
       {/* =====================================================================
           FINAL CTA

@@ -140,9 +140,9 @@ export const NetworkJitterGauge: React.FC<NetworkJitterGaugeProps> = ({ autoStar
           <Wifi
             className={`w-5 h-5 ${
               status === 'PASSED'
-                ? 'text-emerald-400'
+                ? 'text-accent-emerald'
                 : status === 'FAILED' || status === 'ERROR'
-                ? 'text-rose-400'
+                ? 'text-accent-rose'
                 : 'text-accent-cyan animate-pulse'
             }`}
           />
@@ -165,17 +165,17 @@ export const NetworkJitterGauge: React.FC<NetworkJitterGaugeProps> = ({ autoStar
           type="button"
           onClick={() => void runPingTest()}
           disabled={status === 'RUNNING'}
-          className="p-2 rounded-xl bg-inset border border-line disabled:opacity-50 hover:bg-slate-800 transition-colors cursor-pointer"
+          className="p-2 rounded-xl bg-inset border border-line disabled:opacity-50 hover:bg-surface-3 transition-colors cursor-pointer"
           title="Re-run network test"
         >
-          <RefreshCw className={`w-4 h-4 ${status === 'RUNNING' ? 'animate-spin text-cyan-400' : ''}`} />
+          <RefreshCw className={`w-4 h-4 ${status === 'RUNNING' ? 'animate-spin text-accent-cyan' : ''}`} />
         </button>
       </div>
 
-      {error && <p className="text-xs text-rose-400">Network test error: {error}</p>}
+      {error && <p className="text-xs text-accent-rose">Network test error: {error}</p>}
 
       <div className="flex gap-6 text-xs font-mono">
-        <span className={latency !== null && latency > 3500 ? 'text-rose-400 font-bold' : 'text-ink-muted'}>
+        <span className={latency !== null && latency > 3500 ? 'text-accent-rose font-bold' : 'text-ink-muted'}>
           Round trip: {latency === null ? '--' : `${latency} ms`}
         </span>
         <span className="text-ink-muted">Timing variation: {jitter === null ? '--' : `${jitter} ms`}</span>

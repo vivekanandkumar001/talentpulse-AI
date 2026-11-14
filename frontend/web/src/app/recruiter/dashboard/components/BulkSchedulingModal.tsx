@@ -303,7 +303,7 @@ export function BulkSchedulingModal({
         {/* Step 2: Review, Modify, and Confirm Proposals (REQ-2, REQ-3) */}
         {bulkStep === 'proposals' && (
           <div className="space-y-4">
-            <div className="p-3 rounded-xl bg-purple-500/10 flex items-center gap-2.5 text-xs text-purple-200">
+            <div className="p-3 rounded-xl bg-violet-500/10 border border-violet-500/30 flex items-center gap-2.5 text-xs text-accent-violet">
               <CheckCircle2 className="w-4 h-4 text-accent-emerald shrink-0" />
               <span>
                 AI matched <strong>{bulkProposals.length}</strong> candidates. Review or modify proposed time slots below before confirming.

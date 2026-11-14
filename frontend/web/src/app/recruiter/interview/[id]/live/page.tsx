@@ -542,7 +542,7 @@ export default function RecruiterLiveMonitorPage() {
                 <button
                   type="button"
                   onClick={handleToggleMute}
-                  className="p-1 rounded text-ink-muted hover:text-white transition-colors cursor-pointer"
+                  className="p-1 rounded text-ink-muted hover:text-ink transition-colors cursor-pointer"
                   title={isAudioMuted ? 'Unmute Audio' : 'Mute Audio'}
                 >
                   {isAudioMuted ? <VolumeX className="w-4 h-4 text-accent-rose" /> : <Volume2 className="w-4 h-4 text-accent-cyan" />}
@@ -691,7 +691,7 @@ export default function RecruiterLiveMonitorPage() {
                   href={`/recruiter/interview/${sessionId}/recording`}
                   className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white text-xs font-bold shadow-md cursor-pointer"
                 >
-                  <span>View Recording & Scorecard -></span>
+                  <span>View Recording &amp; Scorecard →</span>
                 </Link>
               </div>
             )}

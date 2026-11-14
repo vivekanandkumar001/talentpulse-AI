@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -70,16 +70,16 @@ export const ReadinessBanner: React.FC = () => {
   return (
     <div className="w-full space-y-4">
       {justCompleted && (
-        <div className="w-full p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 text-xs font-mono text-emerald-950  flex items-center justify-between gap-3 shadow-xl backdrop-blur-md animate-fadeIn">
+        <div className="w-full p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 text-xs font-mono text-accent-emerald  flex items-center justify-between gap-3 shadow-xl backdrop-blur-md animate-fadeIn">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-xl bg-emerald-500/20 text-emerald-500">
               <CheckCircle2 className="w-5 h-5 shrink-0" />
             </div>
             <div>
-              <p className="font-bold text-sm text-emerald-800  font-sans">
+              <p className="font-bold text-sm text-accent-emerald  font-sans">
                 Interview Completed Successfully
               </p>
-              <p className="text-emerald-700  mt-0.5">
+              <p className="text-accent-emerald  mt-0.5">
                 Your interview responses, code workspace, and proctoring telemetry have been submitted to the recruitment team for evaluation.
               </p>
             </div>
@@ -87,7 +87,7 @@ export const ReadinessBanner: React.FC = () => {
           <button
             type="button"
             onClick={() => setJustCompleted(false)}
-            className="p-1 rounded-lg hover:bg-emerald-500/20 text-emerald-600  hover:text-ink cursor-pointer transition-colors"
+            className="p-1 rounded-lg hover:bg-emerald-500/20 text-accent-emerald  hover:text-ink cursor-pointer transition-colors"
           >
             <X className="w-4 h-4" />
           </button>

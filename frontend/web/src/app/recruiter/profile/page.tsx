@@ -267,14 +267,14 @@ export default function RecruiterProfilePage() {
         <div
           className={`fixed top-20 right-4 z-50 px-4 py-3 rounded-xl border shadow-xl flex items-center gap-3 text-sm font-semibold transition-all ${
             toastMessage.type === 'success'
-              ? 'bg-surface border-emerald-300 text-emerald-800 shadow-emerald-500/10'
-              : 'bg-surface border-rose-300 text-rose-800 shadow-rose-500/10'
+              ? 'bg-surface border-accent-emerald/40 text-accent-emerald shadow-emerald-500/10'
+              : 'bg-surface border-accent-rose/40 text-accent-rose shadow-rose-500/10'
           }`}
         >
           {toastMessage.type === 'success' ? (
-            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-accent-emerald shrink-0" />
           ) : (
-            <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
+            <AlertCircle className="w-5 h-5 text-accent-rose shrink-0" />
           )}
           <span>{toastMessage.text}</span>
         </div>
@@ -310,7 +310,7 @@ export default function RecruiterProfilePage() {
                   <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-ink">
                     {profile.organization.name || 'Your Workspace'}
                   </h1>
-                  <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-blue-50 text-accent-blue border border-blue-200 uppercase shadow-xs">
+                  <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-accent-blue/10 text-accent-blue border border-accent-blue/30 uppercase shadow-xs">
                     {(profile.organization.tier || 'Starter')} Tier • Active Workspace
                   </span>
                 </div>
@@ -384,7 +384,7 @@ export default function RecruiterProfilePage() {
                     value={profile.fullName}
                     onChange={handleRecruiterInputChange}
                     placeholder="Your full name"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 shadow-xs transition-colors font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-accent-blue/30 shadow-xs transition-colors font-medium"
                   />
                 </div>
 
@@ -421,7 +421,7 @@ export default function RecruiterProfilePage() {
                     value={profile.phone}
                     onChange={handleRecruiterInputChange}
                     placeholder="+91 98765 43210"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 shadow-xs transition-colors font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-accent-blue/30 shadow-xs transition-colors font-medium"
                   />
                 </div>
 
@@ -439,7 +439,7 @@ export default function RecruiterProfilePage() {
                     value={profile.designation}
                     onChange={handleRecruiterInputChange}
                     placeholder="Lead Technical Recruiter"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 shadow-xs transition-colors font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-accent-blue/30 shadow-xs transition-colors font-medium"
                   />
                 </div>
 
@@ -457,7 +457,7 @@ export default function RecruiterProfilePage() {
                     value={profile.department}
                     onChange={handleRecruiterInputChange}
                     placeholder="Engineering Talent"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 shadow-xs transition-colors font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-accent-blue/30 shadow-xs transition-colors font-medium"
                   />
                 </div>
 
@@ -474,7 +474,7 @@ export default function RecruiterProfilePage() {
                     value={profile.linkedinUrl}
                     onChange={handleRecruiterInputChange}
                     placeholder="https://linkedin.com/in/recruiter-profile"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 shadow-xs transition-colors font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-accent-blue/30 shadow-xs transition-colors font-medium"
                   />
                 </div>
               </div>
@@ -504,7 +504,7 @@ export default function RecruiterProfilePage() {
                     value={profile.organization.name}
                     onChange={handleOrgInputChange}
                     placeholder="Your workspace name"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 shadow-xs transition-colors font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-accent-blue/30 shadow-xs transition-colors font-medium"
                   />
                 </div>
 
@@ -522,7 +522,7 @@ export default function RecruiterProfilePage() {
                     value={profile.organization.websiteUrl}
                     onChange={handleOrgInputChange}
                     placeholder="https://progeni.live"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 shadow-xs transition-colors font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-accent-blue/30 shadow-xs transition-colors font-medium"
                   />
                 </div>
 
@@ -540,7 +540,7 @@ export default function RecruiterProfilePage() {
                     value={profile.organization.industry}
                     onChange={handleOrgInputChange}
                     placeholder="Artificial Intelligence / SaaS"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 shadow-xs transition-colors font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-accent-blue/30 shadow-xs transition-colors font-medium"
                   />
                 </div>
 
@@ -558,7 +558,7 @@ export default function RecruiterProfilePage() {
                     value={profile.organization.companySize}
                     onChange={handleOrgInputChange}
                     placeholder="10-50 Employees"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 shadow-xs transition-colors font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-accent-blue/30 shadow-xs transition-colors font-medium"
                   />
                 </div>
 
@@ -576,7 +576,7 @@ export default function RecruiterProfilePage() {
                     value={profile.organization.headquartersCity}
                     onChange={handleOrgInputChange}
                     placeholder="Bengaluru, India"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 shadow-xs transition-colors font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-accent-blue/30 shadow-xs transition-colors font-medium"
                   />
                 </div>
 
@@ -594,7 +594,7 @@ export default function RecruiterProfilePage() {
                     value={profile.organization.billingEmail}
                     onChange={handleOrgInputChange}
                     placeholder="billing@progeni.live"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 shadow-xs transition-colors font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-accent-blue/30 shadow-xs transition-colors font-medium"
                   />
                 </div>
 
@@ -611,7 +611,7 @@ export default function RecruiterProfilePage() {
                     value={profile.organization.bio}
                     onChange={handleOrgInputChange}
                     placeholder="Tell candidates about your company mission, technical culture, and hiring focus..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 shadow-xs transition-colors font-medium resize-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-accent-blue/30 shadow-xs transition-colors font-medium resize-none"
                   />
                 </div>
               </div>
@@ -662,13 +662,13 @@ export default function RecruiterProfilePage() {
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <span className="capitalize text-xs font-mono font-semibold px-2.5 py-1 rounded-lg bg-blue-50 border border-blue-200 text-accent-blue">
+                      <span className="capitalize text-xs font-mono font-semibold px-2.5 py-1 rounded-lg bg-accent-blue/10 border border-accent-blue/30 text-accent-blue">
                         {member.role}
                       </span>
                       <span className={`text-[11px] font-mono font-medium px-2 py-0.5 rounded-md ${
                         member.status === 'active'
-                          ? 'text-emerald-700 bg-emerald-50 border border-emerald-200'
-                          : 'text-amber-700 bg-amber-50 border border-amber-200'
+                          ? 'text-accent-emerald bg-accent-emerald/10 border border-accent-emerald/30'
+                          : 'text-accent-amber bg-accent-amber/10 border border-accent-amber/30'
                       }`}>
                         {member.status === 'active' ? '✓ Active' : '⌛ Pending Invite'}
                       </span>
@@ -690,7 +690,7 @@ export default function RecruiterProfilePage() {
                   <Sparkles className="w-5 h-5 text-accent-blue" />
                   <h2 className="text-base sm:text-lg font-bold text-ink">AI Screening Quotas</h2>
                 </div>
-                <span className="text-xs text-accent-blue font-mono font-bold bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200">Enterprise Plan</span>
+                <span className="text-xs text-accent-blue font-mono font-bold bg-accent-blue/10 px-2.5 py-1 rounded-lg border border-accent-blue/30">Enterprise Plan</span>
               </div>
 
               <div className="space-y-3 p-4 rounded-xl bg-inset">
@@ -711,8 +711,8 @@ export default function RecruiterProfilePage() {
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl bg-blue-50/60 space-y-1.5">
-                <p className="text-xs font-bold text-blue-900 flex items-center gap-1.5">
+              <div className="p-4 rounded-xl bg-accent-blue/10 space-y-1.5">
+                <p className="text-xs font-bold text-accent-blue flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-accent-blue" />
                   Enterprise Dedicated Support
                 </p>
@@ -729,7 +729,7 @@ export default function RecruiterProfilePage() {
                   <Activity className="w-5 h-5 text-accent-blue" />
                   <h2 className="text-base sm:text-lg font-bold text-ink">Audit & Security Stream</h2>
                 </div>
-                <span className="inline-flex items-center gap-1 text-[11px] font-mono font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                <span className="inline-flex items-center gap-1 text-[11px] font-mono font-semibold text-accent-emerald bg-accent-emerald/10 px-2.5 py-1 rounded-full border border-accent-emerald/30">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Live Stream
                 </span>
               </div>
@@ -787,7 +787,7 @@ export default function RecruiterProfilePage() {
                     placeholder="colleague@organization.com"
                     value={inviteEmail}
                     onChange={(e) => setInviteEmail(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 shadow-xs font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink placeholder:text-ink-muted text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-accent-blue/30 shadow-xs font-medium"
                   />
                 </div>
 
@@ -798,7 +798,7 @@ export default function RecruiterProfilePage() {
                   <select
                     value={inviteRole}
                     onChange={(e) => setInviteRole(e.target.value as 'admin' | 'recruiter' | 'interviewer')}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 shadow-xs font-medium"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-surface border border-line-strong text-ink text-sm focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-accent-blue/30 shadow-xs font-medium"
                   >
                     <option value="recruiter">Recruiter (Full Candidate & Dossier Access)</option>
                     <option value="interviewer">Interviewer (Evaluation & Rubrics Only)</option>

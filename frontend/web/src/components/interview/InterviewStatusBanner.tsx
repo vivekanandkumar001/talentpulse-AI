@@ -37,42 +37,42 @@ export const InterviewStatusBanner: React.FC<InterviewStatusBannerProps> = ({
       <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
         <div className="flex flex-wrap items-center gap-3">
           {!audioUnlocked ? (
-            <span className="text-amber-400 flex items-center gap-1.5 font-medium">
-              <Volume2 className="w-4 h-4 text-amber-400 shrink-0" aria-hidden="true" />
+            <span className="text-accent-amber flex items-center gap-1.5 font-medium">
+              <Volume2 className="w-4 h-4 text-accent-amber shrink-0" aria-hidden="true" />
               Interviewer audio is waiting for browser audio unlock
             </span>
           ) : ((
-            <span className="text-emerald-400 flex items-center gap-1.5 font-medium">
-              <Volume2 className="w-4 h-4 text-emerald-400 shrink-0" aria-hidden="true" />
+            <span className="text-accent-emerald flex items-center gap-1.5 font-medium">
+              <Volume2 className="w-4 h-4 text-accent-emerald shrink-0" aria-hidden="true" />
               Interviewer audio ready
             </span>
           ))}
 
           {proctoringAlertBanner && (
-            <span className="text-amber-400 flex items-center gap-1.5 font-medium">
-              <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" aria-hidden="true" />
+            <span className="text-accent-amber flex items-center gap-1.5 font-medium">
+              <AlertTriangle className="w-4 h-4 text-accent-amber shrink-0" aria-hidden="true" />
               {proctoringWarningCount > 0 && <strong>[{proctoringWarningCount}]</strong>}
               {proctoringAlertBanner}
             </span>
           )}
 
           {apiError && (
-            <span className="text-rose-400 flex items-center gap-1.5 font-medium">
-              <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" aria-hidden="true" />
+            <span className="text-accent-rose flex items-center gap-1.5 font-medium">
+              <AlertTriangle className="w-4 h-4 text-accent-rose shrink-0" aria-hidden="true" />
               {apiError}
             </span>
           )}
 
           {remainingSeconds !== null && remainingSeconds >= 0 && (
-            <span className="text-cyan-400 flex items-center gap-1.5 font-medium">
-              <Clock className="w-3.5 h-3.5 text-cyan-400" aria-hidden="true" />
+            <span className="text-accent-cyan flex items-center gap-1.5 font-medium">
+              <Clock className="w-3.5 h-3.5 text-accent-cyan" aria-hidden="true" />
               {remainingSeconds > 60 ? `${String(Math.floor(remainingSeconds / 60)).padStart(2, '0')}:${String(remainingSeconds % 60).padStart(2, '0')}` : remainingSeconds} min interview remaining
             </span>
           )}
 
           {questionRemainingSeconds !== null && questionRemainingSeconds >= 0 && (
-            <span className="text-rose-400 flex items-center gap-1.5 font-medium">
-              <AlertTriangle className="w-3.5 h-3.5 text-rose-400 shrink-0" aria-hidden="true" />
+            <span className="text-accent-rose flex items-center gap-1.5 font-medium">
+              <AlertTriangle className="w-3.5 h-3.5 text-accent-rose shrink-0" aria-hidden="true" />
               {questionRemainingSeconds > 60 ? `${String(Math.floor(questionRemainingSeconds / 60)).padStart(2, '0')}:${String(questionRemainingSeconds % 60).padStart(2, '0')}` : questionRemainingSeconds} min question remaining
             </span>
           )}
@@ -84,7 +84,7 @@ export const InterviewStatusBanner: React.FC<InterviewStatusBannerProps> = ({
               type="button"
               aria-label="Enable interviewer audio voice"
               onClick={onEnableInterviewerAudio}
-              className="px-3 py-1 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/40 text-indigo-300 font-bold text-xs transition-all cursor-pointer"
+              className="px-3 py-1 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/40 text-accent-indigo font-bold text-xs transition-all cursor-pointer"
             >
               Enable Interviewer Voice
             </button>

@@ -24,6 +24,7 @@ import {
   Send,
 } from 'lucide-react';
 import { BrandLogo } from '@/components/common/BrandLogo';
+import ThemeToggle from '@/components/ThemeToggle';
 import { logout } from '@/lib/api';
 
 export const Navbar: React.FC = () => {
@@ -123,7 +124,7 @@ export const Navbar: React.FC = () => {
               <BrandLogo href="/" />
 
               {/* ================= CENTER SECTION: NAVIGATION MENU FROM SCREENSHOT ================= */}
-              <nav ref={dropdownRef} className="hidden lg:flex items-center gap-7 xl:gap-8">
+              <nav ref={dropdownRef} className="hidden xl:flex items-center gap-6 2xl:gap-8">
                 
                 {/* 1. Home */}
                 <Link
@@ -397,6 +398,7 @@ export const Navbar: React.FC = () => {
 
             {/* ================= RIGHT SECTION: ACTION BUTTONS + MENU TOGGLE ================= */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              <ThemeToggle />
               {/* Action buttons (tablet & desktop) */}
               <div className="hidden sm:flex items-center gap-3">
                 {!isAuthPage && currentUser ? (
@@ -440,7 +442,7 @@ export const Navbar: React.FC = () => {
               </div>
 
               {/* ================= MOBILE / TABLET HAMBURGER TOGGLE ================= */}
-              <div className="flex items-center gap-2 lg:hidden">
+              <div className="flex items-center gap-2 xl:hidden">
                 <button
                   type="button"
                   aria-label="Toggle navigation menu"
@@ -457,7 +459,7 @@ export const Navbar: React.FC = () => {
 
         {/* ================= MOBILE DRAWER MENU ================= */}
         {mobileOpen && (
-          <div className="lg:hidden border-t border-line bg-surface/98  px-4 py-4 space-y-3 animate-fadeIn z-50">
+          <div className="xl:hidden border-t border-line bg-surface/98  px-4 py-4 space-y-3 animate-fadeIn z-50">
             <div className="space-y-1">
               <Link
                 href="/"
@@ -517,7 +519,7 @@ export const Navbar: React.FC = () => {
                     href={getDashboardLink(currentUser.role)}
                     prefetch={false}
                     onClick={() => setMobileOpen(false)}
-                    className="text-center rounded-full bg-[#072448] text-white px-4 py-2 text-xs font-bold"
+                    className="text-center rounded-full bg-accent-blue text-on-brand px-4 py-2 text-xs font-bold"
                   >
                     Dashboard
                   </Link>
@@ -539,14 +541,14 @@ export const Navbar: React.FC = () => {
                   <Link
                     href="/login"
                     onClick={() => setMobileOpen(false)}
-                    className="text-center rounded-full border-2 border-[#072448]  text-ink-muted  px-4 py-2 text-xs font-bold"
+                    className="text-center rounded-full border-2 border-accent-blue  text-ink-muted  px-4 py-2 text-xs font-bold"
                   >
                     Login
                   </Link>
                   <Link
                     href="/register"
                     onClick={() => setMobileOpen(false)}
-                    className="text-center rounded-full bg-[#072448] text-white px-4 py-2 text-xs font-bold"
+                    className="text-center rounded-full bg-accent-blue text-on-brand px-4 py-2 text-xs font-bold"
                   >
                     Register
                   </Link>
@@ -570,7 +572,7 @@ export const Navbar: React.FC = () => {
             </button>
 
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-2xl bg-[#072448] text-white flex items-center justify-center shadow-md">
+              <div className="w-10 h-10 rounded-2xl bg-accent-blue text-on-brand flex items-center justify-center shadow-md">
                 <PhoneCall className="w-5 h-5" />
               </div>
               <div>
@@ -599,7 +601,7 @@ export const Navbar: React.FC = () => {
                     value={contactName}
                     onChange={(e) => setContactName(e.target.value)}
                     placeholder="Please enter your name"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong  bg-inset  text-sm text-ink  focus:outline-none focus:ring-2 focus:ring-[#185adb]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong  bg-inset  text-sm text-ink  focus:outline-none focus:ring-2 focus:ring-accent-blue"
                   />
                 </div>
 
@@ -613,7 +615,7 @@ export const Navbar: React.FC = () => {
                     value={contactEmail}
                     onChange={(e) => setContactEmail(e.target.value)}
                     placeholder="Please enter your email address"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong  bg-inset  text-sm text-ink  focus:outline-none focus:ring-2 focus:ring-[#185adb]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong  bg-inset  text-sm text-ink  focus:outline-none focus:ring-2 focus:ring-accent-blue"
                   />
                 </div>
 
@@ -627,13 +629,13 @@ export const Navbar: React.FC = () => {
                     value={contactMsg}
                     onChange={(e) => setContactMsg(e.target.value)}
                     placeholder="Please describe how we can help you..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong  bg-inset  text-sm text-ink  focus:outline-none focus:ring-2 focus:ring-[#185adb]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong  bg-inset  text-sm text-ink  focus:outline-none focus:ring-2 focus:ring-accent-blue"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-xl bg-[#072448] hover:bg-[#0c3666] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3 rounded-xl bg-accent-blue hover:bg-accent-blue-hover text-on-brand font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Send className="w-4 h-4" />
                   <span>Send Inquiry</span>

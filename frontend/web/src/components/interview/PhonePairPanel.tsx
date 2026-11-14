@@ -52,18 +52,15 @@ export const PhonePairPanel: React.FC<PhonePairPanelProps> = ({
     source !== 'phone';
   const isOpen = forceOpen || manualOpen || isHardwareMissing;
 
-  // Auto-start pairing when opened/forced and no active pairing exists (and probing is complete)
+  // Auto-start pairing ONLY when the phone dropped mid-room (forceOpen): the
+  // candidate needs an immediate reconnect path, so mint the QR straight away.
+  // The lobby path never starts a QR silently — QR mint is an explicit user
+  // action ("Open pairing" → "Generate QR") so we don't surprise anyone.
   useEffect(() => {
-    if (forceOpen && !pairing) {
-      if (window.confirm('Start phone companion pairing? This will generate a QR code that your phone will scan to connect.')) {
-        startPairing();
-      }
-    } else if (isOpen && !pairing && source !== 'phone' && status !== 'idle' && status !== 'probing') {
-      if (window.confirm('Start phone companion pairing? This will generate a QR code that your phone will scan to connect.')) {
-        startPairing();
-      }
+    if (forceOpen && !pairing && source !== 'phone') {
+      startPairing();
     }
-  }, [forceOpen, isOpen, pairing, source, status, startPairing]);
+  }, [forceOpen, pairing, source, startPairing]);
 
   // Countdown timer for pairing token expiry
   useEffect(() => {
@@ -123,34 +120,41 @@ export const PhonePairPanel: React.FC<PhonePairPanelProps> = ({
       return {
         title: 'Phone Connected & Streaming',
         detail: 'Desktop is receiving video & microphone feed directly from your phone.',
-        color: 'text-accent-emerald',
+        color: 'text-inverse-emerald',
       };
     }
     if (phoneStatus === ConnectionState.Connecting) {
       return {
         title: 'Phone Handshake in Progress...',
         detail: 'Negotiating encrypted peer connection with your mobile device.',
-        color: 'text-accent-amber',
+        color: 'text-inverse-amber',
       };
     }
     if (phoneStatus === ConnectionState.Reconnecting) {
       return {
         title: 'Reconnecting Phone Feed...',
         detail: 'Network hiccup detected, restoring connection.',
-        color: 'text-accent-amber',
+        color: 'text-inverse-amber',
+      };
+    }
+    if (pairing == null) {
+      return {
+        title: 'Link your phone as the camera & mic',
+        detail: 'Mint a single-use, 5-minute pairing code. Your phone needs no app — it streams straight through the browser.',
+        color: 'text-inverse-cyan',
       };
     }
     if (isExpired) {
       return {
         title: 'QR Code Expired',
         detail: 'Pairing codes have a 5-minute security TTL. Generate a new code to pair.',
-        color: 'text-accent-rose',
+        color: 'text-inverse-rose',
       };
     }
     return {
       title: 'Waiting for Mobile Connection',
       detail: 'Scan the QR code with your phone camera or open the link.',
-      color: 'text-accent-cyan',
+      color: 'text-inverse-cyan',
     };
   }, [source, forceOpen, phoneStatus, isExpired]);
 
@@ -162,7 +166,7 @@ export const PhonePairPanel: React.FC<PhonePairPanelProps> = ({
           <button
             type="button"
             onClick={() => setManualOpen((prev) => !prev)}
-            className="inline-flex items-center gap-2 text-xs font-semibold text-accent-cyan hover:text-cyan-400 transition-colors cursor-pointer group"
+            className="inline-flex items-center gap-2 text-xs font-semibold text-accent-cyan hover:opacity-75 transition-colors cursor-pointer group"
           >
             <Smartphone className="w-4 h-4 text-accent-cyan group-hover:scale-110 transition-transform" />
             <span>
@@ -172,7 +176,7 @@ export const PhonePairPanel: React.FC<PhonePairPanelProps> = ({
 
           {isHardwareMissing && (
             <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-accent-amber">
-              Auto-Suggested
+              CAMERA/MIC UNAVAILABLE
             </span>
           )}
         </div>
@@ -264,6 +268,16 @@ export const PhonePairPanel: React.FC<PhonePairPanelProps> = ({
                   fgColor="#38BDF8"
                   level="M"
                 />
+              ) : pairing == null ? (
+                <div className="w-[160px] h-[160px] flex flex-col items-center justify-center text-center gap-2 px-3">
+                  <QrCode className="w-8 h-8 text-cyan-400" />
+                  <span className="text-xs font-semibold text-slate-200">
+                    Pairing code not yet generated
+                  </span>
+                  <span className="text-[10px] text-slate-500 leading-snug">
+                    Mint a one-time, 5-minute session to link your phone as the camera &amp; mic.
+                  </span>
+                </div>
               ) : (
                 <div className="w-[160px] h-[160px] flex flex-col items-center justify-center text-center p-2 text-rose-400">
                   <AlertTriangle className="w-8 h-8 mb-2" />
@@ -284,40 +298,53 @@ export const PhonePairPanel: React.FC<PhonePairPanelProps> = ({
               </div>
 
               <ol className="space-y-2 text-slate-300 list-decimal list-inside text-[11px]">
-                <li>Open your smartphone camera &amp; scan the QR.</li>
-                <li>Tap the link to open the Companion feed.</li>
+                <li>Generate a pairing code on this device.</li>
+                <li>Open your phone camera &amp; scan the QR.</li>
                 <li>Tap <strong>&quot;Start Camera &amp; Mic&quot;</strong> on your phone.</li>
               </ol>
 
               {/* Action Buttons: Copy Link & New QR */}
               <div className="flex items-center gap-2 pt-1 flex-wrap">
-                <button
-                  type="button"
-                  onClick={handleCopy}
-                  disabled={!pairing?.qrUrl || isExpired}
-                  className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
-                >
-                  {copied ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-emerald-400" />
-                      <span>Copied!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5 text-cyan-400" />
-                      <span>Copy Link</span>
-                    </>
-                  )}
-                </button>
+                {pairing == null ? (
+                  <button
+                    type="button"
+                    onClick={() => startPairing()}
+                    className="px-3.5 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+                  >
+                    <QrCode className="w-3.5 h-3.5" />
+                    <span>Generate QR Code</span>
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      onClick={handleCopy}
+                      disabled={!pairing?.qrUrl || isExpired}
+                      className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5 text-cyan-400" />
+                          <span>Copy Link</span>
+                        </>
+                      )}
+                    </button>
 
-                <button
-                  type="button"
-                  onClick={() => startPairing()}
-                  className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
-                >
-                  <RefreshCw className="w-3.5 h-3.5 text-amber-400" />
-                  <span>New QR</span>
-                </button>
+                    <button
+                      type="button"
+                      onClick={() => startPairing()}
+                      className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5 text-amber-400" />
+                      <span>New QR</span>
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>

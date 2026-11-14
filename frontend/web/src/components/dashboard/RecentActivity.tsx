@@ -81,7 +81,7 @@ export const RecentActivity: React.FC = () => {
   return (
     <div>
       <div className="flex items-baseline justify-between gap-3 mb-3">
-        <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-ink-faint">Recent activity</h2>
+        <h2 className="kicker">Recent activity</h2>
         <Link href="/candidate/reports" className="inline-flex items-center gap-0.5 text-[11px] font-semibold text-ink-muted hover:text-accent-cyan transition-colors">
           All reports
         </Link>

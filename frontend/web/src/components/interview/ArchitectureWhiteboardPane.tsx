@@ -424,15 +424,15 @@ export const ArchitectureWhiteboardPane: React.FC<ArchitectureWhiteboardPaneProp
   const getNodeIcon = (type: NodeType) => {
     switch (type) {
       case 'client':
-        return <Smartphone className="w-4 h-4 text-cyan-400 shrink-0" />;
+        return <Smartphone className="w-4 h-4 text-accent-cyan shrink-0" />;
       case 'balancer':
-        return <Cpu className="w-4 h-4 text-indigo-400 shrink-0" />;
+        return <Cpu className="w-4 h-4 text-accent-indigo shrink-0" />;
       case 'redis':
-        return <HardDrive className="w-4 h-4 text-amber-400 shrink-0" />;
+        return <HardDrive className="w-4 h-4 text-accent-amber shrink-0" />;
       case 'kafka':
-        return <Layers className="w-4 h-4 text-purple-400 shrink-0" />;
+        return <Layers className="w-4 h-4 text-accent-violet shrink-0" />;
       case 'database':
-        return <Database className="w-4 h-4 text-emerald-400 shrink-0" />;
+        return <Database className="w-4 h-4 text-accent-emerald shrink-0" />;
       case 'gateway':
         return <Cloud className="w-4 h-4 text-sky-400 shrink-0" />;
       default:
@@ -461,50 +461,50 @@ export const ArchitectureWhiteboardPane: React.FC<ArchitectureWhiteboardPaneProp
           <button
             type="button"
             onClick={() => addNode('database')}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-inset hover:bg-surface-elevated border border-line hover:border-emerald-500/40 text-ink hover:text-emerald-400 text-xs transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-inset hover:bg-surface-elevated border border-line hover:border-emerald-500/40 text-ink hover:text-accent-emerald text-xs transition-colors cursor-pointer"
             title="Add Database"
           >
-            <Database className="w-3.5 h-3.5 text-emerald-400" />
+            <Database className="w-3.5 h-3.5 text-accent-emerald" />
             <span>Database</span>
           </button>
 
           <button
             type="button"
             onClick={() => addNode('redis')}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-inset hover:bg-surface-elevated border border-line hover:border-amber-500/40 text-ink hover:text-amber-400 text-xs transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-inset hover:bg-surface-elevated border border-line hover:border-amber-500/40 text-ink hover:text-accent-amber text-xs transition-colors cursor-pointer"
             title="Add Cache Cluster"
           >
-            <HardDrive className="w-3.5 h-3.5 text-amber-400" />
+            <HardDrive className="w-3.5 h-3.5 text-accent-amber" />
             <span>Redis Cache</span>
           </button>
 
           <button
             type="button"
             onClick={() => addNode('kafka')}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-inset hover:bg-surface-elevated border border-line hover:border-purple-500/40 text-ink hover:text-purple-400 text-xs transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-inset hover:bg-surface-elevated border border-line hover:border-purple-500/40 text-ink hover:text-accent-violet text-xs transition-colors cursor-pointer"
             title="Add Message Queue"
           >
-            <Layers className="w-3.5 h-3.5 text-purple-400" />
+            <Layers className="w-3.5 h-3.5 text-accent-violet" />
             <span>Queue / Stream</span>
           </button>
 
           <button
             type="button"
             onClick={() => addNode('balancer')}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-inset hover:bg-surface-elevated border border-line hover:border-indigo-500/40 text-ink hover:text-indigo-400 text-xs transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-inset hover:bg-surface-elevated border border-line hover:border-indigo-500/40 text-ink hover:text-accent-indigo text-xs transition-colors cursor-pointer"
             title="Add Load Balancer"
           >
-            <Cpu className="w-3.5 h-3.5 text-indigo-400" />
+            <Cpu className="w-3.5 h-3.5 text-accent-indigo" />
             <span>Load Balancer</span>
           </button>
 
           <button
             type="button"
             onClick={() => addNode('client')}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-inset hover:bg-surface-elevated border border-line hover:border-cyan-500/40 text-ink hover:text-cyan-400 text-xs transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-inset hover:bg-surface-elevated border border-line hover:border-cyan-500/40 text-ink hover:text-accent-cyan text-xs transition-colors cursor-pointer"
             title="Add Client App"
           >
-            <Smartphone className="w-3.5 h-3.5 text-cyan-400" />
+            <Smartphone className="w-3.5 h-3.5 text-accent-cyan" />
             <span>Client</span>
           </button>
 
@@ -534,7 +534,7 @@ export const ArchitectureWhiteboardPane: React.FC<ArchitectureWhiteboardPaneProp
             className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-medium border transition-colors cursor-pointer ${
               isConnectMode
                 ? 'bg-cyan-500 text-black border-cyan-400 font-bold shadow-lg shadow-cyan-500/30'
-                : 'bg-inset hover:bg-surface-elevated text-ink border-line hover:text-cyan-400'
+                : 'bg-inset hover:bg-surface-elevated text-ink border-line hover:text-accent-cyan'
             }`}
             title="Click components sequentially to draw connector arrows"
           >
@@ -567,7 +567,7 @@ export const ArchitectureWhiteboardPane: React.FC<ArchitectureWhiteboardPaneProp
           <button
             type="button"
             onClick={handleAttachToAnswer}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-400 text-xs font-semibold transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-accent-emerald text-xs font-semibold transition-colors cursor-pointer"
             title="Export architecture topology and attach to candidate answer"
           >
             <Share2 className="w-3.5 h-3.5" />
@@ -579,7 +579,7 @@ export const ArchitectureWhiteboardPane: React.FC<ArchitectureWhiteboardPaneProp
             type="button"
             onClick={handleCritiqueArchitecture}
             disabled={isCritiquing}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/40 text-cyan-400 text-xs font-semibold transition-colors cursor-pointer disabled:opacity-50 shadow-md shadow-cyan-500/10"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/40 text-accent-cyan text-xs font-semibold transition-colors cursor-pointer disabled:opacity-50 shadow-md shadow-cyan-500/10"
             title="Ask Sarah Chen to analyze bottlenecks and SPOFs in your system design"
           >
             <Sparkles className={`w-3.5 h-3.5 ${isCritiquing ? 'animate-spin' : 'animate-pulse'}`} />
@@ -590,15 +590,15 @@ export const ArchitectureWhiteboardPane: React.FC<ArchitectureWhiteboardPaneProp
 
       {/* NOTIFICATION STATUS TOAST */}
       {statusMessage && (
-        <div className="bg-cyan-500/10 border-b border-cyan-500/30 px-4 py-1.5 flex items-center justify-between text-xs font-mono text-cyan-300 animate-fadeIn">
+        <div className="bg-cyan-500/10 border-b border-cyan-500/30 px-4 py-1.5 flex items-center justify-between text-xs font-mono text-accent-cyan animate-fadeIn">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+            <Sparkles className="w-3.5 h-3.5 text-accent-cyan animate-pulse" />
             <span>{statusMessage}</span>
           </div>
           <button
             type="button"
             onClick={() => setStatusMessage(null)}
-            className="text-cyan-400 hover:text-white"
+            className="text-accent-cyan hover:opacity-75 transition-opacity cursor-pointer"
           >
             <X className="w-3 h-3" />
           </button>
@@ -662,13 +662,13 @@ export const ArchitectureWhiteboardPane: React.FC<ArchitectureWhiteboardPaneProp
               <button
                 type="button"
                 onClick={() => setShowCustomModal(false)}
-                className="px-3 py-1.5 rounded-lg bg-inset border border-line text-xs text-ink hover:text-white cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-inset border border-line text-xs text-ink hover:bg-surface-2 cursor-pointer transition-colors"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-4 py-1.5 rounded-lg bg-accent-cyan text-black text-xs font-bold hover:bg-cyan-300 transition-colors cursor-pointer"
+                className="px-4 py-1.5 rounded-lg bg-accent-cyan text-on-brand text-xs font-bold hover:brightness-110 transition-all cursor-pointer"
               >
                 Add to Canvas
               </button>
@@ -860,7 +860,7 @@ export const ArchitectureWhiteboardPane: React.FC<ArchitectureWhiteboardPaneProp
                         <button
                           type="button"
                           onClick={() => saveEditNode(node.id)}
-                          className="text-emerald-400 hover:text-emerald-300"
+                          className="text-accent-emerald hover:opacity-75 transition-opacity cursor-pointer"
                         >
                           <Check className="w-3.5 h-3.5" />
                         </button>
@@ -888,7 +888,7 @@ export const ArchitectureWhiteboardPane: React.FC<ArchitectureWhiteboardPaneProp
                     <button
                       type="button"
                       onClick={() => startEditNode(node)}
-                      className="p-1 rounded hover:bg-inset text-ink-muted hover:text-cyan-400 cursor-pointer"
+                      className="p-1 rounded hover:bg-inset text-ink-muted hover:text-accent-cyan cursor-pointer"
                       title="Rename component"
                     >
                       <Edit2 className="w-3 h-3" />
@@ -912,7 +912,7 @@ export const ArchitectureWhiteboardPane: React.FC<ArchitectureWhiteboardPaneProp
                   <span>Drag to move</span>
                 </span>
                 {isConnectMode ? (
-                  <span className="text-cyan-400 font-bold">
+                  <span className="text-accent-cyan font-bold">
                     {isConnectSource ? 'Source' : 'Click to link'}
                   </span>
                 ) : (
@@ -926,7 +926,7 @@ export const ArchitectureWhiteboardPane: React.FC<ArchitectureWhiteboardPaneProp
         {/* EMPTY STATE HELPER */}
         {nodes.length === 0 && (
           <div className="h-full flex flex-col items-center justify-center text-center p-8 space-y-3">
-            <div className="w-12 h-12 rounded-2xl bg-surface border border-line flex items-center justify-center text-cyan-400 shadow-xl">
+            <div className="w-12 h-12 rounded-2xl bg-surface border border-line flex items-center justify-center text-accent-cyan shadow-xl">
               <Move className="w-6 h-6 animate-pulse" />
             </div>
             <div>
@@ -939,14 +939,14 @@ export const ArchitectureWhiteboardPane: React.FC<ArchitectureWhiteboardPaneProp
               <button
                 type="button"
                 onClick={loadSampleTemplate}
-                className="px-3 py-1.5 rounded-lg bg-surface hover:bg-surface-elevated border border-line text-xs font-mono text-ink hover:text-cyan-400 transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-surface hover:bg-surface-elevated border border-line text-xs font-mono text-ink hover:text-accent-cyan transition-colors cursor-pointer"
               >
                 Load Starter Template
               </button>
               <button
                 type="button"
                 onClick={() => addNode('client')}
-                className="px-3 py-1.5 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/40 text-xs font-mono text-cyan-400 transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/40 text-xs font-mono text-accent-cyan transition-colors cursor-pointer"
               >
                 + Add Client App
               </button>
@@ -966,7 +966,7 @@ export const ArchitectureWhiteboardPane: React.FC<ArchitectureWhiteboardPaneProp
             <button
               type="button"
               onClick={() => setCritiqueResult(null)}
-              className="text-ink-muted hover:text-ink text-xs p-1 rounded hover:bg-slate-800"
+              className="text-slate-400 hover:text-slate-100 text-xs p-1 rounded hover:bg-slate-800"
             >
               <X className="w-3.5 h-3.5" />
             </button>

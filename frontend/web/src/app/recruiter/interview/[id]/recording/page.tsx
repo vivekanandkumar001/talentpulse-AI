@@ -413,7 +413,7 @@ export default function RecruiterRecordingViewPage() {
                       <button
                         type="button"
                         onClick={togglePlay}
-                        className="p-1 hover:text-white transition-colors cursor-pointer"
+                        className="p-1 hover:text-ink transition-colors cursor-pointer"
                       >
                         {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                       </button>
@@ -422,7 +422,7 @@ export default function RecruiterRecordingViewPage() {
                         <button
                           type="button"
                           onClick={toggleMute}
-                          className="p-1 hover:text-white transition-colors cursor-pointer"
+                          className="p-1 hover:text-ink transition-colors cursor-pointer"
                         >
                           {isMuted ? <VolumeX className="w-4 h-4 text-accent-rose" /> : <Volume2 className="w-4 h-4" />}
                         </button>
@@ -462,7 +462,7 @@ export default function RecruiterRecordingViewPage() {
                       <button
                         type="button"
                         onClick={toggleFullscreen}
-                        className="p-1 hover:text-white transition-colors cursor-pointer"
+                        className="p-1 hover:text-ink transition-colors cursor-pointer"
                         title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
                       >
                         {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -563,7 +563,7 @@ export default function RecruiterRecordingViewPage() {
                     title={`Jump to proctoring alert: ${event.title} at ${event.formattedTime}`}
                   >
                     <ShieldAlert className="w-3.5 h-3.5 text-accent-amber" />
-                    <span className="font-medium text-amber-200 truncate max-w-[200px]">
+                    <span className="font-medium text-ink truncate max-w-[200px]">
                       {event.title}
                     </span>
                     <span className="inline-flex items-center gap-1 font-mono font-bold text-[11px] text-accent-cyan bg-inset px-2 py-0.5 rounded border border-line">
@@ -723,7 +723,7 @@ export default function RecruiterRecordingViewPage() {
                                   {turn.candidate_code.split('\n').length} lines
                                 </span>
                               </div>
-                              <pre className="p-3 rounded-lg bg-canvas border border-line/80 font-mono text-xs text-ink overflow-x-auto max-h-56 leading-relaxed selection:bg-cyan-500/30 selection:text-white">
+                              <pre className="p-3 rounded-lg bg-canvas border border-line/80 font-mono text-xs text-ink overflow-x-auto max-h-56 leading-relaxed selection:bg-cyan-500/30 selection:text-accent-cyan">
                                 <code>{turn.candidate_code}</code>
                               </pre>
                             </div>

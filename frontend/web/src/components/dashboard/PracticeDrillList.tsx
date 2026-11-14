@@ -54,7 +54,7 @@ export const PracticeDrillList: React.FC = () => {
   return (
     <div>
       <div className="flex items-baseline justify-between gap-3 mb-3">
-        <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-ink-faint">Targeted drills</h2>
+        <h2 className="kicker">Targeted drills</h2>
         <button
           type="button"
           onClick={() => router.push('/candidate/practice')}
@@ -80,7 +80,7 @@ export const PracticeDrillList: React.FC = () => {
           <button
             type="button"
             onClick={() => router.push('/candidate/practice')}
-            className="mt-3 inline-flex items-center gap-2 text-xs font-bold text-white bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 px-4 py-2 rounded-lg transition-all cursor-pointer"
+            className="mt-3 inline-flex items-center gap-2 btn-primary-gradient text-on-brand text-xs font-bold px-4 py-2 rounded-lg transition-all cursor-pointer"
           >
             Browse available drills
           </button>

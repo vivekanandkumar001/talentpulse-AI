@@ -6,14 +6,13 @@ import { streamGuardScript } from "@/components/common/streamGuardScript";
 import { JsonLd } from "@/components/seo/JsonLd";
 import "./globals.css";
 
-/* Pre-paint theme bootstrap: reads saved preference or the OS setting and
-   stamps data-theme on <html> before first paint (avoids theme flash). */
+/* Pre-paint theme bootstrap: light is the default for every visitor.
+   Only an explicit saved choice (localStorage.tp_theme = 'dark') opts into
+   dark mode, stamped on <html> before first paint to avoid a theme flash. */
 const THEME_INIT_SCRIPT = `(function () {
   try {
     var saved = localStorage.getItem('tp_theme');
-    var theme = saved === 'dark' || saved === 'light'
-      ? saved
-      : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    var theme = saved === 'dark' ? 'dark' : 'light';
     if (theme === 'light') {
       document.documentElement.removeAttribute('data-theme');
     } else {

@@ -264,13 +264,13 @@ export const MayankUpiModal: React.FC<MayankUpiModalProps> = ({
         {/* Top Header */}
         <div className="relative px-5 pt-5 pb-4 border-b border-line flex items-center justify-between bg-surface">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-accent-blue border border-blue-200/80 shadow-xs">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-blue/10 text-accent-blue border border-accent-blue/30 shadow-xs">
               <QrCode className="w-5 h-5" />
             </div>
             <div>
               <h3 className="text-base font-bold text-ink flex items-center gap-1.5">
                 Scan &amp; Pay with UPI
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-50 text-accent-blue font-bold border border-blue-200">
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-accent-blue/10 text-accent-blue font-bold border border-accent-blue/30">
                   Instant
                 </span>
               </h3>
@@ -299,7 +299,7 @@ export const MayankUpiModal: React.FC<MayankUpiModalProps> = ({
               <p className="text-2xl font-black text-ink tracking-tight">₹{displayAmount}.00</p>
             </div>
             <div className="text-right">
-              <span className="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-md bg-blue-50 text-accent-blue border border-blue-200">
+              <span className="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-md bg-accent-blue/10 text-accent-blue border border-accent-blue/30">
                 <Sparkles className="w-3.5 h-3.5" />
                 +{orderData?.amount_credits || displayAmount} Credits
               </span>
@@ -319,7 +319,7 @@ export const MayankUpiModal: React.FC<MayankUpiModalProps> = ({
               {rzpBusy ? 'Starting Razorpay…' : 'Pay via Razorpay (UPI / Card / NetBanking) — Instant Credit'}
             </button>
             {rzpError && (
-              <p className="text-[11px] text-rose-600 font-medium flex items-start gap-1 leading-snug">
+              <p className="text-[11px] text-accent-rose font-medium flex items-start gap-1 leading-snug">
                 <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" /> {rzpError}
               </p>
             )}
@@ -343,8 +343,8 @@ export const MayankUpiModal: React.FC<MayankUpiModalProps> = ({
           {/* Real-time Listening Pulse */}
           <div className="flex items-center justify-center gap-2 p-2.5 rounded-lg bg-inset border border-line text-xs font-medium">
             {pollingStatus === 'verified' ? (
-              <span className="flex items-center gap-2 text-emerald-700 font-bold">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <span className="flex items-center gap-2 text-accent-emerald font-bold">
+                <CheckCircle2 className="w-4 h-4 text-accent-emerald" />
                 Payment Confirmed! Adding credits...
               </span>
             ) : (
@@ -381,7 +381,7 @@ export const MayankUpiModal: React.FC<MayankUpiModalProps> = ({
             >
               {copiedUpi ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-emerald-600" /> Copied
+                  <Check className="w-3.5 h-3.5 text-accent-emerald" /> Copied
                 </>
               ) : (
                 <>
@@ -394,8 +394,8 @@ export const MayankUpiModal: React.FC<MayankUpiModalProps> = ({
           {/* Fallback UTR Submission Accordion */}
           <div className="border-t border-line pt-3">
             {gatewayStalled && pollingStatus !== 'verified' && (
-              <div className="mb-2 p-2.5 rounded-lg bg-amber-50 border border-amber-200 text-[11px] leading-snug text-amber-800 font-medium flex items-start gap-2">
-                <AlertCircle className="w-4 h-4 mt-0.5 shrink-0 text-amber-600" />
+              <div className="mb-2 p-2.5 rounded-lg bg-accent-amber/10 border border-accent-amber/30 text-[11px] leading-snug text-accent-amber font-medium flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 mt-0.5 shrink-0 text-accent-amber" />
                 <span>Live payment confirmation is unavailable right now. If your money was already debited, paste your 12-digit UTR below — credits will be added instantly.</span>
               </div>
             )}
@@ -429,7 +429,7 @@ export const MayankUpiModal: React.FC<MayankUpiModalProps> = ({
                   </button>
                 </div>
                 {utrError && (
-                  <p className="text-[11px] text-rose-600 font-medium flex items-center gap-1">
+                  <p className="text-[11px] text-accent-rose font-medium flex items-center gap-1">
                     <AlertCircle className="w-3.5 h-3.5" /> {utrError}
                   </p>
                 )}
@@ -440,8 +440,8 @@ export const MayankUpiModal: React.FC<MayankUpiModalProps> = ({
 
         {/* Footer Security Strip */}
         <div className="px-5 py-3 bg-inset border-t border-line flex items-center justify-between text-[11px] text-ink-muted">
-          <span className="flex items-center gap-1.5 font-medium text-emerald-700">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+          <span className="flex items-center gap-1.5 font-medium text-accent-emerald">
+            <ShieldCheck className="w-3.5 h-3.5 text-accent-emerald" />
             Verified UPI Gateway
           </span>
           <span className="font-mono text-[10px] text-ink-muted">Instant Automated Credit</span>

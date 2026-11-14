@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -66,7 +66,7 @@ export const InterviewRoomHeader: React.FC<InterviewRoomHeaderProps> = ({
         <div className="flex items-center gap-1.5 sm:gap-3 shrink-0 whitespace-nowrap">
           <BrandLogo href="/candidate/dashboard" hideTextOnMobile={true} />
 
-          <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 rounded-full bg-rose-500/10 border border-rose-500/25 text-rose-400 font-mono text-[10px] sm:text-xs shrink-0 whitespace-nowrap">
+          <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 rounded-full bg-rose-500/10 border border-rose-500/25 text-accent-rose font-mono text-[10px] sm:text-xs shrink-0 whitespace-nowrap">
             <Circle className="w-2 h-2 fill-rose-500 animate-pulse text-rose-500 shrink-0" />
             <span className="whitespace-nowrap font-medium">
               <span className="hidden sm:inline">REC </span>
@@ -132,7 +132,7 @@ export const InterviewRoomHeader: React.FC<InterviewRoomHeaderProps> = ({
                 ? 'bg-rose-500/10 border-rose-500/30 text-accent-rose'
                 : proctoringHealthState === 'ERROR'
                 ? 'bg-rose-500/10 border-rose-500/30 text-accent-rose'
-                : 'bg-indigo-500/10 border-indigo-500/30 text-indigo-300'
+                : 'bg-indigo-500/10 border-indigo-500/30 text-accent-indigo'
             }`}
             title={
               proctoringStatus === 'tab_warning'

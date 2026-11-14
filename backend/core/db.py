@@ -1,5 +1,6 @@
 import os
 import logging
+from core.http_utils import generic_500, safe_log_tag
 from contextlib import contextmanager
 import pymongo
 from dotenv import load_dotenv
@@ -473,7 +474,7 @@ def ensure_super_admin(db):
             "created_at": now_utc,
             "updated_at": now_utc,
         })
-        logger.info(f"[MongoDB] Seeded default super_admin account: {admin_email}")
+        logger.info(f"[MongoDB] Seeded default super_admin account: {safe_log_tag(admin_email)}")
         return
 
     drifted = (
@@ -571,7 +572,7 @@ def check_mongo_connection() -> dict:
         return {"status": "connected", "ping": info}
     except Exception as e:
         logger.error(f"MongoDB connection failed: {e}")
-        return {"status": "error", "error": str(e)}
+        return {"status": "error", "error": generic_500(e)}
 
 def check_qdrant_connection() -> dict:
     try:
@@ -585,7 +586,7 @@ def check_qdrant_connection() -> dict:
             return {"status": "connected", "collections": []}
     except Exception as e:
         logger.warning(f"Qdrant connection check failed: {e}")
-        return {"status": "mock_fallback", "error": str(e)}
+        return {"status": "mock_fallback", "error": generic_500(e)}
 
 # Stubs for obsolete postgres connection pooling
 PG_URI = None

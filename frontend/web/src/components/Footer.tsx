@@ -113,7 +113,7 @@ export const Footer: React.FC = () => {
               <li>
                 <Link href="/career" className="text-ink-muted hover:text-accent-blue  transition-colors flex items-center gap-1.5 font-medium">
                   Career
-                  <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600  font-bold border border-emerald-500/20">
+                  <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-accent-emerald  font-bold border border-emerald-500/20">
                     We&apos;re Hiring
                   </span>
                 </Link>
@@ -143,11 +143,12 @@ export const Footer: React.FC = () => {
       <div className="border-t border-line bg-surface/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink-faint">
           <p>© {new Date().getFullYear()} Progeni Atlas Technologies Inc. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <Link href="/about#integrity" className="hover:text-ink transition-colors">Anti-Bias Ethics</Link>
-            <Link href="/contact" className="hover:text-ink transition-colors">Privacy Policy</Link>
-            <Link href="/contact" className="hover:text-ink transition-colors">Terms of Service</Link>
-            <Link href="/contact" className="hover:text-ink transition-colors">Security Audit</Link>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <Link href="/ai-transparency#anti-bias" className="hover:text-ink transition-colors">Anti-Bias Ethics</Link>
+            <Link href="/privacy" className="hover:text-ink transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-ink transition-colors">Terms of Service</Link>
+            <Link href="/refund" className="hover:text-ink transition-colors">Refund Policy</Link>
+            <Link href="/ai-transparency" className="hover:text-ink transition-colors">AI Transparency</Link>
           </div>
         </div>
       </div>

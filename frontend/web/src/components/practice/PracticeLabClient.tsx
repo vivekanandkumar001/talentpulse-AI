@@ -17,7 +17,8 @@ import { PracticeDrillBrowser } from '@/components/practice/PracticeDrillBrowser
 
 export function PracticeLabClient() {
   const searchParams = useSearchParams();
-  const initialMode = searchParams.get('mode') === 'drills' ? 'drills' : 'mock';
+  const initialMode = searchParams.get('mode') === 'drills' || !!searchParams.get('skill') ? 'drills' : 'mock';
+  const initialSkill = searchParams.get('skill') || undefined;
   const [activeTab, setActiveTab] = useState<'mock' | 'drills'>(initialMode);
 
   return (
@@ -66,7 +67,7 @@ export function PracticeLabClient() {
       {activeTab === 'mock' ? (
         <PracticeInterviewSetup />
       ) : (
-        <PracticeDrillBrowser embedded={true} />
+        <PracticeDrillBrowser embedded={true} initialSkill={initialSkill} />
       )}
     </div>
   );

@@ -12,8 +12,8 @@ export function RecommendationBadge({
  const upperRec = String(rec ||'').trim().toUpperCase();
  if (isPast || upperRec === 'MISSED'|| upperRec === 'ABANDONED'|| upperRec === 'EXPIRED') {
  return (
- <span className="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-amber-100/90 border border-amber-300 text-amber-900 flex items-center gap-1 shadow-xs">
- <XCircle className="w-3.5 h-3.5 text-amber-700 shrink-0"/> MISSED
+ <span className="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-accent-amber/20 border border-accent-amber/40 text-accent-amber flex items-center gap-1 shadow-xs">
+ <XCircle className="w-3.5 h-3.5 text-accent-amber shrink-0"/> MISSED
  </span>
  );
  }

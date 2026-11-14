@@ -138,7 +138,7 @@ export const CandidateVideoPreview: React.FC<CandidateVideoPreviewProps> = ({
 
   return (
     <div
-      className={`relative w-full h-full min-h-[180px] sm:min-h-[220px] rounded-2xl border border-line bg-slate-950 overflow-hidden shadow-md flex items-center justify-center group ${className}`}
+      className={`relative w-full h-full min-h-[180px] sm:min-h-[220px] rounded-2xl border border-inverse-line bg-slate-950 overflow-hidden shadow-md flex items-center justify-center group ${className}`}
     >
       {!isVideoOff && stream ? (
         <video
@@ -149,9 +149,9 @@ export const CandidateVideoPreview: React.FC<CandidateVideoPreviewProps> = ({
           className="w-full h-full object-cover scale-x-[-1]"
         />
       ) : (
-        <div className="flex flex-col items-center justify-center space-y-2 text-ink-muted">
-          <div className="w-12 h-12 rounded-full bg-surface border border-line flex items-center justify-center">
-            <User className="w-6 h-6 text-ink-muted" />
+        <div className="flex flex-col items-center justify-center space-y-2 text-inverse-ink-muted">
+          <div className="w-12 h-12 rounded-full bg-inverse-surface-2 border border-inverse-line flex items-center justify-center">
+            <User className="w-6 h-6 text-inverse-ink-muted" />
           </div>
           <p className="text-xs font-mono">{!stream ? 'No Camera Stream' : 'Camera Muted'}</p>
         </div>

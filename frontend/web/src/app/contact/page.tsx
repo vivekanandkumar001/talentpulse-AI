@@ -43,8 +43,8 @@ export default function ContactPage() {
       icon: Mail,
       title: 'Email Us Directly',
       desc: 'Our enterprise solutions team responds within 4 business hours.',
-      value: 'sales@progeni.atlas',
-      sub: 'support@progeni.atlas',
+      value: 'sales@progeni.live',
+      sub: 'support@progeni.live',
     },
     {
       icon: Phone,
@@ -79,7 +79,7 @@ export default function ContactPage() {
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-ink tracking-tight leading-[1.1]">
             Let&apos;s Discuss Your{' '}
-            <span className="bg-gradient-to-r from-[#185adb] via-cyan-500 to-indigo-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-accent-blue via-cyan-500 to-indigo-600 bg-clip-text text-transparent">
               Hiring Goals
             </span>
           </h1>
@@ -116,7 +116,7 @@ export default function ContactPage() {
                       className="p-6 rounded-2xl border border-line bg-surface-deep shadow-xs space-y-2 hover:border-cyan-400/40 transition-colors"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-[#072448] text-white flex items-center justify-center shadow-xs">
+                        <div className="w-10 h-10 rounded-xl bg-accent-blue text-on-brand flex items-center justify-center shadow-xs">
                           <Icon className="w-5 h-5" />
                         </div>
                         <div>
@@ -125,7 +125,7 @@ export default function ContactPage() {
                         </div>
                       </div>
                       <div className="pt-2 border-t border-line text-xs font-mono">
-                        <p className="font-bold text-[#185adb] ">{card.value}</p>
+                        <p className="font-bold text-accent-blue ">{card.value}</p>
                         <p className="text-ink-muted text-[11px] mt-0.5">{card.sub}</p>
                       </div>
                     </div>
@@ -170,7 +170,7 @@ export default function ContactPage() {
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="Please enter your full name"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-line bg-surface text-sm text-ink focus:outline-none focus:ring-2 focus:ring-[#185adb]"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-line bg-surface text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent-blue"
                         />
                       </div>
 
@@ -184,7 +184,7 @@ export default function ContactPage() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Please enter your work email address"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-line bg-surface text-sm text-ink focus:outline-none focus:ring-2 focus:ring-[#185adb]"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-line bg-surface text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent-blue"
                         />
                       </div>
                     </div>
@@ -199,7 +199,7 @@ export default function ContactPage() {
                           value={company}
                           onChange={(e) => setCompany(e.target.value)}
                           placeholder="Please enter your company name"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-line bg-surface text-sm text-ink focus:outline-none focus:ring-2 focus:ring-[#185adb]"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-line bg-surface text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent-blue"
                         />
                       </div>
 
@@ -210,7 +210,7 @@ export default function ContactPage() {
                         <select
                           value={inquiryType}
                           onChange={(e) => setInquiryType(e.target.value)}
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-line bg-surface text-sm text-ink focus:outline-none focus:ring-2 focus:ring-[#185adb]"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-line bg-surface text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent-blue"
                         >
                           <option value="Enterprise Demo">Schedule Enterprise Demo</option>
                           <option value="Pricing & Licensing">Pricing &amp; Volume Licensing</option>
@@ -231,13 +231,13 @@ export default function ContactPage() {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Please tell us about your team size, expected interview volume, or specific technical stacks..."
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-line bg-surface text-sm text-ink focus:outline-none focus:ring-2 focus:ring-[#185adb]"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-line bg-surface text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent-blue"
                       />
                     </div>
 
                     <button
                       type="submit"
-                      className="w-full py-3 rounded-xl bg-[#072448] hover:bg-[#0c3666]   text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer mt-2"
+                      className="w-full py-3 rounded-xl bg-accent-blue hover:bg-accent-blue-hover   text-on-brand font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer mt-2"
                     >
                       <Send className="w-4 h-4" />
                       <span>Send Enterprise Inquiry</span>

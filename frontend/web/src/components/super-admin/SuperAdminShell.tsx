@@ -16,6 +16,7 @@ import {
   X,
 } from 'lucide-react';
 import { BrandLogo } from '@/components/common/BrandLogo';
+import ThemeToggle from '@/components/ThemeToggle';
 import { logout, apiFetch } from '@/lib/api';
 import { SUPER_ADMIN_NAV, initialsOf } from '@/lib/super-admin';
 
@@ -241,6 +242,7 @@ export default function SuperAdminShell({ children }: { children: React.ReactNod
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3">
+              <ThemeToggle />
               {/* Super Admin Platform Notifications */}
               <div className="relative" ref={notifMenuRef}>
                 <button

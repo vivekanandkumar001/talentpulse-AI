@@ -64,7 +64,7 @@ interface InvalidSessionScreenProps {
 export const InvalidSessionScreen: React.FC<InvalidSessionScreenProps> = ({ onReturnDashboard }) => (
   <div className="min-h-dvh w-full overflow-y-auto flex flex-col items-center justify-center bg-canvas text-ink p-8">
     <div className="max-w-xl text-center p-8 rounded-2xl bg-surface border border-line shadow-2xl space-y-4 backdrop-blur-xl">
-      <div className="w-12 h-12 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center mx-auto">
+      <div className="w-12 h-12 rounded-full bg-rose-500/10 border border-rose-500/30 text-accent-rose flex items-center justify-center mx-auto">
         <AlertTriangle className="w-6 h-6" />
       </div>
       <h2 className="text-xl font-bold text-ink">Invalid Interview Session</h2>
@@ -106,7 +106,7 @@ export const MediaPreparingScreen: React.FC<MediaPreparingScreenProps> = ({
         </p>
       )}
       {mediaStatus === 'error' && (
-        <p className="mt-4 text-sm text-red-400">
+        <p className="mt-4 text-sm text-accent-rose">
           Media setup failed. Please check camera/microphone permissions and the LiveKit connection, then retry.
         </p>
       )}
@@ -138,16 +138,16 @@ export const ProctoringWaitingScreen: React.FC<ProctoringWaitingScreenProps> = (
         Interview integrity monitoring is required. The interview cannot start until the proctoring detector is running on a live camera feed.
       </p>
       {proctoringHealthState === 'INITIALIZING' && (
-        <p className="mt-4 text-sm text-cyan-400 font-mono">Initializing MediaPipe detector & WASM modules…</p>
+        <p className="mt-4 text-sm text-accent-cyan font-mono">Initializing MediaPipe detector & WASM modules…</p>
       )}
       {proctoringHealthState === 'CAMERA_WAITING' && (
-        <p className="mt-4 text-sm text-amber-400 font-mono">Detector ready. Waiting for live camera frames…</p>
+        <p className="mt-4 text-sm text-accent-amber font-mono">Detector ready. Waiting for live camera frames…</p>
       )}
       {proctoringHealthState === 'READY' && (
-        <p className="mt-4 text-sm text-amber-400 font-mono">Camera feed live — analysing the first frames…</p>
+        <p className="mt-4 text-sm text-accent-amber font-mono">Camera feed live — analysing the first frames…</p>
       )}
       {proctoringUnavailable && (
-        <p className="mt-4 text-sm text-red-400">
+        <p className="mt-4 text-sm text-accent-rose">
           Proctoring is not active. The detector or camera could not be started, so integrity checks cannot run.
         </p>
       )}
@@ -193,7 +193,7 @@ export const FullscreenStartGateScreen: React.FC<FullscreenStartGateScreenProps>
       <p className="text-xs font-mono text-ink-muted">
         Proctoring: {proctoringHealthState} &bull; faces observed: {facesObserved}
       </p>
-      {apiError && <p className="text-sm text-rose-400">{apiError}</p>}
+      {apiError && <p className="text-sm text-accent-rose">{apiError}</p>}
       <button
         type="button"
         onClick={onBeginInterview}

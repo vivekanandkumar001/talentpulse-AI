@@ -48,7 +48,7 @@ export const ArchitectureWhiteboard: React.FC = () => {
       case 'database': return <Database className="w-4 h-4 text-accent-cyan" />;
       case 'cache': return <HardDrive className="w-4 h-4 text-accent-amber" />;
       case 'balancer': return <Cpu className="w-4 h-4 text-accent-indigo" />;
-      case 'queue': return <Layers className="w-4 h-4 text-purple-400" />;
+      case 'queue': return <Layers className="w-4 h-4 text-accent-violet" />;
       default: return <Server className="w-4 h-4 text-accent-emerald" />;
     }
   };

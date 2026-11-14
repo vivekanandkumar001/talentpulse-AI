@@ -30,7 +30,7 @@ export const DrillCardGrid: React.FC<DrillCardGridProps> = ({ drills, onStartDri
         <button
           type="button"
           onClick={() => window.location.href = '/candidate/practice'}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/30 text-indigo-300 font-semibold text-xs transition-all cursor-pointer"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/30 text-accent-indigo font-semibold text-xs transition-all cursor-pointer"
         >
           <Sparkles className="w-3.5 h-3.5" /> View All Drills
         </button>

@@ -45,7 +45,7 @@ export const LiveClosedCaptions: React.FC<LiveClosedCaptionsProps> = ({ subtitle
             {!isCandidateSpeaking ? (
               <Sparkles className="w-3.5 h-3.5 text-accent-cyan" />
             ) : (
-              <User className="w-3.5 h-3.5 text-indigo-400" />
+              <User className="w-3.5 h-3.5 text-accent-indigo" />
             )}
             <span>{speakerDisplayName}</span>
           </span>
@@ -77,7 +77,7 @@ export const LiveClosedCaptions: React.FC<LiveClosedCaptionsProps> = ({ subtitle
                 className={`px-2 py-0.5 rounded text-[11px] font-mono shrink-0 font-medium ${
                   sub.speaker !== 'You' && sub.speaker !== 'Candidate'
                     ? 'text-accent-cyan bg-cyan-500/10'
-                    : 'text-indigo-400 bg-indigo-500/10'
+                    : 'text-accent-indigo bg-indigo-500/10'
                 }`}
               >
                 {sub.speaker}:

@@ -29,19 +29,21 @@ interface PracticeDrillsResponse {
 interface PracticeDrillBrowserProps {
   /** Drill id from `?drill=`, used to deep-link straight into a session. */
   initialDrillId?: string;
+  /** Skill keyword from `?skill=`, pre-fills search and auto-launches best matching drill. */
+  initialSkill?: string;
   /** When true, omits the duplicate standalone header */
   embedded?: boolean;
 }
 
-export function PracticeDrillBrowser({ initialDrillId, embedded = false }: PracticeDrillBrowserProps) {
+export function PracticeDrillBrowser({ initialDrillId, initialSkill, embedded = false }: PracticeDrillBrowserProps) {
   const router = useRouter();
 
   const [drills, setDrills] = useState<PracticeDrillItem[]>([]);
   const [stats, setStats] = useState<CandidatePracticeStats | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<PracticeCategory>('ALL');
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('ALL');
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [debouncedSearch, setDebouncedSearch] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>(() => initialSkill?.trim() ?? '');
+  const [debouncedSearch, setDebouncedSearch] = useState<string>(() => initialSkill?.trim() ?? '');
   const [activeDrill, setActiveDrill] = useState<PracticeDrillItem | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -139,6 +141,26 @@ export function PracticeDrillBrowser({ initialDrillId, embedded = false }: Pract
       setActiveDrill(match);
     } else {
       console.warn(`Deep-linked drill "${initialDrillId}" is not in the current result set.`);
+    }
+  }
+
+  // Deep-link: /candidate/practice?skill=<name> — auto-launch the best-matching
+  // drill once the filtered list arrives. Prefer a recommended drill (personalized)
+  // and fall back to the first search result. If wallet balance is known to be 0,
+  // do not auto-open; the existing zero-balance guard blocks click-to-launch.
+  if (!deepLinkConsumed && initialSkill && drills.length > 0) {
+    setDeepLinkConsumed(true);
+    const normalized = initialSkill.trim().toLowerCase();
+    const match =
+      drills.find((d) => d.recommendedReason !== undefined) ??
+      drills.find((d) =>
+        (d.coreSkillsTested ?? []).some((s) => s.toLowerCase().includes(normalized) || normalized.includes(s.toLowerCase()))
+      ) ??
+      drills[0];
+    if (match) {
+      if (walletBalance !== 0) {
+        setActiveDrill(match);
+      }
     }
   }
 

@@ -24,7 +24,7 @@ export const FRONTEND_CONFIG = {
     '/mediapipe/models/face_landmarker.task',
 
   /** Remote image allowed hostnames */
-  allowedImageHosts: (process.env.ALLOWED_IMAGE_HOSTS || 'res.cloudinary.com,app.progeni.atlas')
+  allowedImageHosts: (process.env.ALLOWED_IMAGE_HOSTS || 'res.cloudinary.com,app.progeni.live')
     .split(',')
     .map((s) => s.trim())
     .filter(Boolean),

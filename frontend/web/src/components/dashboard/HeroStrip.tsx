@@ -82,7 +82,7 @@ export const HeroStrip: React.FC = () => {
   return (
     <div className="space-y-5">
       {justCompleted && (
-        <div className="flex items-center justify-between gap-3 border-l-2 border-emerald-500 pl-3 py-1 text-xs text-emerald-700">
+        <div className="flex items-center justify-between gap-3 border-l-2 border-emerald-500 pl-3 py-1 text-xs text-accent-emerald">
           <span className="flex items-center gap-2 font-medium">
             <CheckCircle2 className="w-4 h-4 shrink-0" />
             Interview submitted — the recruiter team will review your recording and scorecard.
@@ -90,7 +90,7 @@ export const HeroStrip: React.FC = () => {
           <button
             type="button"
             onClick={() => setJustCompleted(false)}
-            className="p-1 rounded hover:bg-emerald-100 cursor-pointer transition-colors"
+            className="p-1 rounded hover:bg-accent-emerald/20 cursor-pointer transition-colors"
             aria-label="Dismiss"
           >
             <X className="w-4 h-4" />
@@ -104,7 +104,7 @@ export const HeroStrip: React.FC = () => {
             <span className="inline-block w-2 h-2 rounded-full bg-accent-cyan" />
             Week {weekNo} · Placement Prep
           </p>
-          <h1 className="mt-1.5 text-3xl sm:text-4xl font-extrabold text-ink tracking-tight leading-[1.05]">
+          <h1 className="mt-2 text-3xl sm:text-4xl md:text-5xl font-extrabold text-ink tracking-tight leading-[1.05]">
             {firstName ? `Back at it, ${firstName}` : 'Welcome to Progeni Atlas'}
           </h1>
           <p className="mt-2 text-sm text-ink-muted max-w-lg leading-relaxed">
@@ -118,8 +118,8 @@ export const HeroStrip: React.FC = () => {
               return (
                 <React.Fragment key={m.key}>
                   <span
-                    className={`inline-flex items-center gap-1 rounded px-2 py-1 font-medium ${
-                      done ? 'bg-emerald-500/10 text-accent-emerald' : 'bg-surface-2 text-ink-muted'
+                    className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-semibold border transition-colors ${
+                      done ? 'bg-emerald-500/10 text-accent-emerald border-emerald-500/30' : 'bg-surface text-ink-muted border-line-strong'
                     }`}
                   >
                     {done && <CheckCircle2 className="w-3 h-3" />}
@@ -141,7 +141,7 @@ export const HeroStrip: React.FC = () => {
           )}
           <Link
             href="/candidate/practice"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-xs font-bold text-white bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 transition-all cursor-pointer whitespace-nowrap"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-xs font-bold text-on-brand btn-primary-gradient transition-all cursor-pointer whitespace-nowrap shadow-[0_10px_28px_-10px_var(--brand-glow)]"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
             {demosLeft > 0 ? `Start free demo interview` : 'Start practice interview'}

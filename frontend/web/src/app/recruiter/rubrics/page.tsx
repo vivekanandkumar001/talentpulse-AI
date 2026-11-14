@@ -703,7 +703,7 @@ export default function EvaluationRubricsPage() {
 
                   {/* Positive Signals */}
                   <div className="space-y-1.5">
-                    <span className="text-[11px] font-bold text-emerald-600 uppercase tracking-wide flex items-center gap-1">
+                    <span className="text-[11px] font-bold text-accent-emerald uppercase tracking-wide flex items-center gap-1">
                       <Check className="w-3.5 h-3.5 text-emerald-500" />
                       Positive Observable Signals
                     </span>

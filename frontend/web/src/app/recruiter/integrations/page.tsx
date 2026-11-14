@@ -469,7 +469,7 @@ export default function ATSIntegrationsPage() {
   const activeProviderObj = selectedProviderKey ? data.providers[selectedProviderKey] : null;
 
   return (
-    <div className="min-h-screen bg-canvas text-ink flex flex-col font-sans selection:bg-[#185adb]/20">
+    <div className="min-h-screen bg-canvas text-ink flex flex-col font-sans selection:bg-accent-blue/20">
       {/* Recruiter Navigation Bar */}
       <RecruiterHeader />
 
@@ -479,14 +479,14 @@ export default function ATSIntegrationsPage() {
           <div
             className={`px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-xs font-bold border backdrop-blur-md ${
               toastMessage.type === 'success'
-                ? 'bg-emerald-500/10 text-emerald-600 border-emerald-500/30'
-                : 'bg-rose-500/10 text-rose-600 border-rose-500/30'
+                ? 'bg-emerald-500/10 text-accent-emerald border-emerald-500/30'
+                : 'bg-rose-500/10 text-accent-rose border-rose-500/30'
             }`}
           >
             {toastMessage.type === 'success' ? (
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <CheckCircle2 className="w-4 h-4 text-accent-emerald shrink-0" />
             ) : (
-              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+              <AlertCircle className="w-4 h-4 text-accent-rose shrink-0" />
             )}
             <span>{toastMessage.text}</span>
           </div>
@@ -501,7 +501,7 @@ export default function ATSIntegrationsPage() {
 
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
             <div className="space-y-2 max-w-2xl">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/5 text-[#185adb] text-xs font-bold">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-blue-500/20 bg-blue-500/5 text-accent-blue text-xs font-bold">
                 <Workflow className="w-3.5 h-3.5" />
                 <span>Recruitment Workflow Hub</span>
               </div>
@@ -518,7 +518,7 @@ export default function ATSIntegrationsPage() {
               <button
                 type="button"
                 onClick={() => setActiveTab('bulk_import')}
-                className="px-4 py-2.5 rounded-xl bg-[#185adb] hover:bg-[#154bb7] text-white font-bold text-xs shadow-md shadow-blue-500/20 flex items-center gap-2 cursor-pointer transition-all"
+                className="px-4 py-2.5 rounded-xl bg-accent-blue hover:bg-accent-blue-hover text-on-brand font-bold text-xs shadow-md shadow-blue-500/20 flex items-center gap-2 cursor-pointer transition-all"
               >
                 <Upload className="w-4 h-4" />
                 <span>Bulk Import Candidates (CSV)</span>
@@ -541,7 +541,7 @@ export default function ATSIntegrationsPage() {
               <span className="text-[11px] font-semibold text-ink-muted uppercase block">Connected Tools</span>
               <div className="mt-1 flex items-baseline gap-1.5">
                 <span className="text-2xl font-black text-ink">{data.stats.activeProviders}</span>
-                <span className="text-xs font-medium text-emerald-600">Active</span>
+                <span className="text-xs font-medium text-accent-emerald">Active</span>
               </div>
             </div>
 
@@ -564,7 +564,7 @@ export default function ATSIntegrationsPage() {
             <div className="p-3.5 rounded-2xl bg-surface-2">
               <span className="text-[11px] font-semibold text-ink-muted uppercase block">Auto-Sync Pipeline</span>
               <div className="mt-1 flex items-baseline gap-1.5">
-                <span className="text-2xl font-black text-emerald-600">
+                <span className="text-2xl font-black text-accent-emerald">
                   {data.rules.autoInviteOnStage && data.rules.autoExportScorecard ? 'Active' : 'Partially Configured'}
                 </span>
               </div>
@@ -579,7 +579,7 @@ export default function ATSIntegrationsPage() {
             onClick={() => setActiveTab('platforms')}
             className={`px-4 py-2 rounded-xl transition flex items-center gap-2 cursor-pointer ${
               activeTab === 'platforms'
-                ? 'bg-blue-500/10 text-[#185adb] border border-blue-500/20'
+                ? 'bg-blue-500/10 text-accent-blue border border-blue-500/20'
                 : 'text-ink-muted hover:text-ink hover:bg-surface'
             }`}
           >
@@ -595,13 +595,13 @@ export default function ATSIntegrationsPage() {
             onClick={() => setActiveTab('bulk_import')}
             className={`px-4 py-2 rounded-xl transition flex items-center gap-2 cursor-pointer ${
               activeTab === 'bulk_import'
-                ? 'bg-blue-500/10 text-[#185adb] border border-blue-500/20'
+                ? 'bg-blue-500/10 text-accent-blue border border-blue-500/20'
                 : 'text-ink-muted hover:text-ink hover:bg-surface'
             }`}
           >
             <FileSpreadsheet className="w-4 h-4" />
             <span>Bulk CSV / Excel Import</span>
-            <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-emerald-500/10 text-emerald-600 font-mono">
+            <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-emerald-500/10 text-accent-emerald font-mono">
               Fast
             </span>
           </button>
@@ -611,7 +611,7 @@ export default function ATSIntegrationsPage() {
             onClick={() => setActiveTab('rules')}
             className={`px-4 py-2 rounded-xl transition flex items-center gap-2 cursor-pointer ${
               activeTab === 'rules'
-                ? 'bg-blue-500/10 text-[#185adb] border border-blue-500/20'
+                ? 'bg-blue-500/10 text-accent-blue border border-blue-500/20'
                 : 'text-ink-muted hover:text-ink hover:bg-surface'
             }`}
           >
@@ -624,7 +624,7 @@ export default function ATSIntegrationsPage() {
             onClick={() => setActiveTab('activity')}
             className={`px-4 py-2 rounded-xl transition flex items-center gap-2 cursor-pointer ${
               activeTab === 'activity'
-                ? 'bg-blue-500/10 text-[#185adb] border border-blue-500/20'
+                ? 'bg-blue-500/10 text-accent-blue border border-blue-500/20'
                 : 'text-ink-muted hover:text-ink hover:bg-surface'
             }`}
           >
@@ -656,7 +656,7 @@ export default function ATSIntegrationsPage() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
-                      <div className="p-2.5 rounded-2xl bg-emerald-500/10 text-emerald-600">
+                      <div className="p-2.5 rounded-2xl bg-emerald-500/10 text-accent-emerald">
                         <FileSpreadsheet className="w-5 h-5" />
                       </div>
                       <div>
@@ -664,7 +664,7 @@ export default function ATSIntegrationsPage() {
                         <span className="text-[11px] text-ink-muted font-medium">Direct Bulk Import</span>
                       </div>
                     </div>
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-accent-emerald border border-emerald-500/20">
                       <Check className="w-3 h-3" /> Ready
                     </span>
                   </div>
@@ -688,7 +688,7 @@ export default function ATSIntegrationsPage() {
                   <button
                     type="button"
                     onClick={() => setActiveTab('bulk_import')}
-                    className="px-3.5 py-1.5 rounded-xl bg-surface-2 hover:bg-[#185adb] hover:text-white border border-line text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-xl bg-surface-2 hover:bg-accent-blue hover:text-on-brand border border-line text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
                   >
                     <span>Import Candidates</span>
                     </button>
@@ -700,7 +700,7 @@ export default function ATSIntegrationsPage() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
-                      <div className="p-2.5 rounded-2xl bg-emerald-500/10 text-emerald-600">
+                      <div className="p-2.5 rounded-2xl bg-emerald-500/10 text-accent-emerald">
                         <Workflow className="w-5 h-5" />
                       </div>
                       <div>
@@ -709,7 +709,7 @@ export default function ATSIntegrationsPage() {
                       </div>
                     </div>
                     {data.providers.greenhouse?.enabled ? (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-accent-emerald border border-emerald-500/20">
                         <Check className="w-3 h-3" /> Connected
                       </span>
                     ) : (
@@ -738,7 +738,7 @@ export default function ATSIntegrationsPage() {
                   <button
                     type="button"
                     onClick={() => handleOpenConnectModal('greenhouse')}
-                    className="px-3.5 py-1.5 rounded-xl bg-surface-2 hover:bg-[#185adb] hover:text-white border border-line text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-xl bg-surface-2 hover:bg-accent-blue hover:text-on-brand border border-line text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
                   >
                     <span>{data.providers.greenhouse?.enabled ? 'Configure' : 'Connect'}</span>
                     </button>
@@ -759,7 +759,7 @@ export default function ATSIntegrationsPage() {
                       </div>
                     </div>
                     {data.providers.workday?.enabled ? (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-accent-emerald border border-emerald-500/20">
                         <Check className="w-3 h-3" /> Connected
                       </span>
                     ) : (
@@ -787,7 +787,7 @@ export default function ATSIntegrationsPage() {
                   <button
                     type="button"
                     onClick={() => handleOpenConnectModal('workday')}
-                    className="px-3.5 py-1.5 rounded-xl bg-surface-2 hover:bg-[#185adb] hover:text-white border border-line text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-xl bg-surface-2 hover:bg-accent-blue hover:text-on-brand border border-line text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
                   >
                     <span>{data.providers.workday?.enabled ? 'Configure' : 'Connect'}</span>
                     </button>
@@ -799,7 +799,7 @@ export default function ATSIntegrationsPage() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
-                      <div className="p-2.5 rounded-2xl bg-amber-500/10 text-amber-600">
+                      <div className="p-2.5 rounded-2xl bg-amber-500/10 text-accent-amber">
                         <Users className="w-5 h-5" />
                       </div>
                       <div>
@@ -808,7 +808,7 @@ export default function ATSIntegrationsPage() {
                       </div>
                     </div>
                     {data.providers.lever?.enabled ? (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-accent-emerald border border-emerald-500/20">
                         <Check className="w-3 h-3" /> Connected
                       </span>
                     ) : (
@@ -836,7 +836,7 @@ export default function ATSIntegrationsPage() {
                   <button
                     type="button"
                     onClick={() => handleOpenConnectModal('lever')}
-                    className="px-3.5 py-1.5 rounded-xl bg-surface-2 hover:bg-[#185adb] hover:text-white border border-line text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-xl bg-surface-2 hover:bg-accent-blue hover:text-on-brand border border-line text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
                   >
                     <span>{data.providers.lever?.enabled ? 'Configure' : 'Connect'}</span>
                     </button>
@@ -857,7 +857,7 @@ export default function ATSIntegrationsPage() {
                       </div>
                     </div>
                     {data.providers.ashby?.enabled ? (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-accent-emerald border border-emerald-500/20">
                         <Check className="w-3 h-3" /> Connected
                       </span>
                     ) : (
@@ -885,7 +885,7 @@ export default function ATSIntegrationsPage() {
                   <button
                     type="button"
                     onClick={() => handleOpenConnectModal('ashby')}
-                    className="px-3.5 py-1.5 rounded-xl bg-surface-2 hover:bg-[#185adb] hover:text-white border border-line text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-xl bg-surface-2 hover:bg-accent-blue hover:text-on-brand border border-line text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
                   >
                     <span>{data.providers.ashby?.enabled ? 'Configure' : 'Connect'}</span>
                     </button>
@@ -906,7 +906,7 @@ export default function ATSIntegrationsPage() {
                       </div>
                     </div>
                     {data.providers.linkedin?.enabled ? (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-accent-emerald border border-emerald-500/20">
                         <Check className="w-3 h-3" /> Connected
                       </span>
                     ) : (
@@ -934,7 +934,7 @@ export default function ATSIntegrationsPage() {
                   <button
                     type="button"
                     onClick={() => handleOpenConnectModal('linkedin')}
-                    className="px-3.5 py-1.5 rounded-xl bg-surface-2 hover:bg-[#185adb] hover:text-white border border-line text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
+                    className="px-3.5 py-1.5 rounded-xl bg-surface-2 hover:bg-accent-blue hover:text-on-brand border border-line text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
                   >
                     <span>{data.providers.linkedin?.enabled ? 'Configure' : 'Connect'}</span>
                     </button>
@@ -1058,7 +1058,7 @@ export default function ATSIntegrationsPage() {
                 <button
                   type="submit"
                   disabled={importingCandidates || !selectedJobId || !pastedCandidates.trim()}
-                  className="px-6 py-3 rounded-xl bg-[#185adb] hover:bg-[#154bb7] disabled:opacity-50 text-white font-bold text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-3 rounded-xl bg-accent-blue hover:bg-accent-blue-hover disabled:opacity-50 text-on-brand font-bold text-xs shadow-md transition-all flex items-center gap-2 cursor-pointer"
                 >
                   {importingCandidates ? (
                     <>
@@ -1104,10 +1104,10 @@ export default function ATSIntegrationsPage() {
                   onClick={() =>
                     handleSaveRules({ ...data.rules, autoInviteOnStage: !data.rules.autoInviteOnStage })
                   }
-                  className="cursor-pointer text-[#185adb]"
+                  className="cursor-pointer text-accent-blue"
                 >
                   {data.rules.autoInviteOnStage ? (
-                    <ToggleRight className="w-8 h-8 text-[#185adb]" />
+                    <ToggleRight className="w-8 h-8 text-accent-blue" />
                   ) : (
                     <ToggleLeft className="w-8 h-8 text-ink-muted" />
                   )}
@@ -1130,10 +1130,10 @@ export default function ATSIntegrationsPage() {
                   onClick={() =>
                     handleSaveRules({ ...data.rules, autoExportScorecard: !data.rules.autoExportScorecard })
                   }
-                  className="cursor-pointer text-[#185adb]"
+                  className="cursor-pointer text-accent-blue"
                 >
                   {data.rules.autoExportScorecard ? (
-                    <ToggleRight className="w-8 h-8 text-[#185adb]" />
+                    <ToggleRight className="w-8 h-8 text-accent-blue" />
                   ) : (
                     <ToggleLeft className="w-8 h-8 text-ink-muted" />
                   )}
@@ -1161,7 +1161,7 @@ export default function ATSIntegrationsPage() {
                     onChange={(e) =>
                       handleSaveRules({ ...data.rules, passThreshold: parseInt(e.target.value, 10) })
                     }
-                    className="w-32 accent-[#185adb]"
+                    className="w-32 accent-accent-blue"
                   />
                   <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-xl bg-surface-2 border border-line text-ink">
                     {data.rules.passThreshold}%
@@ -1188,10 +1188,10 @@ export default function ATSIntegrationsPage() {
                       notifyHiringManagerEmail: !data.rules.notifyHiringManagerEmail,
                     })
                   }
-                  className="cursor-pointer text-[#185adb]"
+                  className="cursor-pointer text-accent-blue"
                 >
                   {data.rules.notifyHiringManagerEmail ? (
-                    <ToggleRight className="w-8 h-8 text-[#185adb]" />
+                    <ToggleRight className="w-8 h-8 text-accent-blue" />
                   ) : (
                     <ToggleLeft className="w-8 h-8 text-ink-muted" />
                   )}
@@ -1250,7 +1250,7 @@ export default function ATSIntegrationsPage() {
                         <button
                           type="button"
                           onClick={() => setActiveTab('bulk_import')}
-                          className="mt-3 px-3.5 py-1.5 rounded-xl bg-[#185adb] text-white font-bold text-xs hover:bg-[#154bb7] transition cursor-pointer"
+                          className="mt-3 px-3.5 py-1.5 rounded-xl bg-accent-blue text-on-brand font-bold text-xs hover:bg-accent-blue-hover transition cursor-pointer"
                         >
                           Import First Batch of Candidates
                         </button>
@@ -1283,7 +1283,7 @@ export default function ATSIntegrationsPage() {
                           </span>
                         </td>
                         <td className="py-3 px-3 text-right">
-                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full uppercase">
+                          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-accent-emerald bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full uppercase">
                             <Check className="w-3 h-3" />
                             {log.status || 'Delivered'}
                           </span>
@@ -1303,7 +1303,7 @@ export default function ATSIntegrationsPage() {
             <div className="w-full max-w-lg rounded-2xl border border-line bg-surface p-6 sm:p-8 shadow-xl space-y-6 text-ink">
               <div className="flex items-center justify-between border-b border-line pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-2xl bg-blue-500/10 text-[#185adb]">
+                  <div className="p-2.5 rounded-2xl bg-blue-500/10 text-accent-blue">
                     <Workflow className="w-5 h-5" />
                   </div>
                   <div>
@@ -1412,7 +1412,7 @@ export default function ATSIntegrationsPage() {
                       onChange={(e) =>
                         setEditingConfig({ ...editingConfig, autoInviteOnStage: e.target.checked })
                       }
-                      className="w-4 h-4 rounded text-accent-blue accent-[#185adb]"
+                      className="w-4 h-4 rounded text-accent-blue accent-accent-blue"
                     />
                     <span className="text-xs text-ink font-medium">
                       Auto-invite candidates when moved to Screening stage
@@ -1426,7 +1426,7 @@ export default function ATSIntegrationsPage() {
                       onChange={(e) =>
                         setEditingConfig({ ...editingConfig, autoExportScorecard: e.target.checked })
                       }
-                      className="w-4 h-4 rounded text-accent-blue accent-[#185adb]"
+                      className="w-4 h-4 rounded text-accent-blue accent-accent-blue"
                     />
                     <span className="text-xs text-ink font-medium">
                       Auto-push evaluation scorecard & PDF dossier when completed
@@ -1462,7 +1462,7 @@ export default function ATSIntegrationsPage() {
                     type="button"
                     onClick={handleSaveConnection}
                     disabled={savingConnection}
-                    className="px-5 py-2 rounded-xl bg-[#185adb] hover:bg-[#154bb7] disabled:opacity-50 text-white font-bold text-xs transition cursor-pointer"
+                    className="px-5 py-2 rounded-xl bg-accent-blue hover:bg-accent-blue-hover disabled:opacity-50 text-on-brand font-bold text-xs transition cursor-pointer"
                   >
                     {savingConnection ? 'Saving...' : 'Save & Connect'}
                   </button>

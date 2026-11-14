@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -522,8 +522,8 @@ export default function CandidateDossiersPage() {
  const upperRec = String(rec ||'').trim().toUpperCase();
  if (isPast || upperRec === 'MISSED'|| upperRec === 'ABANDONED'|| upperRec === 'EXPIRED') {
  return (
- <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-100/90 border border-amber-300 text-amber-900 flex items-center gap-1 shadow-xs">
- <XCircle className="w-3.5 h-3.5 text-amber-700 shrink-0"/> MISSED
+ <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-accent-amber/20 border border-accent-amber/40 text-accent-amber flex items-center gap-1 shadow-xs">
+ <XCircle className="w-3.5 h-3.5 text-accent-amber shrink-0"/> MISSED
  </span>
  );
  }
@@ -549,8 +549,8 @@ export default function CandidateDossiersPage() {
  );
  case 'LEAN_HIRE':
  return (
- <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-amber-100/90 border border-amber-300 text-amber-900 flex items-center gap-1 shadow-xs">
- <Clock className="w-3.5 h-3.5 text-amber-700"/> LEAN HIRE
+ <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-accent-amber/20 border border-accent-amber/40 text-accent-amber flex items-center gap-1 shadow-xs">
+ <Clock className="w-3.5 h-3.5 text-accent-amber"/> LEAN HIRE
  </span>
  );
  case 'REJECT':
@@ -664,7 +664,7 @@ export default function CandidateDossiersPage() {
  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-500/15 hover:bg-indigo-500/25 border border-indigo-500/30 text-accent-indigo font-semibold text-xs shadow-md transition-all cursor-pointer"
  title="Download candidate evaluation scorecard PDF dossier"
  >
- <FileText className="w-4 h-4 text-indigo-400"/>
+ <FileText className="w-4 h-4 text-accent-indigo"/>
  <span>Download PDF Dossier</span>
  </button>
  <button
@@ -732,7 +732,7 @@ export default function CandidateDossiersPage() {
  <option value="selected">Selected</option>
  <option value="rejected">Rejected</option>
  <option value="inprocess">In-Process</option>
- <option value="backout"className="bg-surface text-amber-800 font-semibold">Backout</option>
+ <option value="backout"className="bg-surface text-accent-amber font-semibold">Backout</option>
  </select>
 
  <select
@@ -845,12 +845,12 @@ export default function CandidateDossiersPage() {
  {dt.time && (
  <span className={`text-[10px] font-bold flex items-center gap-1 ${
  c.stage?.toLowerCase().includes('miss') || c.status?.toLowerCase().includes('abandon')
- ? 'text-amber-800'
+ ? 'text-accent-amber'
  : 'text-accent-indigo'
  }`}>
  <Clock className={`w-2.5 h-2.5 ${
  c.stage?.toLowerCase().includes('miss') || c.status?.toLowerCase().includes('abandon')
- ? 'text-amber-700'
+ ? 'text-accent-amber'
  : 'text-accent-indigo'
  }`} />
  {dt.time}
@@ -880,7 +880,7 @@ export default function CandidateDossiersPage() {
  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 min-h-[38px] rounded-xl bg-surface-2 hover:bg-surface-3 text-ink border border-line text-xs font-medium cursor-pointer transition-all"
  title="View recorded interview & transcript"
  >
- <Video className="w-3.5 h-3.5 text-indigo-400"/>
+ <Video className="w-3.5 h-3.5 text-accent-indigo"/>
  <span>Recording</span>
  </Link>
  )
@@ -911,7 +911,7 @@ export default function CandidateDossiersPage() {
  setRescheduleMessage('');
  setRescheduleNotify(true);
  }}
- className="inline-flex items-center justify-center p-2.5 min-h-[40px] min-w-[40px] rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 border border-amber-500/30 cursor-pointer transition-colors shadow-sm"
+ className="inline-flex items-center justify-center p-2.5 min-h-[40px] min-w-[40px] rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-accent-amber border border-amber-500/30 cursor-pointer transition-colors shadow-sm"
  title="Reschedule interview date & time"
  aria-label="Reschedule interview date & time"
  >
@@ -984,7 +984,7 @@ export default function CandidateDossiersPage() {
  onClick={(e) => e.stopPropagation()}
  className="inline-flex items-center gap-1 px-2.5 py-1.5 min-h-[36px] rounded-lg bg-surface-2 text-ink border border-line text-[11px] font-medium"
  >
- <Video className="w-3 h-3 text-indigo-400"/>
+ <Video className="w-3 h-3 text-accent-indigo"/>
  <span>Recording</span>
  </Link>
  )
@@ -1114,7 +1114,7 @@ export default function CandidateDossiersPage() {
  href={`/recruiter/interview/${selectedCandidate.sessionId}/recording`}
  className="inline-flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-xl bg-surface-2 hover:bg-surface-3 text-ink border border-line text-xs font-semibold transition-all"
  >
- <Video className="w-4 h-4 text-indigo-400"/>
+ <Video className="w-4 h-4 text-accent-indigo"/>
  <span>Watch Recording & Transcript</span>
  </Link>
  )
@@ -1153,7 +1153,7 @@ export default function CandidateDossiersPage() {
  type="button"
  disabled={updatingDecision}
  onClick={() => handleCandidateDecision(selectedCandidate.id, 'shortlisted', selectedCandidate.sessionId)}
- className="px-4 py-2 min-h-[40px] rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-xs font-semibold text-emerald-600 cursor-pointer transition-all disabled:opacity-50 inline-flex items-center gap-1.5"
+ className="px-4 py-2 min-h-[40px] rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-xs font-semibold text-accent-emerald cursor-pointer transition-all disabled:opacity-50 inline-flex items-center gap-1.5"
  title="Shortlist candidate and send next steps notification"
  >
  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500"/>

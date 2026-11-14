@@ -80,14 +80,14 @@ export default function PortfolioPage() {
         <div className="absolute top-10 right-1/4 w-[500px] h-[350px] bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/5 text-[#185adb] text-xs font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/5 text-accent-blue text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5" />
             Interactive Platform Showcase
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-ink tracking-tight leading-[1.1]">
             Next-Gen Architecture.{' '}
-            <span className="text-[#185adb]">
+            <span className="text-accent-blue">
               Zero Friction.
             </span>
           </h1>
@@ -100,7 +100,7 @@ export default function PortfolioPage() {
             <Link
               href="/candidate/practice"
               prefetch={false}
-              className="inline-flex items-center gap-2 rounded-xl bg-[#185adb] hover:bg-[#154bb7] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-500/20 transition-all"
+              className="inline-flex items-center gap-2 rounded-xl bg-accent-blue hover:bg-accent-blue-hover px-6 py-3.5 text-sm font-bold text-on-brand shadow-lg shadow-blue-500/20 transition-all"
             >
               Launch Practice Drills </Link>
             <Link
@@ -135,7 +135,7 @@ export default function PortfolioPage() {
               onClick={() => setActiveTab('interview')}
               className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
                 activeTab === 'interview'
-                  ? 'bg-[#072448] text-white shadow-md'
+                  ? 'bg-accent-blue text-on-brand shadow-md'
                   : 'bg-surface-2 text-ink-muted hover:bg-surface-3'
               }`}
             >
@@ -147,7 +147,7 @@ export default function PortfolioPage() {
               onClick={() => setActiveTab('code')}
               className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
                 activeTab === 'code'
-                  ? 'bg-[#072448] text-white shadow-md'
+                  ? 'bg-accent-blue text-on-brand shadow-md'
                   : 'bg-surface-2 text-ink-muted hover:bg-surface-3'
               }`}
             >
@@ -159,7 +159,7 @@ export default function PortfolioPage() {
               onClick={() => setActiveTab('dossier')}
               className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-2 ${
                 activeTab === 'dossier'
-                  ? 'bg-[#072448] text-white shadow-md'
+                  ? 'bg-accent-blue text-on-brand shadow-md'
                   : 'bg-surface-2 text-ink-muted hover:bg-surface-3'
               }`}
             >
@@ -191,7 +191,7 @@ export default function PortfolioPage() {
                   <Link
                     href="/candidate/practice"
                     prefetch={false}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#185adb] text-white font-bold text-xs shadow-md hover:bg-[#154bb7] transition-all"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent-blue text-on-brand font-bold text-xs shadow-md hover:bg-accent-blue-hover transition-all"
                   >
                     Try This Drill Live </Link>
                 </div>
@@ -204,11 +204,29 @@ export default function PortfolioPage() {
                     </span>
                     <span className="font-mono text-ink-muted">Question 3 of 7</span>
                   </div>
-                  <div className="h-56 sm:h-64 rounded-xl bg-gradient-to-br from-surface to-indigo-950 flex flex-col items-center justify-center text-white space-y-3 relative overflow-hidden">
-                    <div className="w-20 h-20 rounded-full border-2 border-cyan-400 bg-cyan-500/20 flex items-center justify-center shadow-[0_0_30px_rgba(34,211,238,0.3)]">
-                      <Sparkles className="w-8 h-8 text-accent-cyan animate-pulse" />
+                  <div className="h-56 sm:h-64 rounded-xl bg-inverse-surface-2 relative overflow-hidden flex flex-col items-center justify-center text-white space-y-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/avatars/interviewer_female.jpg"
+                      alt="Sarah Chen — AI Interviewer"
+                      className="absolute inset-0 h-full w-full object-cover object-center brightness-90"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-inverse-canvas/95 via-inverse-canvas/25 to-transparent" />
+                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 rounded-lg bg-inverse-canvas/85 px-2.5 py-1 backdrop-blur-md border border-cyan-500/30">
+                        <div className="w-6 h-6 rounded-full border border-cyan-400/60 bg-cyan-500/20 flex items-center justify-center shadow-[0_0_20px_rgba(34,211,238,0.35)]">
+                          <Sparkles className="w-3.5 h-3.5 text-accent-cyan animate-pulse" />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-[11px] font-bold text-white leading-tight">Sarah Chen</p>
+                          <p className="text-[9px] font-mono text-inverse-cyan uppercase tracking-wider">AI Interviewer Speaking</p>
+                        </div>
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 rounded-md bg-emerald-500/15 border border-emerald-500/30 px-2 py-1 text-[10px] text-inverse-emerald font-semibold">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        Live
+                      </span>
                     </div>
-                    <p className="text-xs font-mono text-cyan-200">AI Interviewer Speaking...</p>
                   </div>
                 </div>
               </div>
@@ -254,7 +272,7 @@ export default function PortfolioPage() {
     ...
     return median # Verified 0.04ms runtime`}
                   </pre>
-                  <div className="p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-accent-emerald text-[11px]">
+                  <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-accent-emerald text-[11px]">
                     ✓ Passed: Test cases (Empty, Even-Length, Duplicates, Negative Values)
                   </div>
                 </div>
@@ -264,7 +282,7 @@ export default function PortfolioPage() {
             {activeTab === 'dossier' && (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center animate-fadeIn">
                 <div className="space-y-5">
-                  <span className="text-[11px] font-bold text-[#185adb] uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
+                  <span className="text-[11px] font-bold text-accent-blue uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
                     Sample Feedback Report
                   </span>
                   <h3 className="text-2xl font-black text-ink">
@@ -276,7 +294,7 @@ export default function PortfolioPage() {
                   <div className="flex flex-wrap gap-2 pt-2">
                     <Link
                       href="/pricing"
-                      className="px-5 py-2.5 rounded-xl bg-[#072448] text-white font-bold text-xs hover:brightness-110"
+                      className="px-5 py-2.5 rounded-xl bg-accent-blue text-on-brand font-bold text-xs hover:brightness-110"
                     >
                       View Preparation Packs
                     </Link>
@@ -334,7 +352,7 @@ export default function PortfolioPage() {
       <section id="tracks" className="py-20 border-b border-line bg-surface-deep scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <span className="text-xs font-bold text-[#185adb] uppercase tracking-wider block">
+            <span className="text-xs font-bold text-accent-blue uppercase tracking-wider block">
               PRACTICE SYLLABUS &amp; TRACKS
             </span>
             <h2 className="text-3xl sm:text-4xl font-black text-ink tracking-tight">
@@ -353,10 +371,10 @@ export default function PortfolioPage() {
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#185adb] font-mono">
+                    <span className="text-xs font-bold text-accent-blue font-mono">
                       {tr.domain}
                     </span>
-                    <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-500/10 text-[#185adb] border border-blue-500/20">
+                    <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-500/10 text-accent-blue border border-blue-500/20">
                       {tr.focus}
                     </span>
                   </div>
@@ -384,7 +402,7 @@ export default function PortfolioPage() {
                   <Link
                     href="/candidate/practice"
                     prefetch={false}
-                    className="text-xs font-bold text-[#185adb] hover:underline inline-flex items-center gap-1"
+                    className="text-xs font-bold text-accent-blue hover:underline inline-flex items-center gap-1"
                   >
                     Start Drill </Link>
                 </div>

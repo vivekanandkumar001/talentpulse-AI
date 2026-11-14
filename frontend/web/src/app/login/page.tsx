@@ -259,7 +259,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="h-dvh bg-canvas text-ink font-sans flex flex-col relative overflow-hidden">
+    <div className="h-dvh bg-canvas text-ink font-sans flex flex-col relative overflow-y-auto overflow-x-hidden">
       {/* Ambient radial background glows */}
       <div className="absolute top-0 left-0 w-full h-full ambient-glow-cyan pointer-events-none z-0" />
       <div className="absolute bottom-0 right-0 w-full h-full ambient-glow-indigo pointer-events-none z-0" />

@@ -231,8 +231,8 @@ export const PricingSection: React.FC = () => {
                 href={plan.href}
                 className={`w-full py-2.5 rounded-xl text-center text-xs font-bold transition flex items-center justify-center gap-1.5 ${
                   plan.popular
-                    ? 'btn-primary-gradient text-white shadow-md'
-                    : 'border border-[#072448] text-[#072448] hover:bg-surface-2'
+                    ? 'btn-primary-gradient text-on-brand shadow-md'
+                    : 'border border-accent-blue text-accent-blue hover:bg-surface-2'
                 }`}
               >
                 <span>{plan.cta}</span>

@@ -69,9 +69,9 @@ export const QuickStartColumns: React.FC = () => {
   const aptBest = aptAttempts.reduce<number | null>((acc, a) => (acc === null || a.score > acc ? a.score : acc), null);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-6 lg:gap-y-0 lg:divide-x divide-line">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
       {/* ---- AI Interview lane ---- */}
-      <div className="lg:pr-8 flex flex-col gap-3 min-h-[132px]">
+      <div className="card-panel-hover p-5 flex flex-col gap-3 min-h-[148px]">
         <div className="flex items-center justify-between gap-3">
           <h3 className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-ink-faint">
             <Video className="w-4 h-4 text-accent-cyan" />
@@ -96,7 +96,7 @@ export const QuickStartColumns: React.FC = () => {
             </p>
             <Link
               href={`/candidate/interview/${nextInterview.id}/lobby`}
-              className="inline-flex items-center gap-1.5 mt-1 text-xs font-bold text-white bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 px-4 py-2 rounded-lg transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 mt-1 text-xs font-bold btn-primary-gradient text-on-brand text-xs font-bold px-4 py-2 rounded-lg transition-all cursor-pointer"
             >
               Enter interview lobby
             </Link>
@@ -108,7 +108,7 @@ export const QuickStartColumns: React.FC = () => {
             </p>
             <Link
               href="/candidate/practice"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 px-4 py-2 rounded-lg transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-xs font-bold btn-primary-gradient text-on-brand text-xs font-bold px-4 py-2 rounded-lg transition-all cursor-pointer"
             >
               Practice the interview loop
             </Link>
@@ -117,7 +117,7 @@ export const QuickStartColumns: React.FC = () => {
       </div>
 
       {/* ---- Aptitude lane ---- */}
-      <div className="lg:pl-8 flex flex-col gap-3 min-h-[132px]">
+      <div className="card-panel-hover p-5 flex flex-col gap-3 min-h-[148px]">
         <div className="flex items-center justify-between gap-3">
           <h3 className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-ink-faint">
             <Brain className="w-4 h-4 text-accent-violet" />
@@ -141,7 +141,7 @@ export const QuickStartColumns: React.FC = () => {
             <p className="text-xs text-ink-muted font-mono">AMCAT-style · 5 pillars · section-wise percentiles</p>
             <Link
               href="/candidate/aptitude"
-              className="inline-flex items-center gap-1.5 mt-1 text-xs font-bold text-white bg-gradient-to-r from-violet-500 to-indigo-600 hover:from-violet-400 hover:to-indigo-500 px-4 py-2 rounded-lg transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 mt-1 text-xs font-bold btn-primary-gradient text-on-brand text-xs font-bold px-4 py-2 rounded-lg transition-all cursor-pointer"
             >
               Keep climbing — retake
             </Link>
@@ -153,7 +153,7 @@ export const QuickStartColumns: React.FC = () => {
             </p>
             <Link
               href="/candidate/aptitude"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-gradient-to-r from-violet-500 to-indigo-600 hover:from-violet-400 hover:to-indigo-500 px-4 py-2 rounded-lg transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-xs font-bold btn-primary-gradient text-on-brand text-xs font-bold px-4 py-2 rounded-lg transition-all cursor-pointer"
             >
               Take your aptitude baseline
             </Link>

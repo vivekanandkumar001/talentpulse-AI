@@ -471,7 +471,7 @@ export default function CandidateWalletPage() {
           <div className="p-6 rounded-xl border border-line bg-surface shadow-sm relative overflow-hidden group">
             <div className="flex items-center justify-between text-xs text-ink-muted">
               <span className="font-semibold uppercase tracking-wider">Free Demo Quota</span>
-              <div className="p-1.5 rounded-lg bg-indigo-500/10 text-indigo-400">
+              <div className="p-1.5 rounded-lg bg-indigo-500/10 text-accent-indigo">
                 <Sparkles className="h-4 w-4" />
               </div>
             </div>
@@ -589,11 +589,11 @@ export default function CandidateWalletPage() {
                   : 'bg-canvas text-ink-muted hover:text-ink border border-line'
               }`}
             >
-              <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
+              <Sparkles className="h-3.5 w-3.5 text-accent-indigo" />
               <span>Free Demos</span>
               <span
                 className={`px-1.5 py-0.2 rounded-full text-[10px] ${
-                  activeTab === 'DEMO' ? 'bg-surface/20 text-white' : 'bg-indigo-500/10 text-indigo-400'
+                  activeTab === 'DEMO' ? 'bg-surface/20 text-white' : 'bg-indigo-500/10 text-accent-indigo'
                 }`}
               >
                 {counts.demos}
@@ -633,7 +633,7 @@ export default function CandidateWalletPage() {
                             ? 'bg-emerald-500/10 text-accent-emerald group-hover:scale-105'
                             : isDebit
                             ? 'bg-rose-500/10 text-accent-rose group-hover:scale-105'
-                            : 'bg-indigo-500/10 text-indigo-400 group-hover:scale-105'
+                            : 'bg-indigo-500/10 text-accent-indigo group-hover:scale-105'
                         }`}
                       >
                         {isCredit ? (
@@ -657,7 +657,7 @@ export default function CandidateWalletPage() {
                                 ? 'bg-emerald-500/10 text-accent-emerald'
                                 : isDebit
                                 ? 'bg-rose-500/10 text-accent-rose'
-                                : 'bg-indigo-500/10 text-indigo-400'
+                                : 'bg-indigo-500/10 text-accent-indigo'
                             }`}
                           >
                             {isCredit ? 'Credit In' : isDebit ? 'Debit Out' : 'Free Demo'}
@@ -705,7 +705,7 @@ export default function CandidateWalletPage() {
                               ? 'text-accent-emerald'
                               : isDebit
                               ? 'text-accent-rose'
-                              : 'text-indigo-400'
+                              : 'text-accent-indigo'
                           }`}
                         >
                           {isCredit
@@ -1028,7 +1028,7 @@ export default function CandidateWalletPage() {
                 type="button"
                 disabled={recharging || payableInr <= 0}
                 onClick={() => void handleRecharge()}
-                className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#185adb] hover:bg-[#154bb7] shadow-md transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
+                className="px-5 py-2 rounded-xl text-xs font-bold text-on-brand bg-accent-blue hover:bg-accent-blue-hover shadow-md transition disabled:opacity-50 cursor-pointer flex items-center gap-1.5"
               >
                 {recharging ? 'Creating UPI Order...' : `Pay ₹${payableInr.toFixed(0)} via UPI Gateway`}
               </button>

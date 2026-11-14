@@ -18,11 +18,11 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
     <Link
       href={href}
       className={`inline-flex items-center gap-2.5 sm:gap-3 group cursor-pointer select-none whitespace-nowrap shrink-0 ${className}`}
-      title="Progeni Atlas — Autonomous AI Interviews"
-      aria-label="Progeni Atlas"
+      title="progeni.live — Autonomous AI Interviews"
+      aria-label="progeni.live"
     >
-      {/* Dynamic Atlas AI Isometric Emblem */}
-      <div className="relative flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 via-blue-700 to-slate-900 p-1 shadow-sm transition-all duration-200 group-hover:scale-105 border border-blue-400/30">
+      {/* progeni.live monogram emblem */}
+      <div className="relative flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl shadow-sm transition-all duration-200 group-hover:scale-105">
         <svg
           viewBox="0 0 48 48"
           fill="none"
@@ -30,49 +30,29 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           className="h-full w-full drop-shadow-xs"
           aria-hidden="true"
         >
+          <rect width="48" height="48" rx="11" fill="url(#brand-tile-gradient)" />
+          <circle cx="27" cy="18.6" r="7.4" stroke="#ffffff" strokeWidth="5.4" fill="none" />
+          <rect x="13.4" y="11.2" width="6.6" height="25.8" rx="3.3" fill="#ffffff" />
+          <circle cx="35.8" cy="34.6" r="4.6" fill="#22d3ee" />
           <defs>
-            <linearGradient id="logo-facet-top" x1="6" y1="4" x2="42" y2="24" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#60a5fa" />
-              <stop offset="100%" stopColor="#2563eb" />
-            </linearGradient>
-            <linearGradient id="logo-facet-left" x1="6" y1="14" x2="24" y2="44" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#1d4ed8" />
-              <stop offset="100%" stopColor="#0f172a" />
-            </linearGradient>
-            <linearGradient id="logo-facet-right" x1="24" y1="14" x2="42" y2="44" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#38bdf8" />
-              <stop offset="100%" stopColor="#1e40af" />
+            <linearGradient id="brand-tile-gradient" x1="6" y1="4" x2="42" y2="44" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#2f6bff" />
+              <stop offset="55%" stopColor="#1d4ed8" />
+              <stop offset="100%" stopColor="#0b1f3f" />
             </linearGradient>
           </defs>
-
-          {/* Hexagonal Isometric Base */}
-          <path d="M24 4.5L41 14.2V15L24 24.5L7 15V14.2L24 4.5Z" fill="url(#logo-facet-top)" />
-          <path d="M7 15.5L23.5 24.8V43.5L7 34V15.5Z" fill="url(#logo-facet-left)" />
-          <path d="M41 15.5L24.5 24.8V43.5L41 34V15.5Z" fill="url(#logo-facet-right)" />
-
-          {/* Facet Highlights */}
-          <path d="M24 24.5V43.5" stroke="#ffffff" strokeWidth="1.2" strokeOpacity="0.35" />
-          <path d="M7 15L24 24.5L41 15" stroke="#ffffff" strokeWidth="1.2" strokeOpacity="0.4" />
-
-          {/* Inner Geometric "A" Crest + Neural Bridge */}
-          <path d="M15 32L24 13L33 32" stroke="#ffffff" strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M18.5 24.5H29.5" stroke="#bfdbfe" strokeWidth="2.8" strokeLinecap="round" />
-
-          {/* Central AI Nucleus Core */}
-          <circle cx="24" cy="18.5" r="3" fill="#ffffff" />
-          <circle cx="24" cy="18.5" r="5" stroke="#93c5fd" strokeWidth="1" strokeOpacity="0.9" />
         </svg>
       </div>
 
-      {/* Wordmark: 100% Solid High-Contrast "Progeni Atlas" */}
+      {/* Wordmark — progeni.live */}
       <div className={`${hideTextOnMobile ? 'hidden sm:flex' : 'flex'} items-center gap-1.5 whitespace-nowrap`}>
-        <span className="text-xl sm:text-2xl font-black tracking-tight font-sans whitespace-nowrap flex items-center">
-          <span className="text-ink">Progeni</span>
-          <span className="ml-1 text-accent-blue">Atlas</span>
+        <span className="text-xl sm:text-2xl font-extrabold tracking-tight font-sans whitespace-nowrap flex items-baseline">
+          <span className="text-ink">progeni</span>
+          <span className="text-accent-blue">.live</span>
         </span>
 
         {/* AI Tech Pill Badge */}
-        <span className="inline-flex items-center text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-blue-50 text-accent-blue border border-blue-200 ml-0.5 whitespace-nowrap">
+        <span className="inline-flex items-center text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-accent-blue/10 text-accent-blue border border-accent-blue/30 ml-0.5 whitespace-nowrap">
           {badge || 'AI'}
         </span>
       </div>

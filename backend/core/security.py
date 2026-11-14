@@ -5,6 +5,7 @@ Provides JWT decoding, request authentication, role-based authorization decorato
 password hashing, OTP generation/verification, and transactional email dispatch.
 """
 
+from core.http_utils import safe_log_tag
 import logging
 
 import os
@@ -207,9 +208,9 @@ def link_candidate_records_by_email(user_id: str, email: str) -> None:
                 {"candidate_email": clean_email, "candidate_id": {"$ne": user_id}},
                 {"$set": {"candidate_id": user_id}}
             )
-        print(f"[AUTO-CLAIM] Checked and linked orphan records for {clean_email} -> Candidate ID: {user_id}")
+        print(f"[AUTO-CLAIM] Checked and linked orphan records for {safe_log_tag(clean_email)} -> Candidate ID: {user_id}")
     except Exception as e:
-        print(f"[AUTO-CLAIM WARNING] Failed linking records for {email}: {e}")
+        print(f"[AUTO-CLAIM WARNING] Failed linking records for {safe_log_tag(email)}: {e}")
 
 
 def _decode_access_token(raw_token: str) -> dict | None:
@@ -482,12 +483,12 @@ def send_otp_email_smtp(to_email: str, otp_code: str, purpose: str = "REGISTRATI
             html_body=html_content,
         )
         if ok:
-            print(f"[EMAIL] Transactional message delivered to {to_email}")
+            print(f"[EMAIL] Transactional message delivered to {safe_log_tag(to_email)}")
         else:
-            print(f"[EMAIL] Delivery failed for {to_email}: {err}")
+            print(f"[EMAIL] Delivery failed for {safe_log_tag(to_email)}: {err}")
         return ok, err
     except Exception as err:
-        logger.exception("[EMAIL] send_transactional_email crashed for %s", to_email)
+        logger.exception("[EMAIL] send_transactional_email crashed for %s", safe_log_tag(to_email))
         return False, f"Failed to deliver email: {str(err)}"
 
 def send_interview_invite_email_smtp(
@@ -631,12 +632,12 @@ def send_interview_invite_email_smtp(
             attachments=attachments,
         )
         if ok:
-            print(f"[EMAIL] Interview invitation delivered to {to_email}")
+            print(f"[EMAIL] Interview invitation delivered to {safe_log_tag(to_email)}")
         else:
-            print(f"[EMAIL] Delivery failed for {to_email}: {err}")
+            print(f"[EMAIL] Delivery failed for {safe_log_tag(to_email)}: {err}")
         return ok, err
     except Exception as err:
-        logger.exception("[EMAIL] send_transactional_email crashed for %s", to_email)
+        logger.exception("[EMAIL] send_transactional_email crashed for %s", safe_log_tag(to_email))
         return False, f"Failed to deliver email: {str(err)}"
 
 
@@ -701,12 +702,12 @@ def send_team_invite_email_smtp(
             html_body=html_content,
         )
         if ok:
-            print(f"[EMAIL] Team invite delivered to {to_email}")
+            print(f"[EMAIL] Team invite delivered to {safe_log_tag(to_email)}")
         else:
-            print(f"[EMAIL] Team invite delivery failed for {to_email}: {err}")
+            print(f"[EMAIL] Team invite delivery failed for {safe_log_tag(to_email)}: {err}")
         return ok, err
     except Exception as err:
-        logger.exception("[EMAIL] team invite send crashed for %s", to_email)
+        logger.exception("[EMAIL] team invite send crashed for %s", safe_log_tag(to_email))
         return False, f"Failed to deliver email: {str(err)}"
 
 
@@ -842,12 +843,12 @@ def send_candidate_decision_email_smtp(
             html_body=html_content,
         )
         if ok:
-            print(f"[EMAIL] Transactional message delivered to {to_email}")
+            print(f"[EMAIL] Transactional message delivered to {safe_log_tag(to_email)}")
         else:
-            print(f"[EMAIL] Delivery failed for {to_email}: {err}")
+            print(f"[EMAIL] Delivery failed for {safe_log_tag(to_email)}: {err}")
         return ok, err
     except Exception as err:
-        logger.exception("[EMAIL] send_transactional_email crashed for %s", to_email)
+        logger.exception("[EMAIL] send_transactional_email crashed for %s", safe_log_tag(to_email))
         return False, f"Failed to deliver email: {str(err)}"
 
 def send_interview_completion_email_smtp(
@@ -930,11 +931,11 @@ def send_interview_completion_email_smtp(
             html_body=html_content,
         )
         if ok:
-            print(f"[EMAIL] Transactional message delivered to {to_email}")
+            print(f"[EMAIL] Transactional message delivered to {safe_log_tag(to_email)}")
         else:
-            print(f"[EMAIL] Delivery failed for {to_email}: {err}")
+            print(f"[EMAIL] Delivery failed for {safe_log_tag(to_email)}: {err}")
         return ok, err
     except Exception as err:
-        logger.exception("[EMAIL] send_transactional_email crashed for %s", to_email)
+        logger.exception("[EMAIL] send_transactional_email crashed for %s", safe_log_tag(to_email))
         return False, f"Failed to deliver email: {str(err)}"
 

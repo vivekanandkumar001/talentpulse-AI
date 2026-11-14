@@ -56,6 +56,11 @@
 
   /* Subtle card elevation */
   --brand-glow: rgba(37, 99, 235, 0.12);
+
+  /* Enterprise polish — layered, restrained elevation for dashboard surfaces */
+  --shadow-card: 0 1px 1px hsl(215 32% 16% / 0.05), 0 6px 20px -6px hsl(215 32% 16% / 0.09);
+  --shadow-lift: 0 2px 4px hsl(215 32% 16% / 0.06), 0 14px 36px -10px hsl(215 32% 16% / 0.16);
+  --inset-highlight: inset 0 1px 0 hsl(0 0% 100% / 0.75);
 }
 
 /* Dark identity — same semantic names; chosen for WCAG AA on dark surfaces. */
@@ -101,6 +106,11 @@
   --on-brand: #020617;
 
   --brand-glow: rgba(96, 165, 250, 0.35);
+
+  /* Enterprise polish — dark values: depth from glow, not strong shadows */
+  --shadow-card: 0 1px 1px hsl(0 0% 0% / 0.35), 0 10px 28px -8px hsl(0 0% 0% / 0.45), inset 0 1px 0 hsl(215 35% 96% / 0.04);
+  --shadow-lift: 0 2px 6px hsl(0 0% 0% / 0.4), 0 18px 44px -10px hsl(0 0% 0% / 0.55), inset 0 1px 0 hsl(215 35% 96% / 0.06);
+  --inset-highlight: inset 0 1px 0 hsl(215 35% 96% / 0.05);
 }
 
 /* Fixed "inverse" palette — immersive dark islands (arena, camera, editors).
@@ -130,6 +140,7 @@
   --color-surface-deep: var(--surface-deep);
   --color-surface-2: var(--surface-2);
   --color-surface-3: var(--surface-3);
+  --color-surface-elevated: var(--surface-2);
   --color-inset: var(--inset);
 
   --color-line: var(--line);
@@ -252,6 +263,95 @@
 .btn-primary-gradient:hover {
   box-shadow: 0 0 24px var(--brand-glow);
   filter: brightness(1.1);
+}
+
+/* ===========================================================================
+   ENTERPRISE POLISH LAYER
+   Shared component classes for reworked dashboard surfaces (both dashboards).
+   Tokens resolve per theme — never use raw rgba shadows inline.
+   =========================================================================== */
+@layer components {
+  /* Raised surface panel: card border + layered shadow + soft top highlight */
+  .card-panel {
+    position: relative;
+    border-radius: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card), var(--inset-highlight);
+  }
+
+  /* Interactive variant: hover lift, subtle border emphasis */
+  .card-panel-hover {
+    position: relative;
+    border-radius: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card), var(--inset-highlight);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .card-panel-hover:hover {
+    border-color: var(--line-strong);
+    box-shadow: var(--shadow-lift), var(--inset-highlight);
+    transform: translateY(-1px);
+  }
+
+  /* Eyebrow / kicker label — section caption used above panel titles and KPIs */
+  .kicker {
+    font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* KPI metric value — tabular numerals, tight leading */
+  .kpi-value {
+    font-size: 1.75rem;
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* KPI delta / status chip */
+  .kpi-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  /* Hairline row divider inside panels — slightly softer than border-line */
+  .hairline-row {
+    border-top: 1px solid var(--line);
+  }
+
+  .hairline-row:first-child {
+    border-top: 0;
+  }
+
+  /* Refined focus treatment for interactive controls inside panels */
+  .panel-interactive:focus-visible {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+
+  /* Subtle tinted icon tile used across dashboards */
+  .icon-tile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.625rem;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--ink-muted);
+  }
 }
 
 /* Pulse animation for glowing cyan dot */
@@ -581,6 +681,22 @@ input::-ms-clear {
 
 .marquee-track-h:hover {
   animation-play-state: paused;
+}
+
+/* Header popovers / menus — soft fade + rise (class was referenced but never defined) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Smooth Card Hover Lift */

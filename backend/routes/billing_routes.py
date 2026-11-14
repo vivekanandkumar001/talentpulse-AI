@@ -14,6 +14,7 @@ import logging
 
 logger = logging.getLogger("progeni_atlas.billing")
 from datetime import datetime, timezone, timedelta
+from core.http_utils import generic_500
 from flask import Blueprint, request, jsonify, g
 
 from core.db import get_mongo_db
@@ -152,7 +153,7 @@ def get_billing_wallet():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @billing_bp.route("/api/billing/wallet/transactions", methods=["GET"])
@@ -282,7 +283,7 @@ def get_billing_wallet_transactions():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 # ==============================================================================
@@ -406,7 +407,7 @@ def create_razorpay_wallet_order():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @billing_bp.route("/api/billing/wallet/razorpay-webhook", methods=["POST"])
@@ -454,7 +455,7 @@ def razorpay_webhook():
         return jsonify({"success": True, "message": "Webhook processed"}), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 def _resolve_credits_for_inr(db, amount_inr: float) -> float:
@@ -680,7 +681,7 @@ def create_wallet_order():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @billing_bp.route("/api/billing/wallet/check-order-status", methods=["GET", "POST"])
@@ -745,7 +746,7 @@ def check_order_status():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @billing_bp.route("/api/billing/wallet/submit-utr", methods=["POST"])
@@ -891,7 +892,7 @@ def submit_wallet_utr():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @billing_bp.route("/api/billing/wallet/upi-webhook", methods=["POST"])
@@ -931,7 +932,7 @@ def upi_webhook():
         return jsonify({"success": True, "message": "Webhook processed successfully"}), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @billing_bp.route("/api/billing/wallet/verify-payment", methods=["POST"])
@@ -1042,6 +1043,6 @@ def verify_wallet_payment():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 

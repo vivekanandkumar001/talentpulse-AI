@@ -71,14 +71,14 @@ export default function AboutPage() {
         <div className="absolute top-20 -left-40 w-[450px] h-[450px] rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/5 text-[#185adb] text-xs font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/5 text-accent-blue text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5" />
             Engineering Mission
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-ink tracking-tight leading-[1.1]">
             We&apos;re Building the Future of{' '}
-            <span className="text-[#185adb]">
+            <span className="text-accent-blue">
               Technical Interview Mastery
             </span>
           </h1>
@@ -91,7 +91,7 @@ export default function AboutPage() {
             <Link
               href="/candidate/practice"
               prefetch={false}
-              className="inline-flex items-center gap-2 rounded-xl bg-[#185adb] hover:bg-[#154bb7] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-500/20 transition-all"
+              className="inline-flex items-center gap-2 rounded-xl bg-accent-blue hover:bg-accent-blue-hover px-6 py-3.5 text-sm font-bold text-on-brand shadow-lg shadow-blue-500/20 transition-all"
             >
               Start Free Practice </Link>
             <Link
@@ -110,7 +110,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             {platformSpecs.map((item, idx) => (
               <div key={idx} className="space-y-1">
-                <p className="text-2xl sm:text-3xl font-black text-[#185adb] font-mono">
+                <p className="text-2xl sm:text-3xl font-black text-accent-blue font-mono">
                   {item.number}
                 </p>
                 <p className="text-xs sm:text-sm text-ink-muted font-medium">
@@ -158,8 +158,8 @@ export default function AboutPage() {
               <div className="rounded-xl border border-line bg-surface-deep p-6 sm:p-8 shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl" />
                 <div className="flex items-center gap-4 mb-6 pb-6 border-b border-line">
-                  <div className="w-12 h-12 rounded-2xl bg-[#072448] text-white flex items-center justify-center font-bold text-lg shadow-md">
-                    <BrainCircuit className="w-6 h-6 text-[#185adb]" />
+                  <div className="w-12 h-12 rounded-2xl bg-accent-blue text-on-brand flex items-center justify-center font-bold text-lg shadow-md">
+                    <BrainCircuit className="w-6 h-6" />
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-ink">Adaptive Evaluation Engine</h3>
@@ -197,7 +197,7 @@ export default function AboutPage() {
       <section id="integrity" className="py-20 border-b border-line bg-surface-deep scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-            <span className="text-xs font-bold text-[#185adb] uppercase tracking-wider block">
+            <span className="text-xs font-bold text-accent-blue uppercase tracking-wider block">
               TRUST &amp; EVALUATION INTEGRITY
             </span>
             <h2 className="text-3xl sm:text-4xl font-black text-ink tracking-tight">
@@ -210,7 +210,7 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 sm:p-8 rounded-2xl bg-surface border border-line shadow-xs space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-[#185adb] flex items-center justify-center">
+              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-accent-blue flex items-center justify-center">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-ink">Objective Rubric Evaluation</h3>
@@ -247,7 +247,7 @@ export default function AboutPage() {
         <div id="team" className="scroll-mt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
-              <span className="text-xs font-bold text-[#185adb] uppercase tracking-wider block">
+              <span className="text-xs font-bold text-accent-blue uppercase tracking-wider block">
                 ENGINEERING PILLARS
               </span>
               <h2 className="text-3xl sm:text-4xl font-black text-ink tracking-tight">
@@ -262,13 +262,13 @@ export default function AboutPage() {
               {engineeringPrinciples.map((item, i) => {
                 const IconComponent = item.icon;
                 return (
-                  <div key={i} className="p-6 rounded-2xl bg-surface-deep border border-line hover:border-[#185adb]/40 transition-colors space-y-4">
-                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 text-[#185adb] flex items-center justify-center shadow-xs">
+                  <div key={i} className="p-6 rounded-2xl bg-surface-deep border border-line hover:border-accent-blue/40 transition-colors space-y-4">
+                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 text-accent-blue flex items-center justify-center shadow-xs">
                       <IconComponent className="w-6 h-6" />
                     </div>
                     <div>
                       <h3 className="text-base font-bold text-ink">{item.title}</h3>
-                      <p className="text-xs font-semibold text-[#185adb] mt-0.5">{item.role}</p>
+                      <p className="text-xs font-semibold text-accent-blue mt-0.5">{item.role}</p>
                     </div>
                     <p className="text-xs text-ink-muted leading-relaxed">
                       {item.description}
@@ -292,7 +292,7 @@ export default function AboutPage() {
             <Link
               href="/candidate/practice"
               prefetch={false}
-              className="px-6 py-3 rounded-full bg-surface text-[#072448] font-bold text-sm hover:bg-surface-2 transition-colors shadow-md"
+              className="px-6 py-3 rounded-full bg-surface text-accent-blue font-bold text-sm hover:bg-surface-2 transition-colors shadow-md"
             >
               Start Free Practice Interview
             </Link>

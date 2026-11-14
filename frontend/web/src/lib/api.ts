@@ -77,7 +77,10 @@ export function clearSession(): void {
   }
 }
 
-/** Resolves the active access token from cookie or localStorage for Authorization headers. */
+/** Resolves the active access token from the HttpOnly session cookie only.
+ *  We deliberately do NOT read tokens from localStorage (XSS-exfiltratable)
+ *  or embed them in the display-user object — the cookie is the single
+ *  source of truth, and it is set HttpOnly by the backend. */
 export function getAccessToken(): string | null {
   if (typeof window === 'undefined') return null;
   try {
@@ -85,16 +88,6 @@ export function getAccessToken(): string | null {
     if (match && match[1]) {
       const decoded = decodeURIComponent(match[1]).replace(/^"|"$/g, '');
       if (decoded && decoded !== 'undefined' && decoded !== 'null') return decoded;
-    }
-    const localToken = window.localStorage.getItem('tp_token');
-    if (localToken && localToken !== 'undefined' && localToken !== 'null') {
-      return localToken;
-    }
-    const rawUser = window.localStorage.getItem(USER_KEY);
-    if (rawUser) {
-      const parsed = JSON.parse(rawUser);
-      const token = parsed?.token || parsed?.access_token;
-      if (token && token !== 'undefined' && token !== 'null') return token;
     }
     return null;
   } catch {
@@ -275,8 +268,15 @@ export interface CandidateProfile {
 export interface CandidateSkill {
   name: string;
   category: string | null;
-  proficiency: number | null;
-  years_experience: number | null;
+  proficiency?: number | null;
+  years_experience?: number | null;
+  /** 0-5 stars, derived from practice/interview evidence (0 when untested). */
+  scoreOutOf5?: number;
+  level?: string;
+  assessed?: boolean;
+  sources?: Array<'interview' | 'practice'>;
+  sessionsCount?: number;
+  interviewEvidenceCount?: number;
 }
 
 export interface CandidateSkillInsight {

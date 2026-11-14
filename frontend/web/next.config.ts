@@ -16,7 +16,7 @@ const allowedDevOrigins = Array.from(new Set([...defaultDevOrigins, ...parsedDev
 // /_next/image into an open proxy that will fetch any HTTPS URL on request.
 // Extend with ALLOWED_IMAGE_HOSTS (comma-separated, no protocol or path).
 const allowedImageHosts = (
-  process.env.ALLOWED_IMAGE_HOSTS || 'res.cloudinary.com,app.progeni.atlas'
+  process.env.ALLOWED_IMAGE_HOSTS || 'res.cloudinary.com,app.progeni.live'
 )
   .split(',')
   .map((s) => s.trim())

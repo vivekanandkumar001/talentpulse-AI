@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { RecruiterHeader } from '@/components/dashboard/RecruiterHeader';
@@ -211,7 +211,7 @@ export default function RecruiterBillingPage() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-line pb-6">
           <div>
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-xl bg-blue-50 text-accent-blue border border-blue-200/80 shadow-xs">
+              <div className="p-2 rounded-xl bg-accent-blue/10 text-accent-blue border border-accent-blue/30 shadow-xs">
                 <Wallet className="h-5 w-5" />
               </div>
               <div>
@@ -247,15 +247,15 @@ export default function RecruiterBillingPage() {
           <div
             className={`p-3.5 rounded-xl border text-xs sm:text-sm flex items-center justify-between shadow-xs ${
               message.type === 'success'
-                ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
-                : 'bg-rose-50 border-rose-200 text-rose-800'
+                ? 'bg-accent-emerald/10 border-accent-emerald/30 text-accent-emerald'
+                : 'bg-accent-rose/10 border-accent-rose/30 text-accent-rose'
             }`}
           >
             <div className="flex items-center gap-2">
               {message.type === 'success' ? (
-                <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
+                <CheckCircle2 className="h-4 w-4 text-accent-emerald shrink-0" />
               ) : (
-                <AlertCircle className="h-4 w-4 text-rose-600 shrink-0" />
+                <AlertCircle className="h-4 w-4 text-accent-rose shrink-0" />
               )}
               <span>{message.text}</span>
             </div>
@@ -267,21 +267,21 @@ export default function RecruiterBillingPage() {
 
         {/* Free Demo Trial Notice if applicable */}
         {wallet?.demoQuota && wallet.demoQuota.remaining > 0 && (
-          <div className="p-4 rounded-xl border border-blue-200 bg-blue-50/80 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="p-4 rounded-xl border border-accent-blue/30 bg-accent-blue/10 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-blue-100 text-accent-blue shrink-0">
+              <div className="p-2 rounded-lg bg-accent-blue/15 text-accent-blue shrink-0">
                 <Gift className="h-4 w-4" />
               </div>
               <div>
-                <span className="font-semibold text-xs sm:text-sm text-blue-900 block">
+                <span className="font-semibold text-xs sm:text-sm text-accent-blue block">
                   Complimentary AI Screening Trial Active
                 </span>
                 <p className="text-xs text-accent-blue mt-0.5">
-                  Your organization has <strong className="font-bold text-blue-900">{wallet.demoQuota.remaining} free screening round(s)</strong> remaining (up to 10 minutes each) with zero wallet deduction.
+                  Your organization has <strong className="font-bold text-accent-blue">{wallet.demoQuota.remaining} free screening round(s)</strong> remaining (up to 10 minutes each) with zero wallet deduction.
                 </p>
               </div>
             </div>
-            <span className="self-start sm:self-auto px-2.5 py-1 rounded-md text-xs font-bold bg-surface text-accent-blue border border-blue-200 shadow-2xs whitespace-nowrap">
+            <span className="self-start sm:self-auto px-2.5 py-1 rounded-md text-xs font-bold bg-surface text-accent-blue border border-accent-blue/30 shadow-2xs whitespace-nowrap">
               {wallet.demoQuota.remaining} of {wallet.demoQuota.totalAllowed} Left
             </span>
           </div>
@@ -294,7 +294,7 @@ export default function RecruiterBillingPage() {
             <div>
               <div className="flex items-center justify-between text-xs text-ink-faint">
                 <span className="font-medium uppercase tracking-wider text-[11px]">Available Balance</span>
-                <span className="font-mono text-[10px] uppercase font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md">
+                <span className="font-mono text-[10px] uppercase font-bold text-accent-emerald bg-accent-emerald/10 border border-accent-emerald/30 px-2 py-0.5 rounded-md">
                   Active
                 </span>
               </div>
@@ -358,7 +358,7 @@ export default function RecruiterBillingPage() {
             <div>
               <div className="flex items-center justify-between text-xs text-ink-faint">
                 <span className="font-medium uppercase tracking-wider text-[11px]">Active Rate Card</span>
-                <span className="font-mono text-[10px] uppercase font-bold text-accent-blue bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md">
+                <span className="font-mono text-[10px] uppercase font-bold text-accent-blue bg-accent-blue/10 border border-accent-blue/30 px-2 py-0.5 rounded-md">
                   Standard
                 </span>
               </div>
@@ -459,11 +459,11 @@ export default function RecruiterBillingPage() {
                         <span
                           className={`inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wide ${
                             tx.entryType === 'recharge_paid'
-                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                              ? 'bg-accent-emerald/10 text-accent-emerald border border-accent-emerald/30'
                               : tx.entryType === 'service_debit'
-                              ? 'bg-blue-50 text-accent-blue border border-blue-200'
+                              ? 'bg-accent-blue/10 text-accent-blue border border-accent-blue/30'
                               : tx.entryType === 'service_hold'
-                              ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                              ? 'bg-accent-amber/10 text-accent-amber border border-accent-amber/30'
                               : 'bg-surface-2 text-ink-muted border border-line'
                           }`}
                         >
@@ -475,13 +475,13 @@ export default function RecruiterBillingPage() {
                       </td>
                       <td
                         className={`py-3.5 px-4 text-right font-mono font-bold whitespace-nowrap ${
-                          tx.amountCredits >= 0 ? 'text-emerald-700' : 'text-rose-600'
+                          tx.amountCredits >= 0 ? 'text-accent-emerald' : 'text-accent-rose'
                         }`}
                       >
                         {tx.amountCredits >= 0 ? `+${tx.amountCredits.toFixed(0)}` : `${tx.amountCredits.toFixed(0)}`} cr
                       </td>
                       <td className="py-3.5 px-4 text-center whitespace-nowrap">
-                        <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase bg-accent-emerald/10 text-accent-emerald border border-accent-emerald/30">
                           {tx.status}
                         </span>
                       </td>
@@ -500,7 +500,7 @@ export default function RecruiterBillingPage() {
           <div className="w-full max-w-lg rounded-2xl border border-line bg-surface p-6 shadow-xl space-y-5">
             <div className="flex items-center justify-between border-b border-line pb-3">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-lg bg-blue-50 text-accent-blue border border-blue-200/80">
+                <div className="p-2 rounded-lg bg-accent-blue/10 text-accent-blue border border-accent-blue/30">
                   <CreditCard className="h-4 w-4" />
                 </div>
                 <div>
@@ -531,7 +531,7 @@ export default function RecruiterBillingPage() {
                     }}
                     className={`cursor-pointer p-4 rounded-xl border-0 text-center transition-all ${
                       selectedPack === pack.credits && !customAmount
-                        ? 'bg-blue-50/60 ring-2 ring-blue-600/20 shadow-xs'
+                        ? 'bg-accent-blue/10 ring-2 ring-accent-blue/30 shadow-xs'
                         : 'bg-surface hover:bg-surface-2'
                     }`}
                   >
@@ -588,7 +588,7 @@ export default function RecruiterBillingPage() {
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-blue-50/70 text-xs">
+              <div className="p-3.5 rounded-xl bg-accent-blue/10 text-xs">
                 <div className="flex items-center justify-between font-bold text-ink">
                   <span>Total Payable:</span>
                   <span className="text-base text-accent-blue">

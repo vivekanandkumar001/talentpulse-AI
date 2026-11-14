@@ -281,13 +281,13 @@ export function OverviewTab({
  </div>
  <div className="mt-2 grid grid-cols-2 gap-2 text-xs font-mono">
  <div className="rounded-lg bg-emerald-500/10 p-2 text-accent-emerald">
- <span className="block text-[10px] font-bold uppercase text-emerald-800">
+ <span className="block text-[10px] font-bold uppercase text-accent-emerald">
  Recharges & Grants
  </span>
  +{formatCurrencyUsd(t.rechargesUsd)}
  </div>
  <div className="rounded-lg bg-rose-500/10 p-2 text-accent-rose">
- <span className="block text-[10px] font-bold uppercase text-rose-800">
+ <span className="block text-[10px] font-bold uppercase text-accent-rose">
  Service Debits
  </span>
  -{formatCurrencyUsd(t.debitsUsd)}

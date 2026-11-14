@@ -81,7 +81,7 @@ export const CompetencyMap: React.FC = () => {
   return (
     <div>
       <div className="flex items-baseline justify-between gap-3 mb-3">
-        <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-ink-faint">Competency map</h2>
+        <h2 className="kicker">Competency map</h2>
         <span className="text-[11px] text-ink-faint font-mono">
           {sessionCount > 0 ? `${sessionCount} scored session${sessionCount === 1 ? '' : 's'}` : 'No scored sessions'}
         </span>
@@ -99,7 +99,7 @@ export const CompetencyMap: React.FC = () => {
           </p>
           <Link
             href="/candidate/practice"
-            className="mt-3 inline-flex items-center gap-2 text-xs font-bold text-white bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 px-4 py-2 rounded-lg transition-all cursor-pointer"
+            className="mt-3 inline-flex items-center gap-2 btn-primary-gradient text-on-brand text-xs font-bold px-4 py-2 rounded-lg transition-all cursor-pointer"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
             Start your first practice interview

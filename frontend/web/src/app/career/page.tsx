@@ -78,63 +78,14 @@ export default function CareerPage() {
     },
   ];
 
-  const defaultJobs = [
-    {
-      id: 'job-1',
-      title: 'Staff AI Research Engineer (Speech & Conversational LLMs)',
-      dept: 'AI / ML',
-      location: 'Remote (Global)',
-      type: 'Full-time',
-      experience: 'Senior / Staff (5+ yrs)',
-      description:
-        'Lead the design and fine-tuning of multi-modal audio-language models for sub-250ms conversational latency and adaptive questioning.',
-    },
-    {
-      id: 'job-2',
-      title: 'Senior Full-Stack Engineer (Next.js & Real-Time Python)',
-      dept: 'Engineering',
-      location: 'Remote (US / EU / APAC)',
-      type: 'Full-time',
-      experience: 'Senior (4+ yrs)',
-      description:
-        'Architect responsive candidate workspaces, WebRTC live audio/video streaming pipelines, and recruiter analytics dashboards.',
-    },
-    {
-      id: 'job-3',
-      title: 'Lead Distributed Systems Engineer (Sandboxed Runtimes)',
-      dept: 'Engineering',
-      location: 'Remote (Global)',
-      type: 'Full-time',
-      experience: 'Senior / Lead (5+ yrs)',
-      description:
-        'Scale our isolated multi-language code compilation sandboxes, memory safety wrappers, and live algorithmic execution cluster.',
-    },
-    {
-      id: 'job-4',
-      title: 'Principal Product Designer (AI Systems & Design Tokens)',
-      dept: 'Product',
-      location: 'Remote (US / EU)',
-      type: 'Full-time',
-      experience: 'Senior / Principal (5+ yrs)',
-      description:
-        'Craft delightful, anxiety-reducing candidate interview interfaces, accessible design tokens, and recruiter dossier visualizations.',
-    },
-    {
-      id: 'job-5',
-      title: 'Enterprise Technical Talent Partner',
-      dept: 'Operations',
-      location: 'Remote (US / UK)',
-      type: 'Full-time',
-      experience: 'Mid-Senior (3+ yrs)',
-      description:
-        'Partner with Tier-1 tech enterprises rolling out automated technical interviewing and calibrated rubric adoption.',
-    },
-  ];
+  // Careers are managed exclusively from the /super-admin/careers panel.
+  // No hardcoded fallback: the public page renders whatever the admin publishes.
 
-  const jobs = liveJobs.length > 0 ? liveJobs : defaultJobs;
+  const jobs = liveJobs;
 
   const filteredJobs =
     selectedDept === 'All' ? jobs : jobs.filter((j) => j.dept === selectedDept);
+  const departmentOptions = ['All', ...Array.from(new Set(jobs.map((j: any) => j.dept)))] as string[];
 
   const handleOpenApply = (job: any) => {
     setSelectedJob(job);
@@ -195,7 +146,7 @@ export default function CareerPage() {
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-ink tracking-tight leading-[1.1]">
             Build the Future of{' '}
-            <span className="bg-gradient-to-r from-[#185adb] via-cyan-500 to-indigo-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-accent-blue via-cyan-500 to-indigo-600 bg-clip-text text-transparent">
               Autonomous Intelligence
             </span>
           </h1>
@@ -231,7 +182,7 @@ export default function CareerPage() {
               const IconComp = p.icon;
               return (
                 <div key={i} className="p-6 rounded-xl border border-line bg-surface-deep space-y-4 shadow-xs">
-                  <div className="w-12 h-12 rounded-2xl bg-[#072448] text-white flex items-center justify-center shadow-md">
+                  <div className="w-12 h-12 rounded-2xl bg-accent-blue text-on-brand flex items-center justify-center shadow-md">
                     <IconComp className="w-6 h-6" />
                   </div>
                   <h3 className="text-base font-bold text-ink">{p.title}</h3>
@@ -256,14 +207,14 @@ export default function CareerPage() {
 
             {/* Department Filter Pills */}
             <div className="flex items-center gap-2 flex-wrap">
-              {['All', 'AI / ML', 'Engineering', 'Product', 'Operations'].map((dept) => (
+              {departmentOptions.map((dept) => (
                 <button
                   key={dept}
                   type="button"
                   onClick={() => setSelectedDept(dept)}
                   className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
                     selectedDept === dept
-                      ? 'bg-[#072448] text-white shadow-xs'
+                      ? 'bg-accent-blue text-on-brand shadow-xs'
                       : 'bg-surface text-ink-muted border border-line hover:bg-surface-2'
                   }`}
                 >
@@ -275,14 +226,48 @@ export default function CareerPage() {
 
           {/* Job List Cards */}
           <div className="space-y-4">
-            {filteredJobs.map((job) => (
+            {loadingJobs ? (
+              Array.from({ length: 3 }).map((_, i) => (
+                <div
+                  key={`skeleton-${i}`}
+                  className="p-6 sm:p-7 rounded-xl border border-line bg-surface shadow-xs animate-pulse space-y-3"
+                >
+                  <div className="flex gap-2">
+                    <div className="h-4 w-20 rounded-full bg-surface-2" />
+                    <div className="h-4 w-32 rounded bg-surface-2" />
+                  </div>
+                  <div className="h-5 w-2/3 rounded bg-surface-2" />
+                  <div className="h-3 w-full rounded bg-surface-2" />
+                  <div className="h-3 w-5/6 rounded bg-surface-2" />
+                </div>
+              ))
+            ) : filteredJobs.length === 0 ? (
+              <div className="p-10 sm:p-14 rounded-2xl border border-dashed border-line-strong text-center space-y-4">
+                <div className="w-14 h-14 rounded-2xl bg-surface-2 text-ink-muted flex items-center justify-center mx-auto">
+                  <Building2 className="w-7 h-7" />
+                </div>
+                <div className="space-y-1.5">
+                  <h3 className="text-lg font-bold text-ink">No openings right now</h3>
+                  <p className="text-xs sm:text-sm text-ink-muted max-w-md mx-auto">
+                    We continuously hire exceptional engineers, designers and operators. New roles are published here as they open — please check back soon.
+                  </p>
+                </div>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent-blue hover:bg-accent-blue-hover text-on-brand text-xs font-bold transition-all"
+                >
+                  Get in touch
+                </Link>
+              </div>
+            ) : (
+              filteredJobs.map((job) => (
               <div
                 key={job.id}
                 className="p-6 sm:p-7 rounded-xl border border-line bg-surface shadow-xs hover:border-cyan-400/50 hover:shadow-lg transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-6"
               >
                 <div className="space-y-2 max-w-2xl">
                   <div className="flex items-center gap-2.5 flex-wrap">
-                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-500/10 text-[#185adb]  border border-blue-500/20">
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-500/10 text-accent-blue  border border-blue-500/20">
                       {job.dept}
                     </span>
                     <span className="text-[11px] text-ink-muted flex items-center gap-1 font-medium">
@@ -303,13 +288,13 @@ export default function CareerPage() {
                   <button
                     type="button"
                     onClick={() => handleOpenApply(job)}
-                    className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#072448] hover:bg-[#0c3666]   text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-accent-blue hover:bg-accent-blue-hover   text-on-brand font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <span>Apply Now</span>
                     </button>
                 </div>
               </div>
-            ))}
+            )))}
           </div>
         </div>
       </section>
@@ -327,7 +312,7 @@ export default function CareerPage() {
             </button>
 
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-2xl bg-[#072448] text-white flex items-center justify-center shadow-md">
+              <div className="w-10 h-10 rounded-2xl bg-accent-blue text-on-brand flex items-center justify-center shadow-md">
                 <Briefcase className="w-5 h-5" />
               </div>
               <div>
@@ -358,7 +343,7 @@ export default function CareerPage() {
                     value={applicantName}
                     onChange={(e) => setApplicantName(e.target.value)}
                     placeholder="Please enter your full name"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong  bg-inset  text-sm text-ink  focus:outline-none focus:ring-2 focus:ring-[#185adb]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong  bg-inset  text-sm text-ink  focus:outline-none focus:ring-2 focus:ring-accent-blue"
                   />
                 </div>
 
@@ -372,7 +357,7 @@ export default function CareerPage() {
                     value={applicantEmail}
                     onChange={(e) => setApplicantEmail(e.target.value)}
                     placeholder="Please enter your email address"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong  bg-inset  text-sm text-ink  focus:outline-none focus:ring-2 focus:ring-[#185adb]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong  bg-inset  text-sm text-ink  focus:outline-none focus:ring-2 focus:ring-accent-blue"
                   />
                 </div>
 
@@ -385,7 +370,7 @@ export default function CareerPage() {
                     value={applicantLinkedIn}
                     onChange={(e) => setApplicantLinkedIn(e.target.value)}
                     placeholder="Please enter LinkedIn, GitHub, or portfolio URL"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong  bg-inset  text-sm text-ink  focus:outline-none focus:ring-2 focus:ring-[#185adb]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong  bg-inset  text-sm text-ink  focus:outline-none focus:ring-2 focus:ring-accent-blue"
                   />
                 </div>
 
@@ -398,13 +383,13 @@ export default function CareerPage() {
                     value={applicantNote}
                     onChange={(e) => setApplicantNote(e.target.value)}
                     placeholder="Please briefly highlight your relevant experience and projects..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong  bg-inset  text-sm text-ink  focus:outline-none focus:ring-2 focus:ring-[#185adb]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-line-strong  bg-inset  text-sm text-ink  focus:outline-none focus:ring-2 focus:ring-accent-blue"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3 rounded-xl bg-[#072448] hover:bg-[#0c3666] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer mt-2"
+                  className="w-full py-3 rounded-xl bg-accent-blue hover:bg-accent-blue-hover text-on-brand font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer mt-2"
                 >
                   <Send className="w-4 h-4" />
                   <span>Submit Application</span>

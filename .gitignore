@@ -54,3 +54,9 @@ Thumbs.db
 .opencode/
 
 .env*
+
+# Local audit scripts & generated audit artifacts (contain test-account
+# credentials in plaintext — never commit)
+/scripts/
+/Demo-Viewer-Resume.pdf
+/Fresh-Candidate-Resume.pdf

@@ -64,7 +64,7 @@ export const PrepChecklist: React.FC = () => {
   return (
     <div>
       <div className="flex items-baseline justify-between gap-3 mb-3">
-        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-ink-faint">Your checklist</h3>
+        <h3 className="kicker">Your checklist</h3>
         <span className="text-[11px] text-ink-muted font-mono">{doneCount}/{steps.length} · {pct}%</span>
       </div>
 

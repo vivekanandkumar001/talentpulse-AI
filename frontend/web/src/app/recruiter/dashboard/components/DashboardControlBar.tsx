@@ -56,7 +56,7 @@ export function DashboardControlBar({
  setSortDirection: (direction: DashboardSortDirection) => void;
 }) {
  return (
- <section className="bg-surface rounded-2xl border border-line backdrop-blur-md shadow-sm overflow-hidden p-3.5 space-y-3">
+ <section className="card-panel overflow-hidden p-3.5 space-y-3">
  
  {/* ROW 1: PRIMARY VIEW TABS + STATUS DROPDOWN ALWAYS STRICTLY PARALLEL */}
  <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">

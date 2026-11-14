@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -389,7 +389,7 @@ interface SubmitSectionProps {
   register: any;
   error?: string;
   isSubmitted: boolean;
-  termsText: string;
+  termsText: React.ReactNode;
   isSubmitting: boolean;
   loadingText: string;
   submitText: string;
@@ -835,7 +835,7 @@ export default function RegisterPage() {
     );
 
   return (
-    <div className="h-dvh bg-canvas text-ink font-sans flex flex-col relative overflow-hidden">
+    <div className="h-dvh bg-canvas text-ink font-sans flex flex-col relative overflow-y-auto overflow-x-hidden">
       <div className="absolute top-0 left-0 w-full h-full ambient-glow-cyan pointer-events-none z-0" />
       <div className="absolute bottom-0 right-0 w-full h-full ambient-glow-indigo pointer-events-none z-0" />
 
@@ -1142,10 +1142,10 @@ export default function RegisterPage() {
                                 </div>
 
                                 {parsedSkills.length > 0 && (
-                                  <div className="p-3.5 rounded-xl bg-sky-50/90 border border-sky-200 text-xs animate-fadeIn shadow-xs">
+                                  <div className="p-3.5 rounded-xl bg-accent-cyan/10 border border-accent-cyan/30 text-xs animate-fadeIn shadow-xs">
                                     <div className="flex items-center gap-1.5 mb-2.5">
-                                      <Check className="w-3.5 h-3.5 text-sky-600 shrink-0" />
-                                      <span className="text-xs font-semibold text-sky-950">
+                                      <Check className="w-3.5 h-3.5 text-accent-cyan shrink-0" />
+                                      <span className="text-xs font-semibold text-ink">
                                         Identified Skills from Resume ({parsedSkills.length}):
                                       </span>
                                     </div>
@@ -1208,7 +1208,14 @@ export default function RegisterPage() {
                             register={candidateForm.register}
                             error={candidateForm.formState.errors.agreeTerms?.message}
                             isSubmitted={candidateForm.formState.isSubmitted}
-                            termsText="I agree to the Candidate Terms of Service and Privacy Policy."
+                            termsText={
+                              <>
+                                I agree to the{' '}
+                                <Link href="/terms" target="_blank" className="text-accent-cyan hover:underline">Candidate Terms of Service</Link>
+                                {' '}and{' '}
+                                <Link href="/privacy" target="_blank" className="text-accent-cyan hover:underline">Privacy Policy</Link>.
+                              </>
+                            }
                             isSubmitting={isSubmitting}
                             loadingText="Creating profile..."
                             submitText="Complete Registration & Launch Interview "
@@ -1386,7 +1393,14 @@ export default function RegisterPage() {
                             register={recruiterForm.register}
                             error={recruiterForm.formState.errors.agreeTerms?.message}
                             isSubmitted={recruiterForm.formState.isSubmitted}
-                            termsText="I agree to the Enterprise Services Agreement and Evaluation Terms."
+                            termsText={
+                              <>
+                                I agree to the{' '}
+                                <Link href="/terms" target="_blank" className="text-accent-cyan hover:underline">Terms of Service</Link>
+                                {' '}and{' '}
+                                <Link href="/ai-transparency" target="_blank" className="text-accent-cyan hover:underline">AI Transparency &amp; AEDT Notice</Link>.
+                              </>
+                            }
                             isSubmitting={isSubmitting}
                             loadingText="Setting up enterprise account..."
                             submitText="Complete Registration & Access Dashboard "

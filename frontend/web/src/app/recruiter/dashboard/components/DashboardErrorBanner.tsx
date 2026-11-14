@@ -15,7 +15,7 @@ export function DashboardErrorBanner({
       <div className="flex items-start gap-3">
         <AlertCircle className="w-6 h-6 text-accent-rose shrink-0 mt-0.5" />
         <div>
-          <h3 className="font-semibold text-sm text-rose-200">{error.title}</h3>
+          <h3 className="font-semibold text-sm text-accent-rose">{error.title}</h3>
           <p className="text-xs text-accent-rose/80 mt-0.5">{error.message}</p>
         </div>
       </div>

@@ -40,7 +40,7 @@ export default function ThemeToggle() {
       <button
         type="button"
         aria-label="Toggle color theme"
-        className="hidden sm:inline-flex items-center justify-center h-8 w-8 rounded-lg border border-line bg-surface-2 text-ink-muted"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-surface-2 text-ink-muted"
       >
         <Moon className="h-4 w-4" aria-hidden="true" />
       </button>
@@ -53,7 +53,7 @@ export default function ThemeToggle() {
       onClick={toggle}
       aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
       title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-      className="hidden sm:inline-flex items-center justify-center h-8 w-8 rounded-lg border border-line bg-surface-2 text-ink-muted transition-colors hover:bg-surface-3 hover:text-ink cursor-pointer"
+      className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-line bg-surface-2 text-ink-muted transition-colors hover:bg-surface-3 hover:text-ink"
     >
       {theme === 'dark' ? (
         <Sun className="h-4 w-4 text-accent-amber" aria-hidden="true" />

@@ -444,7 +444,7 @@ export default function PhoneCompanionPage() {
     switch (connectionStatus) {
       case ConnectionState.Connected:
         return (
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-accent-emerald text-xs font-mono font-medium shadow-sm">
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-inverse-emerald text-xs font-mono font-medium shadow-sm">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -454,23 +454,23 @@ export default function PhoneCompanionPage() {
         );
       case ConnectionState.Connecting:
         return (
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-950/80 border border-amber-500/40 text-accent-amber text-xs font-mono font-medium">
-            <RefreshCw className="w-3 h-3 animate-spin text-accent-amber" />
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-950/80 border border-amber-500/40 text-inverse-amber text-xs font-mono font-medium">
+            <RefreshCw className="w-3 h-3 animate-spin text-inverse-amber" />
             <span>Connecting</span>
           </div>
         );
       case ConnectionState.Reconnecting:
         return (
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-950/80 border border-amber-500/40 text-accent-amber text-xs font-mono font-medium">
-            <RefreshCw className="w-3 h-3 animate-spin text-accent-amber" />
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-950/80 border border-amber-500/40 text-inverse-amber text-xs font-mono font-medium">
+            <RefreshCw className="w-3 h-3 animate-spin text-inverse-amber" />
             <span>Reconnecting</span>
           </div>
         );
       case ConnectionState.Disconnected:
       default:
         return (
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-2/80 border border-line-strong text-ink-muted text-xs font-mono font-medium">
-            <WifiOff className="w-3 h-3 text-ink-muted" />
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-inverse-surface-2/80 border border-inverse-line-strong text-inverse-ink-muted text-xs font-mono font-medium">
+            <WifiOff className="w-3 h-3 text-inverse-ink-muted" />
             <span>Disconnected</span>
           </div>
         );
@@ -478,28 +478,28 @@ export default function PhoneCompanionPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070A12] text-ink flex flex-col font-sans selection:bg-cyan-500 selection:text-slate-950">
+    <div className="min-h-screen bg-[#070A12] text-inverse-ink flex flex-col font-sans selection:bg-cyan-500 selection:text-slate-950">
       {/* TOP HEADER */}
-      <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-[#0A0F1D]/90 border-b border-line/80 px-4 py-3">
-        <div className="max-w-md mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-cyan-950/60 border border-cyan-500/30 text-accent-cyan">
+      <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-[#0A0F1D]/90 border-b border-inverse-line/80 px-4 py-3">
+        <div className="max-w-md mx-auto flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <div className="p-1.5 rounded-lg bg-cyan-950/60 border border-cyan-500/30 text-inverse-cyan">
               <Smartphone className="w-4 h-4" />
             </div>
             <div>
-              <div className="text-xs font-semibold tracking-tight text-ink">
-                Progeni<span className="text-accent-cyan"> Atlas</span>
+              <div className="text-xs font-semibold tracking-tight text-inverse-ink">
+                Progeni<span className="text-inverse-cyan"> Atlas</span>
               </div>
-              <div className="text-[10px] text-ink-muted font-mono">Companion Feed</div>
+              <div className="text-[10px] text-inverse-ink-muted font-mono">Companion Feed</div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             {pageState === 'live' && renderConnectionChip()}
             {wakeLockActive && (
               <span
                 title="Screen wake lock active"
-                className="text-[10px] px-2 py-0.5 rounded bg-surface-2/80 border border-line-strong/60 text-ink-muted font-mono"
+                className="text-[10px] px-2 py-0.5 rounded bg-inverse-surface-2/80 border border-inverse-line-strong/60 text-inverse-ink-muted font-mono"
               >
                 Wake Lock ON
               </span>
@@ -513,9 +513,9 @@ export default function PhoneCompanionPage() {
         {/* 1. Insecure Context Warning */}
         {!isSecure && (
           <div className="p-3.5 rounded-xl bg-amber-950/70 border border-amber-500/40 text-amber-200 text-xs flex items-start gap-2.5 shadow-lg">
-            <ShieldAlert className="w-5 h-5 text-accent-amber shrink-0 mt-0.5" />
+            <ShieldAlert className="w-5 h-5 text-inverse-amber shrink-0 mt-0.5" />
             <div className="space-y-1">
-              <div className="font-semibold text-accent-amber">HTTPS Connection Required</div>
+              <div className="font-semibold text-inverse-amber">HTTPS Connection Required</div>
               <p className="text-amber-200/90 leading-relaxed">
                 Mobile browsers require a secure HTTPS connection to stream camera &amp; microphone audio.
                 Please ensure you open this URL over HTTPS or via a secure tunnel.
@@ -528,9 +528,9 @@ export default function PhoneCompanionPage() {
         {inAppBrowserName && (
           <div className="p-3.5 rounded-xl bg-rose-950/70 border border-rose-500/40 text-rose-200 text-xs space-y-2.5 shadow-lg">
             <div className="flex items-start gap-2.5">
-              <AlertTriangle className="w-5 h-5 text-accent-rose shrink-0 mt-0.5" />
+              <AlertTriangle className="w-5 h-5 text-inverse-rose shrink-0 mt-0.5" />
               <div className="space-y-1">
-                <div className="font-semibold text-accent-rose">
+                <div className="font-semibold text-inverse-rose">
                   {inAppBrowserName} Browser Detected
                 </div>
                 <p className="text-rose-200/90 leading-relaxed">
@@ -545,12 +545,12 @@ export default function PhoneCompanionPage() {
             >
               {copiedLink ? (
                 <>
-                  <Check className="w-4 h-4 text-accent-emerald" />
+                  <Check className="w-4 h-4 text-inverse-emerald" />
                   <span>Link Copied! Open Chrome / Safari</span>
                 </>
               ) : (
                 <>
-                  <Copy className="w-4 h-4 text-accent-rose" />
+                  <Copy className="w-4 h-4 text-inverse-rose" />
                   <span>Copy Link to Open in Safari/Chrome</span>
                 </>
               )}
@@ -562,14 +562,14 @@ export default function PhoneCompanionPage() {
         {appSwitchWarning && (
           <div className="p-3 rounded-xl bg-amber-950/80 border border-amber-500/50 text-amber-200 text-xs flex items-start justify-between gap-2 shadow-md">
             <div className="flex items-start gap-2">
-              <AlertTriangle className="w-4 h-4 text-accent-amber shrink-0 mt-0.5" />
+              <AlertTriangle className="w-4 h-4 text-inverse-amber shrink-0 mt-0.5" />
               <p className="leading-relaxed">
-                <strong className="text-accent-amber">Dhyan dein:</strong> Interview ke dauran app switch mat karo; camera ruk sakta hai. (Please keep this screen open).
+                <strong className="text-inverse-amber">Dhyan dein:</strong> Interview ke dauran app switch mat karo; camera ruk sakta hai. (Please keep this screen open).
               </p>
             </div>
             <button
               onClick={() => setAppSwitchWarning(false)}
-              className="text-accent-amber hover:text-amber-200 font-mono text-[11px] shrink-0 underline"
+              className="text-inverse-amber hover:text-amber-200 font-mono text-[11px] shrink-0 underline"
             >
               Theek hai
             </button>
@@ -584,13 +584,13 @@ export default function PhoneCompanionPage() {
           <div className="flex-1 flex flex-col items-center justify-center text-center py-16 space-y-4">
             <div className="relative">
               <div className="w-16 h-16 rounded-2xl bg-cyan-950/50 border border-cyan-500/30 flex items-center justify-center">
-                <RefreshCw className="w-8 h-8 text-accent-cyan animate-spin" />
+                <RefreshCw className="w-8 h-8 text-inverse-cyan animate-spin" />
               </div>
               <div className="absolute inset-0 rounded-2xl bg-cyan-500/10 blur-xl"></div>
             </div>
             <div className="space-y-1">
-              <h2 className="text-base font-semibold text-ink">Pairing with Desktop...</h2>
-              <p className="text-xs text-ink-muted max-w-xs">
+              <h2 className="text-base font-semibold text-inverse-ink">Pairing with Desktop...</h2>
+              <p className="text-xs text-inverse-ink-muted max-w-xs">
                 Verifying single-use pairing token with Progeni Atlas interview session.
               </p>
             </div>
@@ -600,25 +600,25 @@ export default function PhoneCompanionPage() {
         {/* STATE: ERROR / EXPIRED / INVALID */}
         {pageState === 'error' && (
           <div className="flex-1 flex flex-col items-center justify-center text-center py-12 px-2 space-y-6">
-            <div className="w-16 h-16 rounded-2xl bg-rose-950/60 border border-rose-500/30 flex items-center justify-center text-accent-rose shadow-xl">
+            <div className="w-16 h-16 rounded-2xl bg-rose-950/60 border border-rose-500/30 flex items-center justify-center text-inverse-rose shadow-xl">
               <AlertTriangle className="w-8 h-8" />
             </div>
 
             <div className="space-y-2 max-w-xs">
-              <h2 className="text-lg font-bold text-ink">
+              <h2 className="text-lg font-bold text-inverse-ink">
                 {errorDetails?.title || 'Pairing Token Expired'}
               </h2>
-              <p className="text-xs text-ink-muted leading-relaxed">
+              <p className="text-xs text-inverse-ink-muted leading-relaxed">
                 {errorDetails?.message || 'Ask the desktop to show a new QR code.'}
               </p>
             </div>
 
             {errorDetails?.isExpiredOrUsed ? (
-              <div className="p-4 rounded-xl bg-surface-2/80 border border-line text-left space-y-2 max-w-xs w-full text-xs text-ink-muted">
-                <div className="font-semibold text-accent-cyan flex items-center gap-1.5">
+              <div className="p-4 rounded-xl bg-inverse-surface-2/80 border border-inverse-line text-left space-y-2 max-w-xs w-full text-xs text-inverse-ink-muted">
+                <div className="font-semibold text-inverse-cyan flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" /> Next Steps:
                 </div>
-                <p className="text-ink-muted leading-relaxed">
+                <p className="text-inverse-ink-muted leading-relaxed">
                   1. Return to your desktop interview screen.<br />
                   2. Click &quot;Phone as Camera&quot; to generate a fresh QR code.<br />
                   3. Scan the new QR code with your mobile camera.
@@ -640,11 +640,11 @@ export default function PhoneCompanionPage() {
         {pageState === 'ready' && (
           <div className="flex-1 flex flex-col justify-center py-6 space-y-6">
             <div className="text-center space-y-2">
-              <div className="inline-flex p-3 rounded-2xl bg-cyan-950/40 border border-cyan-500/20 text-accent-cyan mb-2">
+              <div className="inline-flex p-3 rounded-2xl bg-cyan-950/40 border border-cyan-500/20 text-inverse-cyan mb-2">
                 <Video className="w-8 h-8" />
               </div>
-              <h2 className="text-xl font-bold text-ink">Phone Companion Ready</h2>
-              <p className="text-xs text-ink-muted max-w-xs mx-auto leading-relaxed">
+              <h2 className="text-xl font-bold text-inverse-ink">Phone Companion Ready</h2>
+              <p className="text-xs text-inverse-ink-muted max-w-xs mx-auto leading-relaxed">
                 Pairing verified. Tap the button below to turn your phone into your interview camera and microphone.
               </p>
             </div>
@@ -659,26 +659,26 @@ export default function PhoneCompanionPage() {
             </button>
 
             {/* SETUP TIPS CARD */}
-            <div className="p-4 rounded-2xl bg-surface-2/70 border border-line space-y-3">
-              <div className="text-xs font-semibold text-ink-muted uppercase tracking-wider flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-accent-cyan" />
+            <div className="p-4 rounded-2xl bg-inverse-surface-2/70 border border-inverse-line space-y-3">
+              <div className="text-xs font-semibold text-inverse-ink-muted uppercase tracking-wider flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-inverse-cyan" />
                 <span>Setup Guidelines</span>
               </div>
-              <ul className="text-xs text-ink-muted space-y-2 leading-relaxed">
+              <ul className="text-xs text-inverse-ink-muted space-y-2 leading-relaxed">
                 <li className="flex items-start gap-2">
-                  <span className="text-accent-cyan">📱</span>
+                  <span className="text-inverse-cyan">📱</span>
                   <span><strong>Stand &amp; Position:</strong> Phone ko stand pe rakho (horizontal/landscape).</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-accent-cyan">💡</span>
+                  <span className="text-inverse-cyan">💡</span>
                   <span><strong>Lighting:</strong> Face clearly visible rahe, lighting samne se ho.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-accent-cyan">⚡</span>
+                  <span className="text-inverse-cyan">⚡</span>
                   <span><strong>Battery:</strong> Charger laga do taaki interview ke dauran phone band na ho.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-accent-cyan">🎧</span>
+                  <span className="text-inverse-cyan">🎧</span>
                   <span><strong>Headphones:</strong> Headphones use karo (echo aur feedback se bachne ke liye).</span>
                 </li>
               </ul>
@@ -689,12 +689,12 @@ export default function PhoneCompanionPage() {
         {/* STATE: STARTING / CONNECTING */}
         {pageState === 'starting' && (
           <div className="flex-1 flex flex-col items-center justify-center text-center py-16 space-y-4">
-            <div className="w-16 h-16 rounded-2xl bg-cyan-950/60 border border-cyan-500/40 flex items-center justify-center text-accent-cyan shadow-xl">
+            <div className="w-16 h-16 rounded-2xl bg-cyan-950/60 border border-cyan-500/40 flex items-center justify-center text-inverse-cyan shadow-xl">
               <RefreshCw className="w-8 h-8 animate-spin" />
             </div>
             <div className="space-y-1">
-              <h2 className="text-base font-bold text-ink">Activating Camera &amp; Mic...</h2>
-              <p className="text-xs text-ink-muted max-w-xs">
+              <h2 className="text-base font-bold text-inverse-ink">Activating Camera &amp; Mic...</h2>
+              <p className="text-xs text-inverse-ink-muted max-w-xs">
                 Establishing LiveKit WebRTC peer connection. Please approve camera/mic permissions if prompted.
               </p>
             </div>
@@ -705,7 +705,7 @@ export default function PhoneCompanionPage() {
         {pageState === 'live' && (
           <div className="flex-1 flex flex-col justify-between space-y-4">
             {/* SELF PREVIEW VIDEO CONTAINER */}
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-canvas border border-line shadow-2xl">
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-inverse-canvas border border-inverse-line shadow-2xl">
               <video
                 ref={videoElementRef}
                 autoPlay
@@ -725,15 +725,15 @@ export default function PhoneCompanionPage() {
               <button
                 onClick={handleFlipCamera}
                 title="Flip Camera (Front/Back)"
-                className="absolute top-3 right-3 p-2.5 rounded-full bg-surface-2/80 hover:bg-surface-2 backdrop-blur-md border border-line-strong/70 text-ink active:scale-90 transition-all shadow-md"
+                className="absolute top-3 right-3 p-2.5 rounded-full bg-inverse-surface-2/80 hover:bg-inverse-surface-2 backdrop-blur-md border border-inverse-line-strong/70 text-inverse-ink active:scale-90 transition-all shadow-md"
               >
-                <FlipHorizontal className="w-4 h-4 text-accent-cyan" />
+                <FlipHorizontal className="w-4 h-4 text-inverse-cyan" />
               </button>
 
               {/* BOTTOM BAR INSIDE PREVIEW */}
-              <div className="absolute bottom-3 inset-x-3 flex items-center justify-between text-[11px] text-ink-muted font-mono bg-canvas/70 backdrop-blur-md px-3 py-1.5 rounded-xl border border-line/80">
+              <div className="absolute bottom-3 inset-x-3 flex items-center justify-between text-[11px] text-inverse-ink-muted font-mono bg-inverse-canvas/70 backdrop-blur-md px-3 py-1.5 rounded-xl border border-inverse-line/80">
                 <span className="flex items-center gap-1.5">
-                  <Camera className="w-3.5 h-3.5 text-accent-cyan" />
+                  <Camera className="w-3.5 h-3.5 text-inverse-cyan" />
                   <span>{facingMode === 'user' ? 'Front Camera' : 'Rear Camera'}</span>
                 </span>
                 <span>720p HD</span>
@@ -741,23 +741,23 @@ export default function PhoneCompanionPage() {
             </div>
 
             {/* LIVE AUDIO LEVEL METER */}
-            <div className="p-3.5 rounded-2xl bg-surface-2/80 border border-line/80 space-y-2">
+            <div className="p-3.5 rounded-2xl bg-inverse-surface-2/80 border border-inverse-line/80 space-y-2">
               <div className="flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2 text-ink-muted font-medium">
+                <div className="flex items-center gap-2 text-inverse-ink-muted font-medium">
                   {micVolume > 0.05 ? (
-                    <Mic className="w-4 h-4 text-accent-cyan animate-pulse" />
+                    <Mic className="w-4 h-4 text-inverse-cyan animate-pulse" />
                   ) : (
-                    <Mic className="w-4 h-4 text-ink-muted" />
+                    <Mic className="w-4 h-4 text-inverse-ink-muted" />
                   )}
                   <span>Microphone Feed</span>
                 </div>
-                <span className="font-mono text-[10px] text-ink-muted">
+                <span className="font-mono text-[10px] text-inverse-ink-muted">
                   {micVolume > 0.05 ? 'Capturing Voice' : 'Silent'}
                 </span>
               </div>
 
               {/* Volume Bar Visualizer */}
-              <div className="w-full h-2 rounded-full bg-canvas overflow-hidden flex">
+              <div className="w-full h-2 rounded-full bg-inverse-canvas overflow-hidden flex">
                 <div
                   className="h-full rounded-full transition-all duration-75 ease-out bg-gradient-to-r from-cyan-500 via-teal-400 to-emerald-400"
                   style={{ width: `${Math.round(micVolume * 100)}%` }}
@@ -769,25 +769,25 @@ export default function PhoneCompanionPage() {
             <div className="flex items-center gap-3">
               <button
                 onClick={handleFlipCamera}
-                className="flex-1 py-3 px-4 rounded-xl bg-surface-2 hover:bg-surface-2 active:scale-[0.98] border border-line-strong/80 text-ink text-xs font-semibold flex items-center justify-center gap-2 transition-all"
+                className="flex-1 py-3 px-4 rounded-xl bg-inverse-surface-2 hover:bg-inverse-surface-2 active:scale-[0.98] border border-inverse-line-strong/80 text-inverse-ink text-xs font-semibold flex items-center justify-center gap-2 transition-all"
               >
-                <FlipHorizontal className="w-4 h-4 text-accent-cyan" />
+                <FlipHorizontal className="w-4 h-4 text-inverse-cyan" />
                 <span>Flip Camera</span>
               </button>
 
               <button
                 onClick={handleManualReconnect}
-                className="flex-1 py-3 px-4 rounded-xl bg-surface-2 hover:bg-surface-2 active:scale-[0.98] border border-line-strong/80 text-ink text-xs font-semibold flex items-center justify-center gap-2 transition-all"
+                className="flex-1 py-3 px-4 rounded-xl bg-inverse-surface-2 hover:bg-inverse-surface-2 active:scale-[0.98] border border-inverse-line-strong/80 text-inverse-ink text-xs font-semibold flex items-center justify-center gap-2 transition-all"
               >
-                <RefreshCw className="w-4 h-4 text-accent-amber" />
+                <RefreshCw className="w-4 h-4 text-inverse-amber" />
                 <span>Reconnect</span>
               </button>
             </div>
 
             {/* SUMMARY TIPS REMINDER */}
-            <div className="p-3.5 rounded-xl bg-surface-2/50 border border-line/60 text-[11px] text-ink-muted space-y-1.5">
-              <div className="font-semibold text-ink-muted flex items-center gap-1.5">
-                <Smartphone className="w-3.5 h-3.5 text-accent-cyan" />
+            <div className="p-3.5 rounded-xl bg-inverse-surface-2/50 border border-inverse-line/60 text-[11px] text-inverse-ink-muted space-y-1.5">
+              <div className="font-semibold text-inverse-ink-muted flex items-center gap-1.5">
+                <Smartphone className="w-3.5 h-3.5 text-inverse-cyan" />
                 <span>Interview In Progress</span>
               </div>
               <p className="leading-relaxed">
@@ -799,7 +799,7 @@ export default function PhoneCompanionPage() {
       </main>
 
       {/* FOOTER */}
-      <footer className="w-full border-t border-line py-3 text-center text-[10px] text-ink-faint font-mono">
+      <footer className="w-full border-t border-inverse-line py-3 text-center text-[10px] text-inverse-ink-faint font-mono">
         Progeni Atlas Companion &bull; End-to-End Encrypted Peer Relay
       </footer>
     </div>

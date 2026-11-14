@@ -29,38 +29,38 @@ export default function CandidateHomePage() {
         </section>
 
         {/* START HERE — two equal, side-by-side tracks */}
-        <section id="start-here" className="pt-5 pb-5 border-b border-line">
-          <div className="flex items-baseline justify-between gap-4 mb-3">
-            <h2 className="text-[11px] font-bold uppercase tracking-[0.2em] text-ink-faint">Start Here</h2>
-            <span className="text-[10px] text-ink-muted font-mono">Either track · equal weight</span>
+        <section id="start-here" className="pt-6 pb-5 border-b border-line">
+          <div className="flex items-baseline justify-between gap-4 mb-4 px-0">
+            <h2 className="kicker">Start Here</h2>
+            <span className="text-[10px] text-ink-faint font-mono uppercase tracking-wider">Either track · equal weight</span>
           </div>
           <QuickStartColumns />
         </section>
 
         {/* Dense snapshot rail */}
-        <section id="snapshot" className="py-5 border-b border-line">
+        <section id="snapshot" className="py-6 border-b border-line">
           <SnapshotStrip />
         </section>
 
         {/* Body grid — recent activity + competency map + checklist */}
-        <section id="progress" className="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-5 border-b border-line pb-5">
-          <div className="lg:col-span-7">
+        <section id="progress" className="grid grid-cols-1 lg:grid-cols-12 gap-5 pt-6 border-b border-line pb-6">
+          <div className="lg:col-span-7 card-panel p-5 sm:p-6">
             <RecentActivity />
           </div>
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 card-panel p-5 sm:p-6">
             <CompetencyMap />
           </div>
         </section>
 
         {/* Feedback + drills + checklist */}
-        <section id="feedback" className="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-5">
-          <div className="lg:col-span-5">
+        <section id="feedback" className="grid grid-cols-1 lg:grid-cols-12 gap-5 pt-6">
+          <div className="lg:col-span-5 card-panel p-5 sm:p-6">
             <FeedbackSummary />
           </div>
-          <div id="drills" className="lg:col-span-4">
+          <div id="drills" className="lg:col-span-4 card-panel p-5 sm:p-6">
             <PracticeDrillList />
           </div>
-          <div id="checklist" className="lg:col-span-3">
+          <div id="checklist" className="lg:col-span-3 card-panel p-5 sm:p-6">
             <PrepChecklist />
           </div>
         </section>

@@ -53,12 +53,12 @@ export const SnapshotStrip: React.FC = () => {
   ];
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-x divide-line border-y border-line">
+    <div className="card-panel grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-x divide-y sm:divide-y-0 divide-line overflow-hidden">
       {stats.map((stat) => (
-        <div key={stat.label} className="px-4 sm:px-5 py-4 first:pl-0 sm:first:pl-5 last:pr-0">
-          <p className="text-[10px] font-mono font-semibold uppercase tracking-[0.16em] text-ink-faint truncate">{stat.label}</p>
-          <p className="mt-1 text-2xl font-extrabold text-ink tabular-nums leading-none">{stat.value}</p>
-          <p className="mt-1 text-[10px] text-ink-faint leading-tight truncate">{stat.sub}</p>
+        <div key={stat.label} className="px-4 sm:px-5 py-4 min-w-0">
+          <p className="kicker truncate">{stat.label}</p>
+          <p className="mt-1.5 kpi-value">{stat.value}</p>
+          <p className="mt-1.5 text-[10px] text-ink-faint leading-tight truncate">{stat.sub}</p>
         </div>
       ))}
     </div>

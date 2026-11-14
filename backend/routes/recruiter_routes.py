@@ -5,6 +5,7 @@ Recruiter profile, team management, jobs, candidate screening invitations,
 rescheduling, confirm schedules, dossiers, and rubrics.
 """
 
+from core.http_utils import safe_log_tag
 import os
 import uuid
 import time
@@ -12,6 +13,7 @@ import io
 import re
 import traceback
 from datetime import datetime, timezone, timedelta
+from core.http_utils import generic_500
 from flask import Blueprint, request, jsonify, g, Response
 
 from core.db import get_mongo_db
@@ -905,7 +907,7 @@ def bulk_parse_resumes(job_id):
 
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @recruiter_bp.route("/api/recruiter/schedules/generate", methods=["POST"])
@@ -961,7 +963,7 @@ def generate_bulk_schedules():
 
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @recruiter_bp.route("/api/recruiter/schedules/confirm", methods=["POST"])
@@ -992,7 +994,7 @@ def confirm_bulk_schedules():
         custom_message = data.get("message", "")
 
         db = get_mongo_db()
-        company_name = user.get("company_name") or user.get("organization") or "Progeni Atlas Hiring Partner"
+        company_name = user.get("company_name") or user.get("org_name") or user.get("companyName") or user.get("organization") or "Progeni Atlas Hiring Partner"
         if org_id and db is not None:
             try:
                 org_doc = db.organizations.find_one({"$or": [{"id": org_id}, {"_id": org_id}]})
@@ -1134,7 +1136,7 @@ def confirm_bulk_schedules():
 
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @recruiter_bp.route("/api/recruiter/invite-candidate", methods=["POST"])
@@ -1187,7 +1189,7 @@ def invite_candidate_screening():
                     jd = job_doc.get("job_description", "")
 
         # Determine organization / company name
-        company_name = user.get("company_name") or user.get("organization") or "Progeni Atlas Hiring Partner"
+        company_name = user.get("company_name") or user.get("org_name") or user.get("companyName") or user.get("organization") or "Progeni Atlas Hiring Partner"
         if org_id and db is not None:
             try:
                 org_doc = db.organizations.find_one({"$or": [{"id": org_id}, {"_id": org_id}]})
@@ -1312,7 +1314,7 @@ def invite_candidate_screening():
                     {"$inc": {"applicants_count": 1}}
                 )
 
-        print(f"📩 [RECRUITER INVITE] AI Interview invite, invitation record, and notification created for {candidate_email} ({candidate_name}) by recruiter {recruiter_email}")
+        print(f"[RECRUITER INVITE] AI Interview invite, invitation record, and notification created for {safe_log_tag(candidate_email)} by recruiter {safe_log_tag(recruiter_email)}")
 
         # Send invitation email with the uploaded JD as an attachment
         email_delivered = False
@@ -1334,7 +1336,7 @@ def invite_candidate_screening():
         except Exception as mail_err:
             email_delivered = False
             email_error = str(mail_err)
-            print(f"[INVITE EMAIL EXCEPTION] Failed to dispatch email to {candidate_email}: {mail_err}")
+            print(f"[INVITE EMAIL EXCEPTION] Failed to dispatch email to {safe_log_tag(candidate_email)}: {mail_err}")
 
         message = f"AI Screening invite dispatched to {candidate_email}."
         if not email_delivered:

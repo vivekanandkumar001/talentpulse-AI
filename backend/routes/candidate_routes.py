@@ -11,6 +11,7 @@ import time
 import re
 import traceback
 from datetime import datetime, timezone, timedelta
+from core.http_utils import generic_500
 from flask import Blueprint, request, jsonify, g
 
 from core.db import get_mongo_db
@@ -383,7 +384,7 @@ def mark_candidate_notifications_read():
         return jsonify({"success": True}), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 # ------------------------------------------------------------------------------
@@ -654,6 +655,15 @@ def candidate_resume_endpoint():
                 curr_skills = user.get("skills_summary") or []
                 combined = list(dict.fromkeys(curr_skills + extracted_skills))
                 db.users.update_one({"_id": user["_id"]}, {"$set": {"skills_summary": combined}})
+
+            # Retention: keep only the most recent resume per candidate
+            try:
+                from core.resume_retention import retain_recent_resumes
+                retention = retain_recent_resumes(candidate_id, candidate_email, keep=2)
+                if retention.get("removed_docs"):
+                    print(f"[ResumeRetention] dropped {retention['removed_docs']} older resume(s) for candidate {candidate_id[:8]}…")
+            except Exception as retention_err:
+                print(f"[ResumeRetention] Warning: {retention_err}")
 
             # Invalidate old practice drills so newly extracted resume skills build fresh drills
             try:
@@ -988,11 +998,96 @@ def get_candidate_skill_insights():
             overall_readiness = round(practice_stats.get("averageScore", 75))
             readiness_tier = "Practice Evaluated"
 
-        # Build verified resume & profile skills list for frontend
-        formatted_skills = [
-            {"name": s, "category": "resume"}
-            for s in skills
-        ]
+        # Demo-ready skill scoring: for each resume skill, compute a 0-5 mark
+        # from tagged practice-drill sessions (drill catalog match_skills /
+        # coreSkillsTested) plus interview scorecard competency evidence that
+        # shares the same stem. Skills without evidence render as 0 stars.
+        def _norm(value) -> str:
+            return str(value).strip().lower()
+
+        def _skill_matches(candidate_skill: str, tag: str) -> bool:
+            return bool(candidate_skill) and (
+                candidate_skill == tag
+                or candidate_skill in tag
+                or tag in candidate_skill
+            )
+
+        try:
+            drill_catalog = get_active_drills()
+        except Exception:
+            drill_catalog = []
+        drill_index = {d.get("id"): d for d in drill_catalog if isinstance(d, dict) and d.get("id")}
+
+        # Aggregate practice evidence per skill tag (lowercased)
+        practice_evidence: dict[str, list[float]] = {}
+        for session in practice_sessions:
+            drill_id = session.get("drillId")
+            score = session.get("score")
+            if drill_id is None or not isinstance(score, (int, float)):
+                continue
+            drill = drill_index.get(str(drill_id))
+            if not drill:
+                continue
+            tags = set()
+            for key in ("match_skills", "coreSkillsTested"):
+                for item in (drill.get(key) or []):
+                    tags.add(_norm(item))
+            for raw_skill in skills:
+                sk = _norm(raw_skill)
+                if not any(_skill_matches(sk, tag) for tag in tags):
+                    continue
+                practice_evidence.setdefault(sk, []).append(float(score))
+
+        # Aggregate interview evidence per skill (normalized lower)
+        interview_evidence: dict[str, list[float]] = {}
+        for c_name, data in competency_map.items():
+            cl = _norm(c_name)
+            for raw_skill in skills:
+                sk = _norm(raw_skill)
+                if _skill_matches(sk, cl):
+                    interview_evidence.setdefault(sk, []).extend(data["scores"])
+
+        def _stars(scores: list[float]) -> float:
+            if not scores:
+                return 0.0
+            return max(0.0, min(5.0, round(sum(scores) / len(scores) / 20.0, 1)))
+
+        def _level(out_of_5: float) -> str:
+            if out_of_5 >= 4.5:
+                return "Expert"
+            if out_of_5 >= 3.5:
+                return "Advanced"
+            if out_of_5 >= 2.5:
+                return "Competent"
+            if out_of_5 >= 1.5:
+                return "Developing"
+            if out_of_5 >= 0.5:
+                return "Learning"
+            return "Unexplored"
+
+        # Build per-skill rows with 0-5 scores for the candidate skills page
+        formatted_skills = []
+        for raw_skill in skills:
+            sk = _norm(raw_skill)
+            practice_scores = practice_evidence.get(sk, [])
+            interview_scores = interview_evidence.get(sk, [])
+            all_scores = practice_scores + interview_scores
+            out_of_5 = _stars(all_scores)
+            sources = []
+            if interview_scores:
+                sources.append("interview")
+            if practice_scores:
+                sources.append("practice")
+            formatted_skills.append({
+                "name": str(raw_skill),
+                "category": "resume",
+                "scoreOutOf5": out_of_5,
+                "level": _level(out_of_5),
+                "assessed": bool(all_scores),
+                "sources": sources,
+                "sessionsCount": len(practice_scores),
+                "interviewEvidenceCount": len(interview_scores),
+            })
 
         personalized = get_candidate_personalized_drills(user_id) if user_id else []
         recommended_drills = [
@@ -1605,11 +1700,23 @@ def get_practice_drills():
                         str(drill.get("title", "")),
                         str(drill.get("description", "")),
                         " ".join(drill.get("coreSkillsTested", []) or []),
+                        " ".join(drill.get("match_skills", []) or []),
                     ]
                 ).lower()
                 return search in haystack
 
             filtered = [d for d in filtered if matches(d)]
+            if not filtered and category == "ALL" and difficulty == "ALL" and len(search) > 1:
+                # Skill-specific deep links (/candidate/practice?skill=React) can
+                # hit zero matches even though the candidate would benefit from a
+                # drill. Synthesize one on demand — generate_dynamic_drill is
+                # cached in the catalog, so the cost is paid once per skill.
+                try:
+                    dynamic = generate_dynamic_drill(search)
+                    if dynamic:
+                        filtered = [dynamic]
+                except Exception:
+                    traceback.print_exc()
 
         best_by_drill: dict[str, float] = {}
         for session in sessions:
@@ -1652,7 +1759,7 @@ def get_practice_drills():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @candidate_bp.route("/api/v1/practice/sessions/evaluate-turn", methods=["POST"])
@@ -1906,7 +2013,7 @@ def get_candidate_practice_history():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 

@@ -11,6 +11,7 @@ import re
 import time
 import traceback
 from datetime import datetime, timezone, timedelta
+from core.http_utils import generic_500
 from flask import Blueprint, request, jsonify, g, make_response
 
 import pymongo
@@ -61,10 +62,10 @@ def create_catalog_item(kind):
     except pymongo.errors.DuplicateKeyError:
         return jsonify({"success": False, "error": "An item with this id already exists"}), 409
     except ValueError as exc:
-        return jsonify({"success": False, "error": str(exc)}), 400
+        return jsonify({"success": False, "error": generic_500(exc)}), 400
     except Exception as exc:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(exc)}), 500
+        return jsonify({"success": False, "error": generic_500(exc)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/catalog/<kind>/<item_id>", methods=["PUT", "DELETE"])
@@ -90,10 +91,10 @@ def update_catalog_item(kind, item_id):
                 item[key] = item[key].isoformat()
         return jsonify({"success": True, "item": item}), 200
     except ValueError as exc:
-        return jsonify({"success": False, "error": str(exc)}), 400
+        return jsonify({"success": False, "error": generic_500(exc)}), 400
     except Exception as exc:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(exc)}), 500
+        return jsonify({"success": False, "error": generic_500(exc)}), 500
 
 # ------------------------------------------------------------------------------
 # SUPER ADMIN PLATFORM MANAGEMENT & GOVERNANCE ENDPOINTS
@@ -144,7 +145,7 @@ def super_admin_overview():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/system-health", methods=["GET"])
@@ -176,7 +177,7 @@ def super_admin_system_health():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/audit-logs", methods=["GET"])
@@ -233,7 +234,7 @@ def super_admin_audit_logs():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/organizations", methods=["GET", "POST"])
@@ -319,7 +320,7 @@ def super_admin_organizations():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/organizations/<org_id>", methods=["GET"])
@@ -415,7 +416,7 @@ def super_admin_organization_detail(org_id):
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/organizations/<org_id>/status", methods=["PATCH"])
@@ -432,7 +433,7 @@ def super_admin_update_org_status(org_id):
             )
         return jsonify({"success": True, "status": new_status}), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/organizations/<org_id>/free-quota", methods=["GET", "POST", "PATCH"])
@@ -466,7 +467,7 @@ def super_admin_org_free_quota(org_id):
             }
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/users", methods=["GET"])
@@ -514,7 +515,7 @@ def super_admin_users():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/users/<user_id>/role", methods=["PATCH"])
@@ -531,7 +532,7 @@ def super_admin_update_user_role(user_id):
             )
         return jsonify({"success": True, "role": new_role}), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/users/<user_id>/status", methods=["PATCH"])
@@ -548,7 +549,7 @@ def super_admin_update_user_status(user_id):
             )
         return jsonify({"success": True, "status": new_status}), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/users/<user_id>/free-quota", methods=["GET", "POST", "PATCH"])
@@ -583,7 +584,7 @@ def super_admin_user_free_quota(user_id):
             }
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/interviews", methods=["GET"])
@@ -701,7 +702,7 @@ def super_admin_interviews(session_id=None):
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/interviews/<session_id>/status", methods=["PATCH", "POST"])
@@ -734,7 +735,7 @@ def super_admin_interview_status(session_id):
             })
         return jsonify({"success": True, "message": f"Session status updated to {new_status}."}), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/permissions", methods=["GET"])
@@ -820,7 +821,7 @@ def super_admin_permissions():
             }
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/usage", methods=["GET"])
@@ -905,7 +906,7 @@ def super_admin_usage():
             "topOrganizations": top_orgs
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/data-governance", methods=["GET"])
@@ -934,7 +935,7 @@ def super_admin_data_governance():
             "deletionNote": "Candidate right-to-be-forgotten requests automatically sanitize PII and delete Cloudinary binaries."
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/settings", methods=["GET", "POST", "PUT"])
@@ -1088,7 +1089,7 @@ def super_admin_settings():
             "settings": defaults
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/settings/<setting_key>", methods=["POST", "PATCH"])
@@ -1136,7 +1137,7 @@ def super_admin_update_setting(setting_key):
             }
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 def _pkg_query(package_id: str):
@@ -1221,7 +1222,7 @@ def super_admin_packages():
             "total": len(clean_pkgs)
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/packages/<package_id>", methods=["PUT", "PATCH"])
@@ -1294,7 +1295,7 @@ def super_admin_package_edit(package_id):
         return jsonify({"success": True, "message": "Package updated successfully."}), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/packages/<package_id>", methods=["DELETE"])
@@ -1313,7 +1314,7 @@ def super_admin_package_delete(package_id):
         return jsonify({"success": True, "message": "Package deleted successfully."}), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/packages/<package_id>/publish", methods=["POST"])
@@ -1330,7 +1331,7 @@ def super_admin_package_publish(package_id):
             )
         return jsonify({"success": True, "message": "Package published successfully."}), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/packages/<package_id>/archive", methods=["POST"])
@@ -1347,7 +1348,7 @@ def super_admin_package_archive(package_id):
             )
         return jsonify({"success": True, "message": "Package archived successfully."}), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/packages", methods=["GET"])
@@ -1381,7 +1382,7 @@ def get_public_packages():
         response.headers["Cache-Control"] = "public, max-age=60, s-maxage=300, stale-while-revalidate=600"
         return response
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/ai-config", methods=["GET", "POST", "PUT"])
@@ -1456,7 +1457,7 @@ def super_admin_ai_config():
             "recentChanges": []
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/ai-config/test", methods=["POST"])
@@ -1475,7 +1476,7 @@ def super_admin_ai_test():
             "error": None
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/entitlement-policy", methods=["GET", "POST", "PUT", "PATCH"])
@@ -1625,7 +1626,7 @@ def super_admin_entitlements():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 # ------------------------------------------------------------------------------
@@ -1726,7 +1727,7 @@ def super_admin_billing_overview():
         }), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 def _normalize_billing_account(acc: dict) -> dict:
@@ -1984,7 +1985,7 @@ def super_admin_billing_accounts():
             "accounts": clean_accounts
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/billing/accounts/user/<user_id>", methods=["GET"])
@@ -1997,7 +1998,7 @@ def super_admin_billing_user_account(user_id):
             return jsonify({"success": False, "error": f"User {user_id} not found"}), 404
         return jsonify({"success": True, "account": acc, "accounts": [acc]}), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/billing/accounts/<account_id>/recharge", methods=["POST"])
@@ -2116,7 +2117,7 @@ def super_admin_billing_recharge(account_id):
             "transaction": tx
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/billing/accounts/<account_id>/grant", methods=["POST"])
@@ -2234,7 +2235,7 @@ def super_admin_billing_grant(account_id):
             "transaction": tx
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/billing/ledger", methods=["GET"])
@@ -2295,7 +2296,7 @@ def super_admin_billing_ledger():
             "total": len(clean_entries)
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/billing/invoices", methods=["GET"])
@@ -2330,7 +2331,7 @@ def super_admin_billing_invoices():
             "invoices": invoices
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/billing/rate-cards", methods=["GET"])
@@ -2371,7 +2372,7 @@ def super_admin_billing_rate_cards():
             "rateCards": rate_cards
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/billing/pricing-policy", methods=["GET"])
@@ -2397,7 +2398,7 @@ def super_admin_billing_pricing_policy():
             }
         }), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 # =====================================================================
@@ -2413,78 +2414,9 @@ def _career_query(job_id):
     return {"$or": queries}
 
 
-DEFAULT_CAREERS = [
-    {
-        "id": "job-1",
-        "job_id": "job-1",
-        "title": "Staff AI Research Engineer (Speech & Conversational LLMs)",
-        "dept": "AI / ML",
-        "location": "Remote (Global)",
-        "type": "Full-time",
-        "experience": "Senior / Staff (5+ yrs)",
-        "description": "Lead the design and fine-tuning of multi-modal audio-language models for sub-250ms conversational latency and adaptive questioning.",
-        "requirements": "Strong experience with PyTorch, Transformer architectures, whisper/speech-to-text fine-tuning, latency optimization.",
-        "status": "published",
-        "created_at": datetime.now(timezone.utc).isoformat(),
-        "updated_at": datetime.now(timezone.utc).isoformat()
-    },
-    {
-        "id": "job-2",
-        "job_id": "job-2",
-        "title": "Senior Full-Stack Engineer (Next.js & Real-Time Python)",
-        "dept": "Engineering",
-        "location": "Remote (US / EU / APAC)",
-        "type": "Full-time",
-        "experience": "Senior (4+ yrs)",
-        "description": "Architect responsive candidate workspaces, WebRTC live audio/video streaming pipelines, and recruiter analytics dashboards.",
-        "requirements": "Proficiency in Next.js 15, TypeScript, WebRTC, Tailwind CSS, Python (FastAPI/Flask), WebSocket architectures.",
-        "status": "published",
-        "created_at": datetime.now(timezone.utc).isoformat(),
-        "updated_at": datetime.now(timezone.utc).isoformat()
-    },
-    {
-        "id": "job-3",
-        "job_id": "job-3",
-        "title": "Lead Distributed Systems Engineer (Sandboxed Runtimes)",
-        "dept": "Engineering",
-        "location": "Remote (Global)",
-        "type": "Full-time",
-        "experience": "Senior / Lead (5+ yrs)",
-        "description": "Scale our isolated multi-language code compilation sandboxes, memory safety wrappers, and live algorithmic execution cluster.",
-        "requirements": "Deep systems knowledge in Linux namespaces, cgroups, Docker, firecracker/gVisor, distributed RPC, high-concurrency Python/Go.",
-        "status": "published",
-        "created_at": datetime.now(timezone.utc).isoformat(),
-        "updated_at": datetime.now(timezone.utc).isoformat()
-    },
-    {
-        "id": "job-4",
-        "job_id": "job-4",
-        "title": "Principal Product Designer (AI Systems & Design Tokens)",
-        "dept": "Product",
-        "location": "Remote (US / EU)",
-        "type": "Full-time",
-        "experience": "Senior / Principal (5+ yrs)",
-        "description": "Craft delightful, anxiety-reducing candidate interview interfaces, accessible design tokens, and recruiter dossier visualizations.",
-        "requirements": "Expertise in enterprise design systems, Figma component architectures, dark/light token design, user research in assessment software.",
-        "status": "published",
-        "created_at": datetime.now(timezone.utc).isoformat(),
-        "updated_at": datetime.now(timezone.utc).isoformat()
-    },
-    {
-        "id": "job-5",
-        "job_id": "job-5",
-        "title": "Enterprise Technical Talent Partner",
-        "dept": "Operations",
-        "location": "Remote (US / UK)",
-        "type": "Full-time",
-        "experience": "Mid-Senior (3+ yrs)",
-        "description": "Partner with Tier-1 tech enterprises rolling out automated technical interviewing and calibrated rubric adoption.",
-        "requirements": "Track record in technical recruitment, HR tech enterprise customer success, or hiring team transformation.",
-        "status": "published",
-        "created_at": datetime.now(timezone.utc).isoformat(),
-        "updated_at": datetime.now(timezone.utc).isoformat()
-    }
-]
+# No hardcoded or auto-seeded openings: the careers collection is managed
+# exclusively from the /super-admin/careers panel. If it is empty, the public
+# page shows an honest "no current openings" state.
 
 
 @super_admin_bp.route("/api/careers/openings", methods=["GET"])
@@ -2492,12 +2424,7 @@ def public_career_openings():
     """Public endpoint to fetch published jobs for the /career landing page."""
     try:
         db = get_mongo_db()
-        if db is not None:
-            if db.company_careers.count_documents({}) == 0:
-                db.company_careers.insert_many(DEFAULT_CAREERS)
-            raw = list(db.company_careers.find({"status": "published"}))
-        else:
-            raw = DEFAULT_CAREERS
+        raw = list(db.company_careers.find({"status": "published"})) if db is not None else []
 
         clean_jobs = []
         for j in raw:
@@ -2507,7 +2434,7 @@ def public_career_openings():
 
         return jsonify({"success": True, "jobs": clean_jobs}), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e), "jobs": DEFAULT_CAREERS}), 200
+        return jsonify({"success": False, "error": generic_500(e), "jobs": []}), 200
 
 
 @super_admin_bp.route("/api/careers/apply", methods=["POST"])
@@ -2549,7 +2476,7 @@ def public_career_apply():
 
         return jsonify({"success": True, "message": "Application submitted successfully."}), 201
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/careers", methods=["GET", "POST"])
@@ -2559,12 +2486,7 @@ def super_admin_careers():
     try:
         db = get_mongo_db()
         if request.method == "GET":
-            if db is not None:
-                if db.company_careers.count_documents({}) == 0:
-                    db.company_careers.insert_many(DEFAULT_CAREERS)
-                raw = list(db.company_careers.find({}).sort("created_at", -1))
-            else:
-                raw = DEFAULT_CAREERS
+            raw = list(db.company_careers.find({}).sort("created_at", -1)) if db is not None else []
 
             clean_jobs = []
             published_count = 0
@@ -2640,7 +2562,7 @@ def super_admin_careers():
         return jsonify({"success": True, "career": new_job}), 201
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/careers/<job_id>", methods=["GET", "PUT", "PATCH", "DELETE"])
@@ -2688,7 +2610,7 @@ def super_admin_career_item(job_id):
         return jsonify({"success": True, "career": {**data, "id": job_id}}), 200
     except Exception as e:
         traceback.print_exc()
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 @super_admin_bp.route("/api/super-admin/careers/<job_id>/applications", methods=["GET"])
@@ -2707,7 +2629,7 @@ def super_admin_career_applications(job_id):
 
         return jsonify({"success": True, "applications": applications, "count": len(applications)}), 200
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        return jsonify({"success": False, "error": generic_500(e)}), 500
 
 
 # =====================================================================

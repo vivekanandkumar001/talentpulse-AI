@@ -5,6 +5,7 @@ Enterprise auth routes: email check, register, verify-otp, resend-otp,
 login, logout, refresh, forgot-password, reset-password.
 """
 
+from core.http_utils import safe_log_tag
 import os
 import uuid
 import datetime
@@ -88,6 +89,7 @@ def register():
             "years_experience": _optional_number("years_experience"),
             "headline": _optional_text("headline"),
             "org_name": _optional_text("org_name"),
+            "company_name": _optional_text("company_name") or _optional_text("org_name") or _optional_text("companyName"),
             "designation": _optional_text("designation"),
             "company_size": _optional_text("company_size"),
         }
@@ -169,10 +171,10 @@ def register():
 
         email_sent, email_err = send_otp_email_smtp(email, otp_code, "REGISTRATION_VERIFY")
         if not email_sent:
-            print(f"[OTP] Registration email handoff warning recipient={email}: {email_err}")
+            print(f"[OTP] Registration email handoff warning recipient={safe_log_tag(email)}: {email_err}")
             return jsonify({
                 "success": True,
-                "warning": f"Account created. If verification email does not arrive, check spam or request resend: {email_err}",
+                "warning": "Account created. If the verification email does not arrive, check spam or request a resend.",
                 "email": email,
                 "role": role,
                 "otpRequired": True,
@@ -221,7 +223,7 @@ def verify_otp():
         expires_at = _as_aware_utc(record.get("expires_at"))
         if expires_at < now_utc:
             db.email_otps.delete_one({"_id": record["_id"]})
-            print(f"[OTP] Verification rejected (expired) purpose={purpose} recipient={email}")
+            print(f"[OTP] Verification rejected (expired) purpose={purpose} recipient={safe_log_tag(email)}")
             return jsonify({"error": "OTP code has expired after 2 minutes. Please click Resend Code.",
                             "expired": True}), 400
 
@@ -232,7 +234,7 @@ def verify_otp():
         # Verify hash (HMAC-peppered; plain-SHA256 hashes are rejected)
         if not check_otp_hash(otp_code, record["otp_hash"]):
             db.email_otps.update_one({"_id": record["_id"]}, {"$inc": {"attempts_count": 1}})
-            print(f"[OTP] Verification rejected (incorrect) purpose={purpose} recipient={email}")
+            print(f"[OTP] Verification rejected (incorrect) purpose={purpose} recipient={safe_log_tag(email)}")
             return jsonify({"error": "Incorrect OTP code. Please check your email and try again."}), 400
 
         # OTP Verified Successfully!
@@ -275,9 +277,9 @@ def verify_otp():
                     credits_granted = grant_signup_free_credits(user_doc)
                 except Exception as grant_err:
                     credits_granted = 0.0
-                    print(f"[SIGNUP BONUS] Grant FAILED for {email}: {grant_err}")
+                    print(f"[SIGNUP BONUS] Grant FAILED for {safe_log_tag(email)}: {grant_err}")
                 if credits_granted and credits_granted > 0:
-                    print(f"[SIGNUP BONUS] Granted {credits_granted} free credits to {email} on first verification")
+                    print(f"[SIGNUP BONUS] Granted {credits_granted} free credits to {safe_log_tag(email)} on first verification")
             else:
                 credits_granted = 0.0
 
@@ -355,10 +357,19 @@ def resend_otp():
         db = get_mongo_db()
 
         # Resend only for existing accounts (prevents arbitrary email bombing).
+        # Return a uniform success response regardless of existence so the
+        # endpoint cannot be used to enumerate registered emails.
         user = db.users.find_one({"email": email})
         if not user:
-            print(f"[OTP] Resend rejected (unknown email) purpose={purpose} recipient={email}")
-            return jsonify({"error": "No account found for this email address."}), 404
+            print(f"[OTP] Resend rejected (unknown email) purpose={purpose} recipient={safe_log_tag(email)}")
+            # Uniform response: the UI sees "email sent" either way. Only the
+            # mailbox holder can observe nothing happened (they get no mail).
+            return jsonify({
+                "success": True,
+                "message": "If this account exists, a new 6-digit code has been sent to your email.",
+                "expiresInSec": OTP_TTL_SEC,
+                "cooldownSec": OTP_RESEND_COOLDOWN_SEC
+            }), 200
 
         # Check last OTP creation for cooldown
         last_otp = db.email_otps.find_one({"email": email, "purpose": purpose}, sort=[("created_at", -1)])
@@ -392,9 +403,9 @@ def resend_otp():
 
         email_sent, email_err = send_otp_email_smtp(email, otp_code, purpose)
         if not email_sent:
-            print(f"[OTP] Resend email handoff failed recipient={email}: {email_err}")
+            print(f"[OTP] Resend email handoff failed recipient={safe_log_tag(email)}: {email_err}")
             return jsonify({
-                "error": f"Failed to send email: {email_err}"
+                "error": "Failed to send the email. Please try again in a few moments."
             }), 502
 
         return jsonify({
@@ -424,7 +435,10 @@ def otp_status():
 
         now_utc = datetime.now(timezone.utc)
         if not record:
-            return jsonify({"exists": False, "expired": True,
+            # Deliberately opaque: do NOT tell the caller whether this email is
+            # registered/has a pending OTP (enumeration oracle). UI treats this
+            # exactly like "expired", which is an honest instruction to resend.
+            return jsonify({"expired": True,
                             "expiresInSec": 0, "cooldownRemainingSec": 0,
                             "ttlSec": OTP_TTL_SEC,
                             "cooldownSec": OTP_RESEND_COOLDOWN_SEC}), 200
@@ -435,8 +449,7 @@ def otp_status():
             elapsed = (now_utc - _as_aware_utc(record["created_at"])).total_seconds()
             cooldown_left = max(0, int(OTP_RESEND_COOLDOWN_SEC - elapsed))
 
-        return jsonify({"exists": True,
-                        "expired": expires_in <= 0,
+        return jsonify({"expired": expires_in <= 0,
                         "expiresInSec": expires_in,
                         "cooldownRemainingSec": cooldown_left,
                         "ttlSec": OTP_TTL_SEC,
@@ -479,9 +492,9 @@ def login():
             try:
                 upgraded_hash = hash_password(password)
                 db.users.update_one({"_id": user["_id"]}, {"$set": {"password_hash": upgraded_hash}})
-                print(f"[SECURITY] Transparently upgraded password hash for {email} to Argon2id.")
+                print(f"[SECURITY] Transparently upgraded password hash for {safe_log_tag(email)} to Argon2id.")
             except Exception as upg_err:
-                print(f"[SECURITY WARNING] Failed to persist upgraded hash for {email}: {upg_err}")
+                print(f"[SECURITY WARNING] Failed to persist upgraded hash for {safe_log_tag(email)}: {upg_err}")
 
         # Check Unverified Guard
         if not user.get("is_email_verified"):
@@ -727,9 +740,9 @@ def forgot_password():
 
         email_sent, email_err = send_otp_email_smtp(email, otp_code, "FORGOT_PASSWORD")
         if not email_sent:
-            print(f"[OTP] Forgot-password email handoff failed recipient={email}: {email_err}")
+            print(f"[OTP] Forgot-password email handoff failed recipient={safe_log_tag(email)}: {email_err}")
             return jsonify({
-                "error": f"Failed to send password reset email: {email_err}"
+                "error": "Failed to send the reset email. Please try again in a few moments."
             }), 502
 
         return jsonify({
@@ -780,7 +793,7 @@ def reset_password():
             if not record or _as_aware_utc(record.get("expires_at")) < now_utc:
                 if record:
                     db.email_otps.delete_one({"_id": record["_id"]})
-                print(f"[OTP] Password-reset rejected (expired/missing) recipient={email}")
+                print(f"[OTP] Password-reset rejected (expired/missing) recipient={safe_log_tag(email)}")
                 return jsonify({"error": "Invalid or expired OTP code. Please request a new code.",
                                 "expired": True}), 400
 
@@ -790,7 +803,7 @@ def reset_password():
 
             if not check_otp_hash(otp_code, record["otp_hash"]):
                 db.email_otps.update_one({"_id": record["_id"]}, {"$inc": {"attempts_count": 1}})
-                print(f"[OTP] Password-reset rejected (incorrect) recipient={email}")
+                print(f"[OTP] Password-reset rejected (incorrect) recipient={safe_log_tag(email)}")
                 return jsonify({"error": "Incorrect OTP code."}), 400
 
             verified = True

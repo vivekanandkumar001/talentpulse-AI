@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import Link from 'next/link';
@@ -492,7 +492,7 @@ function CandidateReportsContent() {
               </div>
             ) : !aptitudeAttempts || aptitudeAttempts.length === 0 ? (
               <div className="rounded-2xl border border-line bg-surface p-12 text-center space-y-4">
-                <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-600 flex items-center justify-center mx-auto">
+                <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-accent-amber flex items-center justify-center mx-auto">
                   <Award className="w-7 h-7" />
                 </div>
                 <div>
@@ -518,7 +518,7 @@ function CandidateReportsContent() {
                     className="rounded-2xl bg-surface border border-line p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:border-amber-500/40 transition shadow-xs"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center font-mono font-bold text-amber-600 text-sm shrink-0">
+                      <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center font-mono font-bold text-accent-amber text-sm shrink-0">
                         {attempt.score}%
                       </div>
                       <div>

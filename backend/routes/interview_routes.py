@@ -18,6 +18,7 @@ import shutil
 import traceback
 import logging
 from datetime import datetime, timezone, timedelta
+from core.http_utils import generic_500
 from flask import Blueprint, request, jsonify, g, send_file, Response
 
 from core.db import get_mongo_db
@@ -2068,7 +2069,7 @@ def interview_transcribe_route(session_id):
         }), 200
     except Exception as e:
         print(f"[Transcribe Error] {e}")
-        return jsonify({"error": str(e), "transcript": ""}), 500
+        return jsonify({"error": generic_500(e), "transcript": ""}), 500
 
 
 @interview_bp.route("/api/interview/<session_id>/reset-listening", methods=["POST"])
@@ -2844,7 +2845,7 @@ def run_interview_code(session_id):
         traceback.print_exc()
         return jsonify({
             "success": False,
-            "error": str(e),
+            "error": generic_500(e),
             "stdout": "",
             "stderr": traceback.format_exc(),
         }), 500

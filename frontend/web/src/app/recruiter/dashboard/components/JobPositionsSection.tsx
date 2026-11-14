@@ -13,7 +13,7 @@ export function JobPositionsSection({
   return (
     <section id="rubrics" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {jobProfiles.length === 0 ? (
-        <div className="col-span-full rounded-2xl bg-surface border border-line p-16 text-center space-y-4 backdrop-blur-md">
+        <div className="col-span-full card-panel p-16 text-center space-y-4">
           <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 text-accent-cyan border border-cyan-500/20 flex items-center justify-center mx-auto shadow-sm">
             <Briefcase className="w-7 h-7" />
           </div>
@@ -38,7 +38,7 @@ export function JobPositionsSection({
         jobProfiles.map((job, idx) => (
         <div
           key={job.id ? `${job.id}-${idx}` : `job-${idx}`}
-          className="rounded-2xl bg-surface border border-line p-6 space-y-4 backdrop-blur-md hover:border-indigo-500/50 transition-all flex flex-col justify-between"
+          className="card-panel-hover p-6 space-y-4 h-full flex flex-col justify-between"
         >
           <div className="space-y-3">
             <div className="flex items-center justify-between">

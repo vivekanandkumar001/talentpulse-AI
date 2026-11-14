@@ -201,7 +201,7 @@ export const RecruiterHeader: React.FC = () => {
       onNotificationsOpenChange={setNotificationsOpen}
       notificationIndicator={
         unreadCount > 0 ? (
-          <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-rose-500 px-1 text-[10px] font-bold text-white ring-2 ring-surface animate-pulse">
+          <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-rose-500 px-1 text-[10px] font-bold tabular-nums text-white ring-2 ring-surface">
             {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         ) : null
@@ -276,7 +276,7 @@ export const RecruiterHeader: React.FC = () => {
       }
       profileHref="/recruiter/profile"
       profileTitle="Manage Organization Profile"
-      profileAvatarClassName="bg-[#185adb]"
+      profileAvatarClassName="bg-gradient-to-tr from-blue-600 to-cyan-500"
       profileInitials={userInitials}
       profileName={userName}
       profileSubtitle="Workspace"

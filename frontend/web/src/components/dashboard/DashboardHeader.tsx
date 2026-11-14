@@ -6,15 +6,12 @@ import { useRouter } from 'next/navigation';
 import {
   Sparkles,
   UserRound,
-  Briefcase,
+  Home,
   Video,
   Award,
-  Wallet,
+  Medal,
   CheckCircle2,
-  AlertTriangle,
-  Clock,
-  Brain,
-  FileText,
+  ScrollText,
   Gauge,
 } from 'lucide-react';
 import { AppHeader } from '@/components/dashboard/AppHeader';
@@ -144,12 +141,12 @@ export const DashboardHeader: React.FC = () => {
   const subtitle = [profile?.course, profile?.academic_year].filter(Boolean).join(' • ') || 'Profile incomplete';
 
   const navLinks = [
-    { name: 'Home', href: '/candidate/dashboard', icon: Briefcase },
+    { name: 'Home', href: '/candidate/dashboard', icon: Home },
     { name: 'Practice', href: '/candidate/practice', icon: Sparkles },
     { name: 'Aptitude', href: '/candidate/aptitude', icon: Gauge },
     { name: 'My Interviews', href: '/candidate/interviews', icon: Video },
-    { name: 'Reports', href: '/candidate/reports', icon: FileText },
-    { name: 'Skills', href: '/candidate/skills', icon: Award },
+    { name: 'Reports', href: '/candidate/reports', icon: ScrollText },
+    { name: 'Skills', href: '/candidate/skills', icon: Medal },
   ];
 
   const handleLogout = async () => {
@@ -173,8 +170,8 @@ export const DashboardHeader: React.FC = () => {
       onNotificationsOpenChange={setNotificationsOpen}
       notificationIndicator={
         unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 min-w-[1.1rem] h-[1.1rem] px-1 rounded-full bg-rose-500 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-surface animate-pulse">
-            {unreadCount}
+          <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-rose-500 px-1 text-[10px] font-bold tabular-nums text-white ring-2 ring-surface">
+            {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         )
       }

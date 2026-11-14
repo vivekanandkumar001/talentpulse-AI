@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -366,7 +366,7 @@ export default function PricingPage() {
 
           <h1 className="text-3xl sm:text-5xl font-black text-ink tracking-tight leading-[1.1]">
             Pocket-Friendly Practice Packs for{' '}
-            <span className="bg-gradient-to-r from-[#185adb] via-cyan-500 to-indigo-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-accent-blue via-cyan-500 to-indigo-600 bg-clip-text text-transparent">
               Every Candidate
             </span>
           </h1>
@@ -399,7 +399,7 @@ export default function PricingPage() {
                     : 'text-ink-muted hover:text-ink'
                 }`}
               >
-                <Building2 className="w-4 h-4 text-indigo-400" />
+                <Building2 className="w-4 h-4 text-accent-indigo" />
                 <span>Recruiter &amp; Team Packs</span>
               </button>
             </div>
@@ -416,7 +416,7 @@ export default function PricingPage() {
                 key={i}
                 className={`p-6 rounded-xl border ${
                   plan.popular
-                    ? 'border-blue-600 bg-surface-deep shadow-2xl relative ring-2 ring-blue-600/20'
+                    ? 'border-blue-600 bg-surface-deep shadow-2xl relative ring-2 ring-accent-blue/30'
                     : 'border-line bg-surface-deep shadow-sm'
                 } flex flex-col justify-between space-y-6 transition hover:translate-y-[-4px] hover:shadow-lg`}
               >
@@ -466,7 +466,7 @@ export default function PricingPage() {
                   className={`w-full py-3 rounded-xl text-center text-xs sm:text-sm font-bold transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer ${
                     plan.popular
                       ? 'bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 text-white shadow-cyan-500/20 hover:brightness-110'
-                      : 'border border-[#072448] text-[#072448] hover:bg-surface-2'
+                      : 'border border-accent-blue text-accent-blue hover:bg-surface-2'
                   }`}
                 >
                   <span>{plan.buttonText}</span>

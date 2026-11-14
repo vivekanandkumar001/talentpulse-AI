@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -301,8 +301,8 @@ export const InterviewBriefingCard: React.FC<InterviewBriefingCardProps> = ({
 
       {/* ACTIVE MEDIA SOURCE BADGE */}
       {source === 'phone' && (
-        <div className="p-3 rounded-xl bg-cyan-950/40 border border-cyan-500/40 text-xs text-cyan-200 flex items-center gap-2 shadow-sm">
-          <Smartphone className="w-4 h-4 text-cyan-400 shrink-0" />
+        <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-ink flex items-center gap-2 shadow-sm">
+          <Smartphone className="w-4 h-4 text-accent-cyan shrink-0" />
           <span>
             Paired with Smartphone: Audio &amp; video will be ingested from your phone.
           </span>
@@ -313,18 +313,18 @@ export const InterviewBriefingCard: React.FC<InterviewBriefingCardProps> = ({
       {billing && (
         <div className={`p-4 rounded-2xl border text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm transition-all ${
           billing.isDemoEligible
-            ? 'bg-emerald-950/20 border-emerald-500/30 text-emerald-200'
+            ? 'bg-emerald-500/10 border-emerald-500/30 text-ink'
             : !billing.chargingEnabled
-            ? 'bg-purple-950/20 border-purple-500/30 text-purple-200'
-            : 'bg-cyan-950/20 border-cyan-500/30 text-cyan-200'
+            ? 'bg-violet-500/10 border-violet-500/30 text-ink'
+            : 'bg-cyan-500/10 border-cyan-500/30 text-ink'
         }`}>
           <div className="flex items-center gap-3 min-w-0">
             <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
               billing.isDemoEligible
-                ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                ? 'bg-emerald-500/10 text-accent-emerald border border-emerald-500/20'
                 : !billing.chargingEnabled
-                ? 'bg-purple-500/10 text-purple-400 border border-purple-500/20'
-                : 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20'
+                ? 'bg-violet-500/10 text-accent-violet border border-violet-500/20'
+                : 'bg-cyan-500/10 text-accent-cyan border border-cyan-500/20'
             }`}>
               {billing.isDemoEligible ? (
                 <Sparkles className="w-4 h-4" />
@@ -345,10 +345,10 @@ export const InterviewBriefingCard: React.FC<InterviewBriefingCardProps> = ({
                 </span>
                 <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full uppercase tracking-wider ${
                   billing.isDemoEligible
-                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                    ? 'bg-emerald-500/20 text-accent-emerald border border-emerald-500/40'
                     : !billing.chargingEnabled
-                    ? 'bg-purple-500/20 text-purple-300 border border-purple-500/40'
-                    : 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
+                    ? 'bg-violet-500/20 text-accent-violet border border-violet-500/40'
+                    : 'bg-cyan-500/20 text-accent-cyan border border-cyan-500/40'
                 }`}>
                   {billing.isDemoEligible ? 'Free Demo' : '₹1 = 1 Credit'}
                 </span>
@@ -459,25 +459,26 @@ export const InterviewBriefingCard: React.FC<InterviewBriefingCardProps> = ({
           />
           <span className="text-xs text-ink leading-tight">
             I confirm that my camera and audio are functional (including phone camera/mic if paired),
-            and I agree to be recorded for evaluation purposes.
+            and I agree to be recorded for evaluation purposes per the{' '}
+            <a href="/ai-transparency" target="_blank" className="text-accent-cyan hover:underline">AI Transparency &amp; AEDT Notice</a>.
             <span className="text-accent-rose font-bold ml-1">*</span>
           </span>
         </label>
 
         {/* TRACK DROPPED ERROR ALERT */}
         {droppedTrackError && (
-          <div className="p-3 rounded-xl bg-rose-950/80 text-rose-200 text-xs flex items-start gap-2">
-            <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+          <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-accent-rose text-xs flex items-start gap-2">
+            <AlertTriangle className="w-4 h-4 text-accent-rose shrink-0 mt-0.5" />
             <p className="leading-relaxed">{droppedTrackError}</p>
           </div>
         )}
 
         {/* ZERO BALANCE WARNING */}
         {isZeroBalance ? (
-          <div className="p-3.5 rounded-xl bg-amber-500/10 text-amber-200 text-xs flex items-start gap-2.5">
-            <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+          <div className="p-3.5 rounded-xl bg-amber-500/10 text-accent-amber text-xs flex items-start gap-2.5">
+            <AlertTriangle className="w-4 h-4 text-accent-amber shrink-0 mt-0.5" />
             <div>
-              <p className="font-semibold text-amber-300">Insufficient Wallet Balance (0 Credits)</p>
+              <p className="font-semibold text-accent-amber">Insufficient Wallet Balance (0 Credits)</p>
               <p className="text-ink-muted mt-0.5">
                 Your wallet balance is zero. You cannot enter practice or paid interviews without credits.
               </p>
@@ -490,10 +491,10 @@ export const InterviewBriefingCard: React.FC<InterviewBriefingCardProps> = ({
             </div>
           </div>
         ) : isLowBalance ? (
-          <div className="p-3.5 rounded-xl bg-amber-500/10 text-amber-200 text-xs flex items-start gap-2.5">
-            <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+          <div className="p-3.5 rounded-xl bg-amber-500/10 text-accent-amber text-xs flex items-start gap-2.5">
+            <AlertTriangle className="w-4 h-4 text-accent-amber shrink-0 mt-0.5" />
             <div>
-              <p className="font-semibold text-amber-300">Low Wallet Balance</p>
+              <p className="font-semibold text-accent-amber">Low Wallet Balance</p>
               <p className="text-ink-muted mt-0.5">
                 Your wallet balance is low ({candidateWalletBalance} Credits). You have enough for {Math.max(1, Math.floor(candidateWalletBalance / 2))} more practice interview(s). Please recharge your wallet to continue.
               </p>
