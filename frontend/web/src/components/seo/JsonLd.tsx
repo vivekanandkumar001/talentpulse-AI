@@ -35,7 +35,7 @@ export function JsonLd() {
       {
         '@type': 'ContactPoint',
         contactType: 'Customer Support',
-        email: 'progeniatlas@ptaxis',
+        email: 'support@progeni.live',
         availableLanguage: ['English', 'Hindi'],
       },
     ],
@@ -71,13 +71,9 @@ export function JsonLd() {
       'Enterprise ATS integrations with Greenhouse, Workday, Lever, and webhooks',
       'Transparent duration-based billing (₹1 per 3 minutes, 2 free trial demo screenings)',
     ],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '128',
-      bestRating: '5',
-      worstRating: '1',
-    },
+    // NOTE: no aggregateRating here. A self-declared 4.9/128 rating without real,
+    // verifiable on-page reviews violates Google's structured-data guidelines and
+    // risks a manual action. Add one back only with genuine review data.
   };
 
   const websiteSchema = {

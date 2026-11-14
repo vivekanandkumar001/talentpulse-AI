@@ -249,17 +249,25 @@ export default function Home() {
     return `${mins}:${secs}`;
   };
 
-  if (checkingAuth) {
-    return (
-      <div className="min-h-screen bg-canvas flex items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-accent-cyan border-t-transparent" />
-      </div>
-    );
-  }
-
+  // NOTE: Never gate the public marketing page on an async auth check.
+  // Returning a spinner here during SSR/prerender serves an empty page to
+  // search-engine crawlers (no h1, no copy, no internal links), which made the
+  // homepage unindexable. Instead we always render the full page and only show
+  // a small non-blocking "redirecting" pill while the session check runs.
   return (
     <main className="min-h-screen bg-canvas text-ink overflow-x-clip selection:bg-cyan-500/30 selection:text-accent-cyan">
       <Navbar />
+
+      {checkingAuth && (
+        <div
+          className="fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-full border border-line bg-surface/90 px-4 py-2 text-[11px] font-medium text-ink-muted shadow-lg backdrop-blur-md"
+          role="status"
+          aria-live="polite"
+        >
+          <div className="h-3 w-3 animate-spin rounded-full border border-accent-cyan border-t-transparent" />
+          Checking your session…
+        </div>
+      )}
 
       {/* =====================================================================
           HERO SECTION - SAKSHAAT-STYLE DYNAMIC AMBIENT MOTION
@@ -295,7 +303,7 @@ export default function Home() {
 
             {/* Title with Gradient Highlight */}
             <h1 className="max-w-2xl text-4xl font-black tracking-tight text-ink sm:text-5xl lg:text-6xl lg:leading-[1.06]">
-              Face your interview
+              Face your AI interview
               <br />
               <span className="bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-400 bg-clip-text text-transparent">
                 before it&apos;s real.

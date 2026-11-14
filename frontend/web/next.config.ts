@@ -68,11 +68,14 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              `script-src 'self' 'unsafe-inline'${isProd ? '' : " 'unsafe-eval'"} https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://checkout.razorpay.com`,
+              // GA4 is optional and env-gated (NEXT_PUBLIC_GA_ID). These hosts are
+              // allow-listed so the gtag bundle and analytics beacons are not blocked
+              // by our own CSP — otherwise analytics silently collects nothing.
+              `script-src 'self' 'unsafe-inline'${isProd ? '' : " 'unsafe-eval'"} https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://checkout.razorpay.com https://www.googletagmanager.com`,
               "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
-              "img-src 'self' data: https: blob: https://*.razorpay.com",
+              "img-src 'self' data: https: blob: https://*.razorpay.com https://www.googletagmanager.com https://www.google-analytics.com",
               "font-src 'self' data: https://cdn.jsdelivr.net",
-              "connect-src 'self' https://pay.progeni.live https://cdn.jsdelivr.net https://cloudflareinsights.com https://*.cloudflareinsights.com wss://*.livekit.cloud https://*.livekit.cloud https://api.razorpay.com https://lumberjack.razorpay.com",
+              "connect-src 'self' https://pay.progeni.live https://cdn.jsdelivr.net https://cloudflareinsights.com https://*.cloudflareinsights.com wss://*.livekit.cloud https://*.livekit.cloud https://api.razorpay.com https://lumberjack.razorpay.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.googletagmanager.com",
               "worker-src 'self' blob:",
               "media-src 'self' blob: data:",
               "frame-src 'self' https://pay.progeni.live https://api.razorpay.com https://checkout.razorpay.com",

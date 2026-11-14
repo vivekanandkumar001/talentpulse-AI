@@ -1,4 +1,4 @@
-# Progeni Atlas — Autonomous AI Technical Interviews & Skills Evaluation
+﻿# Progeni Atlas — Autonomous AI Technical Interviews & Skills Evaluation
 
 > Progeni Atlas is an enterprise-grade autonomous AI technical interview and skills assessment platform. It conducts live, two-way neural voice and video interviews, evaluates multi-language coding tasks in real-time sandbox environments, enforces non-intrusive anti-cheat proctoring, and automatically generates calibrated recruiter scoring dossiers.
 
@@ -31,6 +31,8 @@
 - About & Mission: https://atlas.progeni.live/about
 - Careers: https://atlas.progeni.live/career
 - Contact & Inquiries: https://atlas.progeni.live/contact
+- Portfolio & Blueprints: https://atlas.progeni.live/portfolio
+- AI Transparency: https://atlas.progeni.live/ai-transparency
 - Candidate Workspace: https://atlas.progeni.live/candidate
 - Recruiter Command Center: https://atlas.progeni.live/recruiter
 - Extended LLM Documentation: https://atlas.progeni.live/llms-full.txt
